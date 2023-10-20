@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://1hi6lao2fcrk"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_pl71v"]
+[ext_resource type="PackedScene" uid="uid://b7xxari67wnwx" path="res://Ataques/attack_dagger.tscn" id="2_ghnxu"]
+[ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="3_0rmns"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6iki7"]
+radius = 14.0
+height = 36.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_pl71v")
+attack_dagger = ExtResource("2_ghnxu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_6iki7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2.312)
+texture = ExtResource("3_0rmns")
+
+[node name="Muzzle" type="Node2D" parent="."]
+
+[node name="TimerDagger" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="TimerDagger" to="." method="_on_timer_dagger_timeout"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://xo8fytp5tl6c"]
+
+[ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_45ck4"]
+[ext_resource type="PackedScene" uid="uid://1hi6lao2fcrk" path="res://Unidades/Jugador.tscn" id="2_5v2md"]
+[ext_resource type="Texture2D" uid="uid://1gqahfelhqqa" path="res://icon.svg" id="2_vwhuh"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_45ck4")
+
+[node name="Fondo" type="Sprite2D" parent="."]
+position = Vector2(612, 248.5)
+scale = Vector2(28.1875, 18.1953)
+texture = ExtResource("2_vwhuh")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_5v2md")]
+position = Vector2(234, 276)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
