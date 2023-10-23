@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6ltxn3vy78kg"]
+
+[ext_resource type="Script" path="res://Scripts/attack_homing.gd" id="1_nw6m8"]
+[ext_resource type="Texture2D" uid="uid://cw4crwrepqh7x" path="res://Arte/hammer.png" id="2_x8m0s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5m5b"]
+size = Vector2(24, 17)
+
+[node name="AttackHoming" type="Node2D"]
+script = ExtResource("1_nw6m8")
+
+[node name="Area2D" type="Area2D" parent="."]
+rotation = 1.5708
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_d5m5b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_x8m0s")
+
+[node name="TimerDuracion" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[node name="TimerCooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

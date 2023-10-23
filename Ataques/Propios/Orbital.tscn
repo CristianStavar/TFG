@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd34ws0maxutx"]
+
+[ext_resource type="Script" path="res://Scripts/orbital.gd" id="1_y3sku"]
+[ext_resource type="Texture2D" uid="uid://db7r4bbmkiubx" path="res://Arte/shield_square.png" id="2_w3sqh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41m2a"]
+size = Vector2(14, 14)
+
+[node name="Orbital" type="Node2D"]
+script = ExtResource("1_y3sku")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_41m2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.254902, 1, 1)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_w3sqh")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

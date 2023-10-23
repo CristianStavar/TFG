@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2cbkee27cwny"]
+
+[ext_resource type="Script" path="res://Scripts/attack_area.gd" id="1_1p58r"]
+[ext_resource type="Texture2D" uid="uid://dpy4swi4ev48t" path="res://Arte/axe.png" id="2_xgfqr"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pjyn6"]
+lifetime_randomness = 0.1
+emission_shape = 6
+emission_ring_axis = Vector3(1, 1, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 30.0
+emission_ring_inner_radius = 20.0
+particle_flag_disable_z = true
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+angular_velocity_min = 1.0
+angular_velocity_max = 2.0
+orbit_velocity_min = 1.0
+orbit_velocity_max = 2.0
+linear_accel_min = 1.0
+linear_accel_max = 2.0
+radial_accel_min = 1.0
+radial_accel_max = 2.0
+tangential_accel_min = 1.0
+tangential_accel_max = 2.0
+damping_min = 0.5
+damping_max = 1.0
+angle_min = -136.4
+angle_max = 197.1
+scale_min = 0.9
+scale_max = 1.2
+turbulence_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_43xki"]
+radius = 28.4429
+
+[node name="TornadoHachas" type="Node2D"]
+position = Vector2(-4, 28)
+script = ExtResource("1_1p58r")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_pjyn6")
+texture = ExtResource("2_xgfqr")
+lifetime = 1.2
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_43xki")
+
+[node name="TimerDañar" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="TimerDesaparicion" type="Timer" parent="."]
+wait_time = 4.0
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="timeout" from="TimerDañar" to="." method="_on_timer_dañar_timeout"]
+[connection signal="timeout" from="TimerDesaparicion" to="." method="_on_timer_desaparicion_timeout"]

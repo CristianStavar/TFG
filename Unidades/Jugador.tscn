@@ -1,27 +1,68 @@
-[gd_scene load_steps=5 format=3 uid="uid://1hi6lao2fcrk"]
+[gd_scene load_steps=9 format=3 uid="uid://1hi6lao2fcrk"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pl71v"]
-[ext_resource type="PackedScene" uid="uid://b7xxari67wnwx" path="res://Ataques/attack_dagger.tscn" id="2_ghnxu"]
+[ext_resource type="PackedScene" uid="uid://b7xxari67wnwx" path="res://Ataques/Propios/attack_dagger.tscn" id="2_ybly8"]
 [ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="3_0rmns"]
+[ext_resource type="PackedScene" uid="uid://d2cbkee27cwny" path="res://Ataques/Propios/TornadoHachas.tscn" id="3_bwpf2"]
+[ext_resource type="PackedScene" uid="uid://b6ltxn3vy78kg" path="res://Ataques/Propios/attack_homing.tscn" id="4_4dms5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6iki7"]
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bi6c"]
+size = Vector2(779, 413)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ahrjb"]
 radius = 14.0
 height = 36.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
+collision_mask = 33
 script = ExtResource("1_pl71v")
-attack_dagger = ExtResource("2_ghnxu")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_6iki7")
+attack_dagger = ExtResource("2_ybly8")
+tornado = ExtResource("3_bwpf2")
+homing = ExtResource("4_4dms5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2.312)
 texture = ExtResource("3_0rmns")
+
+[node name="ColisionDeMentira" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_6iki7")
 
 [node name="Muzzle" type="Node2D" parent="."]
 
 [node name="TimerDagger" type="Timer" parent="."]
 autostart = true
 
+[node name="TimerTornado" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerHoming" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="NearbyArea" type="Area2D" parent="."]
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NearbyArea"]
+shape = SubResource("RectangleShape2D_5bi6c")
+
+[node name="TimerPulsador" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="AreaDamage" type="Area2D" parent="."]
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDamage"]
+shape = SubResource("CapsuleShape2D_ahrjb")
+
 [connection signal="timeout" from="TimerDagger" to="." method="_on_timer_dagger_timeout"]
+[connection signal="timeout" from="TimerTornado" to="." method="_on_timer_tornado_timeout"]
+[connection signal="timeout" from="TimerHoming" to="." method="_on_timer_homing_timeout"]
+[connection signal="body_entered" from="NearbyArea" to="." method="_on_nearby_area_body_entered"]
+[connection signal="body_exited" from="NearbyArea" to="." method="_on_nearby_area_body_exited"]
+[connection signal="timeout" from="TimerPulsador" to="." method="_on_timer_pulsador_timeout"]
+[connection signal="body_entered" from="AreaDamage" to="." method="_on_area_damage_body_entered"]
+[connection signal="body_exited" from="AreaDamage" to="." method="_on_area_damage_body_exited"]

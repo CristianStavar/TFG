@@ -1,24 +1,28 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7xxari67wnwx"]
 
-[ext_resource type="Script" path="res://Scripts/attack_dagger.gd" id="1_20408"]
-[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="2_pphqu"]
+[ext_resource type="Script" path="res://Scripts/attack_dagger.gd" id="1_7i5t7"]
+[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="2_71duq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nebor"]
-radius = 3.0
-height = 12.0
+radius = 8.0
+height = 32.0
 
 [node name="AttackDagger" type="Node2D"]
-script = ExtResource("1_20408")
+script = ExtResource("1_7i5t7")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_nebor")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-texture = ExtResource("2_pphqu")
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_71duq")
 
 [node name="TimerDeath" type="Timer" parent="."]
 wait_time = 8.0
@@ -28,4 +32,5 @@ autostart = true
 [node name="TimerCooldown" type="Timer" parent="."]
 autostart = true
 
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
 [connection signal="timeout" from="TimerDeath" to="." method="_on_timer_death_timeout"]
