@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://4nw0yi4ljoan"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="LabelName" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Knife lvl2"
+
+[node name="LabelDescription" type="Label" parent="."]
+offset_left = 3.0
+offset_top = 54.0
+offset_right = 43.0
+offset_bottom = 77.0
+text = "Description yes"

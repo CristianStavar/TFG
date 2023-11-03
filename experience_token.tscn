@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ds1bua0otd6l8"]
+
+[ext_resource type="Script" path="res://experience_token.gd" id="1_2swma"]
+[ext_resource type="Texture2D" uid="uid://xyu77mjlrpbt" path="res://Arte/shield_metal.png" id="2_dur18"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hilnd"]
+radius = 8.0
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_2swma")
+experience_given = 2.0
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_hilnd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 1, 1)
+scale = Vector2(1.375, 1.375)
+texture = ExtResource("2_dur18")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

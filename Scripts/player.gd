@@ -25,8 +25,8 @@ var cooldownHoming1:=false
 var enemigosCerca:=[]
 
 
-var puntosExperiencia:=0
-var puntosExperienciaSubir:=100
+var puntosExperiencia:=0.0
+var puntosExperienciaSubir:=14
 var nivelActual:=1
 
 
@@ -44,6 +44,9 @@ var cooldown_press:=false
 
 
 var health:=0.0
+
+
+@export var experience_level_multiplier:=1.2
 
 func _ready():
 	game_manager.player=self
@@ -150,6 +153,23 @@ func Shotgun():
 
 
 
+func add_experience(quantity:float):
+	puntosExperiencia+=quantity
+	if puntosExperiencia>=puntosExperienciaSubir:
+		player_level_up()
+	game_manager.update_player_ui()
+
+func player_level_up():
+	nivelActual+=1
+	puntosExperiencia=puntosExperiencia-puntosExperienciaSubir
+	update_experience_to_level_up()
+	game_manager.show_player_level_up()
+	
+
+func update_experience_to_level_up():
+	puntosExperienciaSubir*=experience_level_multiplier
+
+
 func Pistol():
 	var b = attack_dagger.instantiate()
 	if separacionActiva:
@@ -173,11 +193,7 @@ func StarShot():
 		
 
 
-func ganar_experiencia(cantidad:int):
-	
-	puntosExperiencia+=cantidad
-	if puntosExperiencia>=puntosExperienciaSubir:
-		nivelActual+=1
+
 
 
 

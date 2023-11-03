@@ -10,13 +10,25 @@ var player
 
 @onready var labelCoordenadas:=get_node("CharacterBody2D/Camera2D/LAbelPosition")
 @onready var label_health:=get_node("CharacterBody2D/Camera2D/LabelHealth")
+
+@onready var label_experience:=get_node("CharacterBody2D/Camera2D/LabelExperience")
+@onready var label_experience2:=get_node("CharacterBody2D/Camera2D/LabelExperience2")
+@onready var label_level:=get_node("CharacterBody2D/Camera2D/LabelLevel")
+
+
+@onready var panel_player_level_up:=get_node("CharacterBody2D/Camera2D/Control")
+@onready var panel_button:=get_node("CharacterBody2D/Camera2D/Control/ContinuaJuego")
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	panel_button.pressed.connect(hide_player_level_up)
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
+	
 	pass
 
 
@@ -50,8 +62,29 @@ func ActivarEstadoArma(estado:String,activo:bool):
 
 
 
+
+func show_player_level_up():
+	get_tree().paused = true
+	panel_player_level_up.visible=true
+	await get_tree().create_timer(5).timeout
+	hide_player_level_up()
+	
+
+func hide_player_level_up():
+	print("\nHe puslado seguir\n")
+	panel_player_level_up.visible=false
+	get_tree().paused = false
+
+
+
 func update_position(valor:Vector2):
 	labelCoordenadas.text=str(valor)
 
 func update_health(value:float):
 	label_health.text="Health: "+str(value)
+	
+func update_player_ui():
+	label_experience.text="Experience: "+str(player.puntosExperiencia)
+	label_experience2.text="Experience2: "+str(player.puntosExperienciaSubir)
+	label_level.text="Level: "+str(player.nivelActual)
+	

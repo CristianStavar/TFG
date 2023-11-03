@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://erq61o72or04"]
+[gd_scene load_steps=5 format=3 uid="uid://erq61o72or04"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_jme4m"]
 [ext_resource type="Texture2D" uid="uid://didksfivvufou" path="res://Arte/rat_2.png" id="1_tk532"]
+[ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://experience_token.tscn" id="2_4bw1n"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s5hm"]
 radius = 16.0
@@ -10,7 +11,8 @@ height = 32.0
 [node name="EnemyRat" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_jme4m")
-health = 80
+health = 4
+experience_token = ExtResource("2_4bw1n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5s5hm")

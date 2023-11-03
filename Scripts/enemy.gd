@@ -9,6 +9,9 @@ extends CharacterBody2D
 @export var move_speed:float=50
 @export var attack_range:float=22
 @export var attack_cooldown:float=.4
+
+@export var experience_token:PackedScene
+
 var can_attack:=false
 var lastAtackTime:float
 var muerto:bool=false
@@ -70,8 +73,19 @@ func quitar_vida(cantidad):
 
 	if health<=0:
 		print("he muerto: - "+str(self))
+		spawn_experience_token()
 		queue_free()
 		
+		
+
+func spawn_experience_token():
+	var b = experience_token.instantiate()
+	
+	b.global_position=self.global_position
+	get_parent().add_child(b)
+
+
+
 func set_vida(cantidad:int):
 	health=cantidad
 

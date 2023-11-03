@@ -13,6 +13,8 @@ var separation:=false
 
 @export var self_attack:PackedScene
 
+
+@export_multiline var description:String
 func _ready():
 	
 	$TimerCooldown.set_wait_time(cooldown)

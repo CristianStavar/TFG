@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://xo8fytp5tl6c"]
+[gd_scene load_steps=17 format=3 uid="uid://xo8fytp5tl6c"]
 
 [ext_resource type="Script" path="res://Scripts/game_manager.gd" id="1_45ck4"]
 [ext_resource type="PackedScene" uid="uid://1hi6lao2fcrk" path="res://Unidades/Jugador.tscn" id="2_5v2md"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://erq61o72or04" path="res://Unidades/Enemigos/enemy_rat.tscn" id="5_6d33p"]
 [ext_resource type="PackedScene" uid="uid://clifhfykt3f42" path="res://Escenas/spawner.tscn" id="6_e7s4i"]
 [ext_resource type="PackedScene" uid="uid://dah76srhmroks" path="res://Unidades/Enemigos/enemy_ghost.tscn" id="7_bs0v3"]
+[ext_resource type="PackedScene" uid="uid://37ic61k0lk5u" path="res://panel_player_level_up.tscn" id="8_nsq3w"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wwdtb"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -557,6 +558,37 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
 theme_override_font_sizes/font_size = 32
 text = "Health: "
+
+[node name="LabelExperience" type="Label" parent="CharacterBody2D/Camera2D"]
+offset_left = 326.0
+offset_top = -252.0
+offset_right = 493.0
+offset_bottom = -207.0
+theme_override_font_sizes/font_size = 30
+text = "Experience:"
+
+[node name="LabelExperience2" type="Label" parent="CharacterBody2D/Camera2D"]
+offset_left = 323.0
+offset_top = -217.0
+offset_right = 490.0
+offset_bottom = -172.0
+theme_override_font_sizes/font_size = 30
+text = "Experience:"
+
+[node name="LabelLevel" type="Label" parent="CharacterBody2D/Camera2D"]
+offset_left = 336.0
+offset_top = -181.0
+offset_right = 426.0
+offset_bottom = -136.0
+theme_override_font_sizes/font_size = 30
+text = "Level: "
+
+[node name="Control" parent="CharacterBody2D/Camera2D" instance=ExtResource("8_nsq3w")]
+visible = false
+offset_left = -234.0
+offset_top = -276.0
+offset_right = -234.0
+offset_bottom = -276.0
 
 [node name="EnemyRat" parent="." instance=ExtResource("5_6d33p")]
 position = Vector2(341, 367)

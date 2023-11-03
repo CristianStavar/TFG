@@ -23,7 +23,7 @@ func invocar_enemigo(tipo:String):
 			var b = enemigo_fantasma.instantiate()
 			b.global_position=posicion+game_manager.player.global_position
 			game_manager.add_child(b)
-			enemigo_fantasma
+
 
 
 func randv_circle(min_radius := 800.0, max_radius := 900.0) -> Vector2:
