@@ -1,6 +1,7 @@
 extends Node2D
 
 var player
+var upgrades_manager
 
 @onready var spawner:=get_node("Spawner")
 
@@ -18,12 +19,17 @@ var player
 
 @onready var panel_player_level_up:=get_node("CharacterBody2D/Camera2D/Control")
 @onready var panel_button:=get_node("CharacterBody2D/Camera2D/Control/ContinuaJuego")
+@onready var botonaso:=get_node("Botonaso")
 
+
+@onready var panel_card_level_up1:=get_node("")
+@onready var panel_card_level_up2:=get_node("")
+@onready var panel_card_level_up3:=get_node("")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	panel_button.pressed.connect(hide_player_level_up)
-
+	botonaso.pressed.connect(hide_player_level_up)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,7 +73,7 @@ func show_player_level_up():
 	get_tree().paused = true
 	panel_player_level_up.visible=true
 	await get_tree().create_timer(5).timeout
-	hide_player_level_up()
+#	hide_player_level_up().
 	
 
 func hide_player_level_up():
@@ -88,3 +94,16 @@ func update_player_ui():
 	label_experience2.text="Experience2: "+str(player.puntosExperienciaSubir)
 	label_level.text="Level: "+str(player.nivelActual)
 	
+	
+	
+	
+	
+	
+	
+
+func set_player(new_player):
+	player=new_player
+
+func set_upgrades_manager(new_upgrades_manager):
+	upgrades_manager=new_upgrades_manager
+

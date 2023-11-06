@@ -1,8 +1,7 @@
 extends CharacterBody2D
 
 
-
-@export var nombre:String
+@export var enemy_name:String
 @export var health: int=5
 @export var damage: int=10
 
@@ -13,8 +12,8 @@ extends CharacterBody2D
 @export var experience_token:PackedScene
 
 var can_attack:=false
-var lastAtackTime:float
-var muerto:bool=false
+var last_attack_time:float
+var dead:bool=false
 
 var target: CharacterBody2D
 var gameManager:Node2D
@@ -44,26 +43,16 @@ func _physics_process(_delta):
 #		print("NAvegacion finita")
 		return
 	var direction=self.position.direction_to(agent.get_next_path_position())
-#	print("position global: "+str(self.position))
-#	print("NExt path position: "+str(agent.get_next_path_position()))
-#	print("La direction es: "+str(direction)+str(" Y movesped: ",moveSpeed))
 	velocity=direction*move_speed # Velocity viene de CharacterBody2D
-#	print("Mi velocity es :"+str(velocity))
-#	print("Intento acercarme a player")
 	move_and_slide()	#PAra aplicar la velocity al characterBody2D
 	
 	
 func make_path():
 	if target != null:
 		agent.target_position=target.position
-#		print("player esta en :"+str(agent.target_position))
-#		print("Yo estoy en: "+str(self.position))
-	
 
 
-func _on_timer_timeout():
-	make_path()
-	
+
 func quitar_vida(cantidad):
 	health-=cantidad
 	print("Me hicieron pupa: "+str(cantidad))
@@ -76,7 +65,6 @@ func quitar_vida(cantidad):
 		spawn_experience_token()
 		queue_free()
 		
-		
 
 func spawn_experience_token():
 	var b = experience_token.instantiate()
@@ -86,18 +74,6 @@ func spawn_experience_token():
 
 
 
-func set_vida(cantidad:int):
-	health=cantidad
-
-
-
-func _on_timer_attack_cooldown_timeout():
-	can_attack=true
-	start_attack_player()
-
-func set_can_attack(value:bool):
-	can_attack=value
-	
 func start_attack_player():
 	if can_attack:
 		target.take_damage(damage)
@@ -107,6 +83,27 @@ func stop_attack_player():
 	can_attack=false
 	timer_attack_cooldown.stop()
 
+##################################
+################# GETTER / SETTER
+##################################
+
+func set_can_attack(value:bool):
+	can_attack=value
+
+func set_vida(cantidad:int):
+	health=cantidad
 
 func get_damage():
 	return damage
+
+##################################
+################# TIMERS
+##################################
+
+func _on_timer_timeout():
+	make_path()
+
+
+func _on_timer_attack_cooldown_timeout():
+	can_attack=true
+	start_attack_player()

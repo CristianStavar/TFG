@@ -25,5 +25,5 @@ func ElegirObjetivo():
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Enemigo"):
 		print("CHOCO CONEMENIGO!!!!-----: "+str(self))
-		body.quitar_vida(daño)
+		body.quitar_vida(damage)
 		queue_free()

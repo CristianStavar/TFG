@@ -604,3 +604,9 @@ position = Vector2(731, 413)
 
 [node name="EnemyGhost2" parent="." instance=ExtResource("7_bs0v3")]
 position = Vector2(244, 35)
+
+[node name="Botonaso" type="Button" parent="."]
+process_mode = 2
+offset_right = 8.0
+offset_bottom = 8.0
+text = "BOTONASOOOOOOOOOOOOOOOOOOOOOOOO"

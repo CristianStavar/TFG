@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CardUpgrade" load_steps=2 format=3 uid="uid://bj3xhvysqa8c7"]
+
+[ext_resource type="Script" path="res://card_upgrade.gd" id="1_v2a5e"]
+
+[resource]
+script = ExtResource("1_v2a5e")
+name = "Daggerino -1"
+description = ""
+unlocked = false
+gotten = false
+player_stat = false
+player_health = false
+player_health_value = 0.0
+player_move_speed = false
+player_move_speed_value = 0.0
+player_health_regen = false
+player_health_regen_value = 0.0

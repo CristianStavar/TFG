@@ -18,9 +18,7 @@ func _on_timer_shoot_timeout():
 	shoot_bullet()
 
 func shoot_bullet():
-#	print("-*-*-*-*-*-*-*- DISPARO")
-	var b = bullet.instantiate()
-	
+	var b = bullet.instantiate()	
 	b.global_position=self.global_position
 	b.define_direction( global_position.direction_to(target.position))
 	get_parent().add_child(b)

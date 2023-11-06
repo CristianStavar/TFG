@@ -1,6 +1,6 @@
 extends Node2D
 
-var daño:float=2.0
+var damage:float=2.0
 
 var speed = 800
 var direction
@@ -30,7 +30,7 @@ func _physics_process(delta):
 func _on_body_entered(body):
 	if body.is_in_group("Enemigo"):
 		print("CHOCO CONEMENIGO!!!!-----: "+str(self))
-		body.quitar_vida(daño)
+		body.quitar_vida(damage)
 		if separation:
 			for angle in [-45,-90,-135,-190,135,90,45,0]:
 				var radians = deg_to_rad(angle)

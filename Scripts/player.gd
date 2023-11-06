@@ -1,12 +1,22 @@
 extends CharacterBody2D
 
 
+@export_group("Player stats")
+
+@export var speed := 300.0  # speed in pixels/sec
+@export var max_health:=100.0
+@export var experience_level_multiplier:=1.2
+
+
+@export_group("")
+
+
+
 @onready var game_manager:=get_node("/root/Main")
 
 @export var attack_dagger:PackedScene
-var proyectilesDaga:=3
+var dagger_projectiles:=3
 
-var speed = 300  # speed in pixels/sec
 var direction
 var direction_shoot=Vector2(1,0)
 
@@ -22,12 +32,12 @@ var cooldownSkill1:=false
 var cooldownHoming1:=false
 
 
-var enemigosCerca:=[]
+var nearby_enemies:=[]
 
 
-var puntosExperiencia:=0.0
-var puntosExperienciaSubir:=14
-var nivelActual:=1
+var experience_points:=0.0
+var experience_points_to_level:=14
+var current_level:=1
 
 
 var aim_direction:Vector2
@@ -46,7 +56,7 @@ var cooldown_press:=false
 var health:=0.0
 
 
-@export var experience_level_multiplier:=1.2
+
 
 func _ready():
 	game_manager.player=self
@@ -129,10 +139,11 @@ func TORNADOO():
 	
 	
 func Homing():
-	var b = homing.instantiate()
-	owner.add_child(b)
-	b.transform = $Muzzle.transform
-	b.global_position=$Muzzle.global_position
+	if pick_random_nearby_enemy!=null:
+		var b = homing.instantiate()
+		owner.add_child(b)
+		b.transform = $Muzzle.transform
+		b.global_position=$Muzzle.global_position
 	
 	
 func Shotgun():
@@ -154,20 +165,20 @@ func Shotgun():
 
 
 func add_experience(quantity:float):
-	puntosExperiencia+=quantity
-	if puntosExperiencia>=puntosExperienciaSubir:
+	experience_points+=quantity
+	if experience_points>=experience_points_to_level:
 		player_level_up()
 	game_manager.update_player_ui()
 
 func player_level_up():
-	nivelActual+=1
-	puntosExperiencia=puntosExperiencia-puntosExperienciaSubir
+	current_level+=1
+	experience_points=experience_points-experience_points_to_level
 	update_experience_to_level_up()
 	game_manager.show_player_level_up()
 	
 
 func update_experience_to_level_up():
-	puntosExperienciaSubir*=experience_level_multiplier
+	experience_points_to_level*=experience_level_multiplier
 
 
 func Pistol():
@@ -199,7 +210,9 @@ func StarShot():
 
 
 func pick_random_nearby_enemy():
-	return enemigosCerca.pick_random()
+	if nearby_enemies.size()<0:
+		return null
+	return nearby_enemies.pick_random()
 
 
 func take_damage(value:float):
@@ -210,7 +223,7 @@ func take_damage(value:float):
 
 
 func _on_timer_dagger_timeout():
-	for i in range(proyectilesDaga):
+	for i in range(dagger_projectiles):
 		shoot_dagger()
 		await get_tree().create_timer(0.08).timeout
 
@@ -226,11 +239,11 @@ func _on_timer_homing_timeout():
 
 
 func _on_nearby_area_body_entered(body):
-	enemigosCerca.append(body)
+	nearby_enemies.append(body)
 
 
 func _on_nearby_area_body_exited(body):
-	enemigosCerca.erase(body)
+	nearby_enemies.erase(body)
 
 
 func _on_timer_pulsador_timeout():
