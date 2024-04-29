@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://3euts7ur0ecs"]
+
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_2q74l"]
+[ext_resource type="Texture2D" uid="uid://d4i6723lwsl58" path="res://Arte/soldier.png" id="2_ugxag"]
+
+[resource]
+script = ExtResource("1_2q74l")
+name = "Mejora velocidad movimiento"
+description = "+ 10 velocidad movimiento"
+sprite = ExtResource("2_ugxag")
+unlocked = true
+gotten = null
+unique = null
+card_type = null
+attack_type = ""
+player_upgrade = true
+player_health_value = null
+player_health_regen_value = null
+player_move_speed_value = 10.0
+player_extra_damage_value = null
+dagger_upgrade = null
+dagger_speed_value = null
+dagger_cooldown_value = null
+dagger_damage_value = null
+dagger_extra_dagger_value = null
+dagger_shotgun_upgrade = null
+dagger_bounce_upgrade = null
+axe_tornado_upgrade = false
+axe_tornado_size_value = 0.0
+axe_tornado_duration_value = 0.0
+axe_tornado_damage_value = 0.0
+axe_tornado_cooldown_value = 0.0
+axe_tornado_extra_tornado_value = 0.0
+axe_tornado_wild_upgrade = false
+axe_tornado_move_upgrade = false
+spear_upgrade = false
+spear_damage_value = 0.0
+spear_cooldown_value = 0.0
+spear_extra_spear_value = 0.0
+hammer_upgrade = false
+hammer_damage_value = 0.0
+hammer_cooldown_value = 0.0
+hammer_speed_value = 0.0
+hammer_extra_hammer_value = 0.0
+shield_upgrade = false
+shield_damage_value = 0.0
+shield_speed_value = 0.0
+shield_extra_shield_value = 0.0
+shield_solid_shield = false

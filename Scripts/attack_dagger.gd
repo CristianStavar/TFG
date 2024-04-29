@@ -1,8 +1,10 @@
 extends Node2D
 
-var damage:float=2.0
+@export var attack_name:String
 
-var speed = 800
+@export var damage:float=2.0
+
+@export var speed = 800
 var direction
 
 @export var cooldown:=1.0
@@ -17,8 +19,8 @@ var separation:=false
 @export_multiline var description:String
 func _ready():
 	
-	$TimerCooldown.set_wait_time(cooldown)
-	
+	#$TimerCooldown.set_wait_time(cooldown)
+	var _f
 
 func _physics_process(delta):
 	if direction!=null:
@@ -28,9 +30,11 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
-	if body.is_in_group("Enemigo"):
+	if body.is_in_group("Enemy"):
 		print("CHOCO CONEMENIGO!!!!-----: "+str(self))
-		body.quitar_vida(damage)
+		body.substract_health(damage)
+		SignalBus.damage_dealt.emit(damage,attack_name)
+		
 		if separation:
 			for angle in [-45,-90,-135,-190,135,90,45,0]:
 				var radians = deg_to_rad(angle)
@@ -47,6 +51,13 @@ func define_direction(defined_direction):
 	update_rotation()
 
 
+func update_damage(value:float):
+	damage+=value
+
+func update_speed(value:float):
+	speed+=value
+	
+	
 
 	
 func ActualizarTimerCooldown(valor:float):
@@ -60,6 +71,12 @@ func update_rotation():
 	
 func set_separation(value:bool):
 	separation=value
+
+
+
+func get_cooldown():
+	return cooldown
+
 
 func _on_timer_death_timeout():
 	queue_free()

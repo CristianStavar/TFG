@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://md6gwyolenyp"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_cno7d"]
+[ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://experience_token.tscn" id="2_3vgrf"]
+[ext_resource type="Texture2D" uid="uid://crkqjkmhkm0bg" path="res://Arte/cyclops.png" id="3_y5pus"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s5hm"]
+radius = 18.0
+height = 52.0
+
+[node name="EnemyGiant" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_cno7d")
+enemy_name = "Rata"
+damage = 12
+move_speed = 60.0
+experience_token = ExtResource("2_3vgrf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_5s5hm")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(3, 3)
+texture = ExtResource("3_y5pus")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="TimerAttackCooldown" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerAttackCooldown" to="." method="_on_timer_attack_cooldown_timeout"]

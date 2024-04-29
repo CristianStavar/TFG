@@ -1,17 +1,47 @@
-[gd_resource type="Resource" script_class="CardUpgrade" load_steps=2 format=3 uid="uid://bj3xhvysqa8c7"]
+[gd_resource type="Resource" script_class="CardSkill" load_steps=2 format=3 uid="uid://bj3xhvysqa8c7"]
 
-[ext_resource type="Script" path="res://card_upgrade.gd" id="1_v2a5e"]
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_8yeri"]
 
 [resource]
-script = ExtResource("1_v2a5e")
-name = "Daggerino -1"
-description = ""
-unlocked = false
+script = ExtResource("1_8yeri")
+name = "Vida"
+description = "Auemnta vida y regeneracion"
+unlocked = true
 gotten = false
-player_stat = false
-player_health = false
-player_health_value = 0.0
-player_move_speed = false
+unique = false
+card_type = "Upgrade"
+attack_type = ""
+player_upgrade = true
+player_health_value = 5.0
+player_health_regen_value = 0.2
 player_move_speed_value = 0.0
-player_health_regen = false
-player_health_regen_value = 0.0
+player_extra_damage_value = 0.0
+dagger_upgrade = false
+dagger_speed_value = 0.0
+dagger_cooldown_value = 0.0
+dagger_damage_value = 0.0
+dagger_extra_dagger_value = 0.0
+dagger_shotgun_upgrade = false
+dagger_bounce_upgrade = false
+axe_tornado_upgrade = false
+axe_tornado_size_value = 0.0
+axe_tornado_duration_value = 0.0
+axe_tornado_damage_value = 0.0
+axe_tornado_cooldown_value = 0.0
+axe_tornado_extra_tornado_value = 0.0
+axe_tornado_wild_upgrade = false
+axe_tornado_move_upgrade = false
+spear_upgrade = false
+spear_damage_value = 0.0
+spear_cooldown_value = 0.0
+spear_extra_spear_value = 0.0
+hammer_upgrade = false
+hammer_damage_value = 0.0
+hammer_cooldown_value = 0.0
+hammer_speed_value = 0.0
+hammer_extra_hammer_value = 0.0
+shield_upgrade = false
+shield_damage_value = 0.0
+shield_speed_value = 0.0
+shield_extra_shield_value = 0.0
+shield_solid_shield = false

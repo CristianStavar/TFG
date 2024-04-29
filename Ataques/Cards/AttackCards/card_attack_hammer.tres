@@ -1,0 +1,50 @@
+[gd_resource type="Resource" script_class="CardSkill" load_steps=4 format=3 uid="uid://bbbki8jrdnmy"]
+
+[ext_resource type="PackedScene" uid="uid://b6ltxn3vy78kg" path="res://Ataques/Propios/attack_homing.tscn" id="1_472ko"]
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="2_eedeg"]
+[ext_resource type="Texture2D" uid="uid://cw4crwrepqh7x" path="res://Arte/hammer.png" id="3_kb2bs"]
+
+[resource]
+script = ExtResource("2_eedeg")
+name = "Lanzamiento de martillo"
+description = "Lanzas un martillo enorme directamente e un enemigo"
+sprite = ExtResource("3_kb2bs")
+unlocked = true
+gotten = false
+unique = true
+attack = ExtResource("1_472ko")
+card_type = "Attack"
+attack_type = "Hammer"
+player_upgrade = false
+player_health_value = 0.0
+player_health_regen_value = 0.0
+player_move_speed_value = 0.0
+player_extra_damage_value = 0.0
+dagger_upgrade = false
+dagger_speed_value = 0.0
+dagger_cooldown_value = 0.0
+dagger_damage_value = 0.0
+dagger_extra_dagger_value = 0.0
+dagger_shotgun_upgrade = false
+dagger_bounce_upgrade = false
+axe_tornado_upgrade = false
+axe_tornado_size_value = 0.0
+axe_tornado_duration_value = 0.0
+axe_tornado_damage_value = 0.0
+axe_tornado_cooldown_value = 0.0
+axe_tornado_extra_tornado_value = 0.0
+axe_tornado_wild_upgrade = false
+axe_tornado_move_upgrade = false
+spear_upgrade = false
+spear_damage_value = 0.0
+spear_cooldown_value = 0.0
+spear_extra_spear_value = 0.0
+hammer_upgrade = false
+hammer_damage_value = 0.0
+hammer_cooldown_value = 0.0
+hammer_speed_value = 0.0
+hammer_extra_hammer_value = 0.0
+shield_upgrade = false
+shield_damage_value = 0.0
+shield_speed_value = 0.0
+shield_extra_shield_value = 0.0

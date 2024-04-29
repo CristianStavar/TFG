@@ -8,6 +8,7 @@ size = Vector2(24, 17)
 
 [node name="AttackHoming" type="Node2D"]
 script = ExtResource("1_nw6m8")
+attack_name = "Hammer"
 
 [node name="Area2D" type="Area2D" parent="."]
 rotation = 1.5708

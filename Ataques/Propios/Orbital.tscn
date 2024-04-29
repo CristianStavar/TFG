@@ -8,6 +8,7 @@ size = Vector2(14, 14)
 
 [node name="Orbital" type="Node2D"]
 script = ExtResource("1_y3sku")
+attack_name = "Orbital"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

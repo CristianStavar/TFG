@@ -1,30 +1,36 @@
-[gd_scene load_steps=9 format=3 uid="uid://1hi6lao2fcrk"]
+[gd_scene load_steps=12 format=3 uid="uid://1hi6lao2fcrk"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pl71v"]
 [ext_resource type="PackedScene" uid="uid://b7xxari67wnwx" path="res://Ataques/Propios/attack_dagger.tscn" id="2_ybly8"]
 [ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="3_0rmns"]
-[ext_resource type="PackedScene" uid="uid://d2cbkee27cwny" path="res://Ataques/Propios/TornadoHachas.tscn" id="3_bwpf2"]
-[ext_resource type="PackedScene" uid="uid://b6ltxn3vy78kg" path="res://Ataques/Propios/attack_homing.tscn" id="4_4dms5"]
+[ext_resource type="PackedScene" uid="uid://chl4gj4rl5duu" path="res://Ataques/Propios/attack_spear.tscn" id="3_yvsj1"]
+[ext_resource type="PackedScene" uid="uid://b6ltxn3vy78kg" path="res://Ataques/Propios/attack_homing.tscn" id="4_qhnm6"]
+[ext_resource type="PackedScene" uid="uid://d2cbkee27cwny" path="res://Ataques/Propios/TornadoHachas.tscn" id="5_o0u2n"]
+[ext_resource type="PackedScene" uid="uid://dd34ws0maxutx" path="res://Ataques/Propios/Orbital.tscn" id="6_x1vcf"]
+[ext_resource type="Texture2D" uid="uid://1gqahfelhqqa" path="res://icon.svg" id="8_46emw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6iki7"]
-height = 32.0
+radius = 7.0
+height = 18.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bi6c"]
 size = Vector2(779, 413)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ahrjb"]
-radius = 14.0
-height = 36.0
+radius = 8.0
+height = 22.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 33
 script = ExtResource("1_pl71v")
+move_speed = 100.0
 attack_dagger = ExtResource("2_ybly8")
-tornado = ExtResource("3_bwpf2")
-homing = ExtResource("4_4dms5")
+attack_spear = ExtResource("3_yvsj1")
+attack_hammer = ExtResource("4_qhnm6")
+attack_axe_tornado = ExtResource("5_o0u2n")
+attack_orbital_shield = ExtResource("6_x1vcf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2.312)
 texture = ExtResource("3_0rmns")
 
 [node name="ColisionDeMentira" type="CollisionShape2D" parent="."]
@@ -35,12 +41,13 @@ shape = SubResource("CapsuleShape2D_6iki7")
 [node name="TimerDagger" type="Timer" parent="."]
 autostart = true
 
-[node name="TimerTornado" type="Timer" parent="."]
-one_shot = true
+[node name="TimerSpear" type="Timer" parent="."]
+wait_time = 3.0
 
-[node name="TimerHoming" type="Timer" parent="."]
+[node name="TimerAxeTornado" type="Timer" parent="."]
+
+[node name="TimerHammer" type="Timer" parent="."]
 wait_time = 0.5
-one_shot = true
 
 [node name="NearbyArea" type="Area2D" parent="."]
 collision_mask = 34
@@ -58,9 +65,21 @@ collision_mask = 34
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDamage"]
 shape = SubResource("CapsuleShape2D_ahrjb")
 
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -426.0
+offset_top = -25.0
+offset_right = -298.0
+offset_bottom = 103.0
+value = 49.0
+texture_progress = ExtResource("8_46emw")
+tint_under = Color(0.113725, 1, 1, 1)
+tint_over = Color(1, 0.0235294, 0.0588235, 1)
+tint_progress = Color(1, 1, 0.109804, 1)
+
 [connection signal="timeout" from="TimerDagger" to="." method="_on_timer_dagger_timeout"]
-[connection signal="timeout" from="TimerTornado" to="." method="_on_timer_tornado_timeout"]
-[connection signal="timeout" from="TimerHoming" to="." method="_on_timer_homing_timeout"]
+[connection signal="timeout" from="TimerSpear" to="." method="_on_timer_spear_timeout"]
+[connection signal="timeout" from="TimerAxeTornado" to="." method="_on_timer_tornado_timeout"]
+[connection signal="timeout" from="TimerHammer" to="." method="_on_timer_hammer_timeout"]
 [connection signal="body_entered" from="NearbyArea" to="." method="_on_nearby_area_body_entered"]
 [connection signal="body_exited" from="NearbyArea" to="." method="_on_nearby_area_body_exited"]
 [connection signal="timeout" from="TimerPulsador" to="." method="_on_timer_pulsador_timeout"]

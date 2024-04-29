@@ -1,33 +1,41 @@
 extends Node2D
 
-var daño:float=2.0
+@export var attack_name:String
+var damage:float=2.0
 
 var speed = 800
 var direction
 
 @export var cooldown:=1.0
-@export var tieneDuracion:=false
+@export var solid_shield:=false
 
-var tiempo:=0.0
+
+var time:=0.0
 var radius:=36.0
 var speedRotation:=5.0
 
 func _ready():
 #	$TimerCooldown.set_wait_time(cooldown)
-	pass
+	add_to_group("Orbital")
 
 
 func _physics_process(delta):
-	tiempo+=delta
-	position=Vector2(sin(tiempo*speedRotation)*radius,cos(tiempo*speedRotation)*radius)
+	time+=delta
+	position=Vector2(sin(time*speedRotation)*radius,cos(time*speedRotation)*radius)
 
 
 
 func _on_body_entered(body):
 	print("Choco con algo!!!")
-	if body.is_in_group("Enemigo"):
+	if body.is_in_group("Enemy"):
 		print("CHOCO CONEMENIGO!!!!-----")
-		body.quitar_vida(daño)
+		body.quitar_vida(damage)
+		SignalBus.damage_dealt.emit(damage,attack_name)
+	if solid_shield and body.is_in_group("EnemyBullet"):
+		body.self_destruct()
+	
+		
+		
 #		queue_free()
 
 func definir_direccion(direccion):

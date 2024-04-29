@@ -1,0 +1,195 @@
+[gd_scene load_steps=4 format=3 uid="uid://drq8v8a5opngh"]
+
+[ext_resource type="Texture2D" uid="uid://dpy4swi4ev48t" path="res://Arte/axe.png" id="1_7gdgi"]
+[ext_resource type="Script" path="res://Scripts/Managers/CollectionsManager.gd" id="1_qma4b"]
+[ext_resource type="Texture2D" uid="uid://da2uh2pr6gqnx" path="res://Arte/bat.png" id="2_ej822"]
+
+[node name="ColectionUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qma4b")
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1201.0
+offset_bottom = 702.0
+
+[node name="ButtonBackToMenu" type="Button" parent="Background"]
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 62.0
+text = "Back to menu"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 89.0
+offset_right = 1063.0
+offset_bottom = 652.0
+theme_override_constants/side_margin = 10
+theme_override_constants/icon_separation = 20
+theme_override_constants/icon_max_width = 20
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 24
+
+[node name="Logros" type="Control" parent="TabContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Logros"]
+layout_mode = 0
+offset_right = 1028.0
+offset_bottom = 90.0
+text = "Descripcion largita ?
+ nose asldjasbjdhlasjd sakdn basbkdjhasjkd asjdhsak jhdasjd khaksj dhksaj dhsak djhsadk jsahdk jash dkjashd ksaj hdskaj hdskaj ha"
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Logros"]
+layout_mode = 0
+offset_right = 1041.0
+offset_bottom = 124.0
+
+[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Logros"]
+position = Vector2(67, 127)
+scale = Vector2(4.4375, 3.8125)
+texture = ExtResource("1_7gdgi")
+
+[node name="Label2" type="Label" parent="TabContainer/Logros"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 170.0
+offset_right = 1041.0
+offset_bottom = 196.0
+text = "Crearuna escena boton con una imagen y meterle script de logro donde poner la info y demás. Luego repegarla aqui por cada logro."
+
+[node name="Objetos" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Objetos"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Pestaña 2 22222
+222"
+
+[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Objetos"]
+position = Vector2(96, 111)
+scale = Vector2(6.0625, 5.6875)
+texture = ExtResource("2_ej822")
+
+[node name="Panel" type="Panel" parent="TabContainer/Objetos"]
+layout_mode = 0
+offset_left = 658.0
+offset_top = 28.0
+offset_right = 1030.0
+offset_bottom = 488.0
+
+[node name="Label" type="Label" parent="TabContainer/Objetos/Panel"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 6.0
+offset_right = 194.0
+offset_bottom = 32.0
+text = "Nombre"
+
+[node name="Label2" type="Label" parent="TabContainer/Objetos/Panel"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 49.0
+offset_right = 358.0
+offset_bottom = 127.0
+text = "Descripcion asdjansd sadjnoasjdn askjd nsakdj nasdj naskdj nas djsand kjasnd kjsand ksaj d"
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="TabContainer/Objetos/Panel"]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 218.0
+offset_right = 206.0
+offset_bottom = 244.0
+text = "Mejoras
+"
+
+[node name="Label4" type="Label" parent="TabContainer/Objetos/Panel"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 269.0
+offset_right = 368.0
+offset_bottom = 435.0
+text = "Mejora1
+Mejora2
+Mejora5 "
+
+[node name="Estadisticas" type="Control" parent="TabContainer"]
+visible = false
+layout_mode = 2
+
+[node name="LabelEnemiesKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 163.0
+offset_top = 34.0
+offset_right = 317.0
+offset_bottom = 67.0
+text = "Enemigos vencidos"
+
+[node name="LabelRatsKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 78.0
+offset_right = 256.0
+offset_bottom = 104.0
+text = "Ratas eliminadas : 83.458.327"
+
+[node name="LabelBatsKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 110.0
+offset_right = 258.0
+offset_bottom = 136.0
+text = "Ratas eliminadas : 83.458.327"
+
+[node name="LabelSpidersKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 145.0
+offset_right = 254.0
+offset_bottom = 171.0
+text = "Ratas eliminadas : 83.458.327"
+
+[node name="LabelCrabsKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 181.0
+offset_right = 256.0
+offset_bottom = 207.0
+text = "Ratas eliminadas : 83.458.327"
+
+[node name="LabelGhostsKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 687.0
+offset_top = 85.0
+offset_right = 914.0
+offset_bottom = 111.0
+text = "Ratas eliminadas : 83.458.327"
+
+[node name="LabelStrongGhostsKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 689.0
+offset_top = 127.0
+offset_right = 916.0
+offset_bottom = 153.0
+text = "Ratas eliminadas : 83.458.327"
+
+[node name="LabelGiantsKilled" type="Label" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_left = 690.0
+offset_top = 170.0
+offset_right = 917.0
+offset_bottom = 196.0
+text = "Ratas eliminadas : 83.458.327"
+
+[connection signal="pressed" from="Background/ButtonBackToMenu" to="." method="_on_button_back_to_menu_pressed"]

@@ -1,0 +1,58 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx528sl58swbt"]
+
+[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="1_qugnm"]
+
+[node name="PauseMenuUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 1178.0
+offset_bottom = 681.0
+
+[node name="ButtonResumeGame" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 442.0
+offset_top = 148.0
+offset_right = -436.0
+offset_bottom = -379.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Reanudar partida"
+
+[node name="ButtonOptions" type="Button" parent="."]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 51.0
+offset_right = 310.0
+offset_bottom = 158.0
+text = "Opciones"
+
+[node name="ButtonMainMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 822.0
+offset_top = 58.0
+offset_right = 1106.0
+offset_bottom = 171.0
+text = "Volver al menu principal"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(171, 355)
+scale = Vector2(6.8125, 6.125)
+texture = ExtResource("1_qugnm")
+
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_left = -21.4312
+offset_top = 3.7551
+offset_right = 33.5688
+offset_bottom = 29.7551
+theme_override_font_sizes/font_size = 16
+text = "Daño:4"

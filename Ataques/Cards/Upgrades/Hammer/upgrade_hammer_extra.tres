@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://ceawcbxi50lbt"]
+
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_2gygg"]
+[ext_resource type="Texture2D" uid="uid://cw4crwrepqh7x" path="res://Arte/hammer.png" id="2_5prev"]
+
+[resource]
+script = ExtResource("1_2gygg")
+name = "martillo extra"
+description = "otro martillo mas."
+sprite = ExtResource("2_5prev")
+unlocked = false
+gotten = false
+unique = false
+card_type = "Upgrade"
+attack_type = ""
+player_upgrade = false
+player_health_value = 0.0
+player_health_regen_value = 0.0
+player_move_speed_value = 0.0
+player_extra_damage_value = 0.0
+dagger_upgrade = false
+dagger_speed_value = 0.0
+dagger_cooldown_value = 0.0
+dagger_damage_value = 0.0
+dagger_extra_dagger_value = 0.0
+dagger_shotgun_upgrade = false
+dagger_bounce_upgrade = false
+axe_tornado_upgrade = false
+axe_tornado_size_value = 0.0
+axe_tornado_duration_value = 0.0
+axe_tornado_damage_value = 0.0
+axe_tornado_cooldown_value = 0.0
+axe_tornado_extra_tornado_value = 0.0
+axe_tornado_wild_upgrade = false
+axe_tornado_move_upgrade = false
+spear_upgrade = false
+spear_damage_value = 0.0
+spear_cooldown_value = 0.0
+spear_extra_spear_value = 0.0
+hammer_upgrade = true
+hammer_damage_value = 0.0
+hammer_cooldown_value = 0.0
+hammer_speed_value = 0.0
+hammer_extra_hammer_value = 1.0
+shield_upgrade = false
+shield_damage_value = 0.0
+shield_speed_value = 0.0
+shield_extra_shield_value = 0.0

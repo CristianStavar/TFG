@@ -1,0 +1,48 @@
+[gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://b4dnvc1s1b8hk"]
+
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_ryvux"]
+[ext_resource type="Texture2D" uid="uid://yp0own211qyj" path="res://Arte/spear.png" id="2_p00bp"]
+
+[resource]
+script = ExtResource("1_ryvux")
+name = "lanza extra"
+description = "LAnzas una mas extra"
+sprite = ExtResource("2_p00bp")
+unlocked = false
+gotten = false
+unique = false
+card_type = "Upgrade"
+attack_type = ""
+player_upgrade = false
+player_health_value = 0.0
+player_health_regen_value = 0.0
+player_move_speed_value = 0.0
+player_extra_damage_value = 0.0
+dagger_upgrade = false
+dagger_speed_value = 0.0
+dagger_cooldown_value = 0.0
+dagger_damage_value = 0.0
+dagger_extra_dagger_value = 0.0
+dagger_shotgun_upgrade = false
+dagger_bounce_upgrade = false
+axe_tornado_upgrade = false
+axe_tornado_size_value = 0.0
+axe_tornado_duration_value = 0.0
+axe_tornado_damage_value = 0.0
+axe_tornado_cooldown_value = 0.0
+axe_tornado_extra_tornado_value = 0.0
+axe_tornado_wild_upgrade = false
+axe_tornado_move_upgrade = false
+spear_upgrade = true
+spear_damage_value = 0.0
+spear_cooldown_value = 0.0
+spear_extra_spear_value = 1.0
+hammer_upgrade = false
+hammer_damage_value = 0.0
+hammer_cooldown_value = 0.0
+hammer_speed_value = 0.0
+hammer_extra_hammer_value = 0.0
+shield_upgrade = false
+shield_damage_value = 0.0
+shield_speed_value = 0.0
+shield_extra_shield_value = 0.0

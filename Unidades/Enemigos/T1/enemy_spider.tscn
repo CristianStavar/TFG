@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://cu4i4dn8cf4n1"]
+
+[ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_c1mva"]
+[ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://experience_token.tscn" id="2_4c0le"]
+[ext_resource type="Texture2D" uid="uid://bcuiw7xutym6v" path="res://Arte/spider.png" id="3_v4xny"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eomxq"]
+size = Vector2(35, 38)
+
+[node name="EnemySpider" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_c1mva")
+enemy_name = "Rata"
+health = 4
+experience_token = ExtResource("2_4c0le")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_eomxq")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(2.7, 2.7)
+texture = ExtResource("3_v4xny")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+time_horizon_agents = 0.2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="TimerAttackCooldown" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerAttackCooldown" to="." method="_on_timer_attack_cooldown_timeout"]

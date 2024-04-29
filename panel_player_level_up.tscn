@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://37ic61k0lk5u"]
+[gd_scene load_steps=3 format=3 uid="uid://37ic61k0lk5u"]
+
+[ext_resource type="PackedScene" uid="uid://4nw0yi4ljoan" path="res://Escenas/attack_card.tscn" id="1_ka0kb"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j4xqv"]
 font_size = 40
@@ -22,10 +24,19 @@ offset_bottom = 189.0
 text = "Subiste de nivel HUrra"
 label_settings = SubResource("LabelSettings_j4xqv")
 
+[node name="NodeCard1" parent="." instance=ExtResource("1_ka0kb")]
+position = Vector2(347, 321)
+
+[node name="NodeCard2" parent="." instance=ExtResource("1_ka0kb")]
+position = Vector2(625, 318)
+
+[node name="NodeCard3" parent="." instance=ExtResource("1_ka0kb")]
+position = Vector2(909, 321)
+
 [node name="ContinuaJuego" type="Button" parent="."]
 layout_mode = 0
-offset_left = 505.0
-offset_top = 279.0
-offset_right = 645.0
-offset_bottom = 310.0
+offset_left = 533.0
+offset_top = 523.0
+offset_right = 673.0
+offset_bottom = 554.0
 text = "Sigamos sigamos"

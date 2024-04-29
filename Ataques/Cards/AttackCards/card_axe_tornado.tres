@@ -1,0 +1,51 @@
+[gd_resource type="Resource" script_class="CardSkill" load_steps=4 format=3 uid="uid://y4nv34qlp5ad"]
+
+[ext_resource type="PackedScene" uid="uid://d2cbkee27cwny" path="res://Ataques/Propios/TornadoHachas.tscn" id="1_l1v4y"]
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="2_vyxmd"]
+[ext_resource type="Texture2D" uid="uid://dpy4swi4ev48t" path="res://Arte/axe.png" id="3_u4w31"]
+
+[resource]
+script = ExtResource("2_vyxmd")
+name = "Tormenta de hachas"
+description = "Crea una tormenta de hachas encima de un enemigo aleatorio."
+sprite = ExtResource("3_u4w31")
+unlocked = true
+gotten = false
+unique = true
+attack = ExtResource("1_l1v4y")
+card_type = "Attack"
+attack_type = "AxeStorm"
+player_upgrade = false
+player_health_value = 0.0
+player_health_regen_value = 0.0
+player_move_speed_value = 0.0
+player_extra_damage_value = 0.0
+dagger_upgrade = false
+dagger_speed_value = 0.0
+dagger_cooldown_value = 0.0
+dagger_damage_value = 0.0
+dagger_extra_dagger_value = 0.0
+dagger_shotgun_upgrade = false
+dagger_bounce_upgrade = false
+axe_tornado_upgrade = false
+axe_tornado_size_value = 0.0
+axe_tornado_duration_value = 0.0
+axe_tornado_damage_value = 0.0
+axe_tornado_cooldown_value = 0.0
+axe_tornado_extra_tornado_value = 0.0
+axe_tornado_wild_upgrade = false
+axe_tornado_move_upgrade = false
+spear_upgrade = false
+spear_damage_value = 0.0
+spear_cooldown_value = 0.0
+spear_extra_spear_value = 0.0
+hammer_upgrade = false
+hammer_damage_value = 0.0
+hammer_cooldown_value = 0.0
+hammer_speed_value = 0.0
+hammer_extra_hammer_value = 0.0
+shield_upgrade = false
+shield_damage_value = 0.0
+shield_speed_value = 0.0
+shield_extra_shield_value = 0.0
+shield_solid_shield = false

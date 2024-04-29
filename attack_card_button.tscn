@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://b46dy8qb76hxl"]
+
+[ext_resource type="Script" path="res://Scripts/card_ui.gd" id="1_41qlr"]
+[ext_resource type="Texture2D" uid="uid://1gqahfelhqqa" path="res://icon.svg" id="2_4gglo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3q2k2"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+outline_size = 2
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_41qlr")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-9.99999, 41.488)
+scale = Vector2(1.89063, 2.41425)
+texture = ExtResource("2_4gglo")
+
+[node name="Image" type="Sprite2D" parent="."]
+position = Vector2(-10.1, -8)
+scale = Vector2(1.26406, 1.2)
+texture = ExtResource("2_4gglo")
+
+[node name="LabelName" type="Label" parent="."]
+offset_left = -35.0
+offset_top = -103.0
+offset_right = 36.0
+offset_bottom = -77.0
+text = "Knife lvl2"
+
+[node name="LabelDescription" type="Label" parent="."]
+offset_left = -104.0
+offset_top = 73.0
+offset_right = 91.0
+offset_bottom = 174.0
+text = "Description yes"
+label_settings = SubResource("LabelSettings_3q2k2")
