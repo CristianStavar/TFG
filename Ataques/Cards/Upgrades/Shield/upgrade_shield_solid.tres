@@ -5,8 +5,10 @@
 
 [resource]
 script = ExtResource("1_76uiu")
-name = "escudo solido "
-description = "el escudo para los proyectile con losque choca"
+name = "Escudo solido "
+description = "El escudo para los proyectile con los que choca."
+show_name = ""
+unique_upgrades = ""
 sprite = ExtResource("2_84bg1")
 unlocked = false
 gotten = false

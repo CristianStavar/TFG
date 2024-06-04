@@ -1,11 +1,15 @@
-[gd_resource type="Resource" script_class="CardSkill" load_steps=2 format=3 uid="uid://bj3xhvysqa8c7"]
+[gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://bj3xhvysqa8c7"]
 
 [ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_8yeri"]
+[ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="2_m6nav"]
 
 [resource]
 script = ExtResource("1_8yeri")
 name = "Vida"
-description = "Auemnta vida y regeneracion"
+description = "Aumenta la vida y la regeneracion"
+show_name = ""
+unique_upgrades = ""
+sprite = ExtResource("2_m6nav")
 unlocked = true
 gotten = false
 unique = false
@@ -22,7 +26,7 @@ dagger_cooldown_value = 0.0
 dagger_damage_value = 0.0
 dagger_extra_dagger_value = 0.0
 dagger_shotgun_upgrade = false
-dagger_bounce_upgrade = false
+dagger_separation_upgrade = false
 axe_tornado_upgrade = false
 axe_tornado_size_value = 0.0
 axe_tornado_duration_value = 0.0
@@ -40,6 +44,7 @@ hammer_damage_value = 0.0
 hammer_cooldown_value = 0.0
 hammer_speed_value = 0.0
 hammer_extra_hammer_value = 0.0
+hammer_fragile_upgrade = false
 shield_upgrade = false
 shield_damage_value = 0.0
 shield_speed_value = 0.0

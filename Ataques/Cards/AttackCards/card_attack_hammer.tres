@@ -1,13 +1,15 @@
 [gd_resource type="Resource" script_class="CardSkill" load_steps=4 format=3 uid="uid://bbbki8jrdnmy"]
 
-[ext_resource type="PackedScene" uid="uid://b6ltxn3vy78kg" path="res://Ataques/Propios/attack_homing.tscn" id="1_472ko"]
+[ext_resource type="PackedScene" uid="uid://b6ltxn3vy78kg" path="res://Ataques/Propios/attack_hammer.tscn" id="1_472ko"]
 [ext_resource type="Script" path="res://Scripts/card_skill.gd" id="2_eedeg"]
 [ext_resource type="Texture2D" uid="uid://cw4crwrepqh7x" path="res://Arte/hammer.png" id="3_kb2bs"]
 
 [resource]
 script = ExtResource("2_eedeg")
 name = "Lanzamiento de martillo"
-description = "Lanzas un martillo enorme directamente e un enemigo"
+description = "Lanzas un martillo enorme dirigido a un enemigo."
+show_name = "Martillo Pesado"
+unique_upgrades = "-Fragil : El martillo see rompe en multiples trozos que daña  alos enemigos impactados"
 sprite = ExtResource("3_kb2bs")
 unlocked = true
 gotten = false
@@ -48,3 +50,4 @@ shield_upgrade = false
 shield_damage_value = 0.0
 shield_speed_value = 0.0
 shield_extra_shield_value = 0.0
+shield_solid_shield = false

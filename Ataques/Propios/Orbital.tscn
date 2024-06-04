@@ -1,18 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://dd34ws0maxutx"]
 
-[ext_resource type="Script" path="res://Scripts/orbital.gd" id="1_y3sku"]
+[ext_resource type="Script" path="res://Scripts/attack_shield.gd" id="1_nxslo"]
 [ext_resource type="Texture2D" uid="uid://db7r4bbmkiubx" path="res://Arte/shield_square.png" id="2_w3sqh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_41m2a"]
 size = Vector2(14, 14)
 
 [node name="Orbital" type="Node2D"]
-script = ExtResource("1_y3sku")
-attack_name = "Orbital"
+script = ExtResource("1_nxslo")
+attack_name = "Shield"
+show_name = "Escudo"
+description = "Un escudo gira a tu alrededor haciendo daño a los enemigos que toque"
+unique_upgrades = "-Bloqueo: El escudo bloquea los proyectiles enemigos que le impacten."
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_41m2a")

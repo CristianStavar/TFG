@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://bb74v8olsrp6p"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_dxe3a"]
+
+[resource]
+script = ExtResource("1_dxe3a")
+name = "Vence"
+description = "Consigue acabar con el jefe final."
+unlocked = false

@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://clifhfykt3f42"]
+[gd_scene load_steps=8 format=3 uid="uid://clifhfykt3f42"]
 
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_4kvhn"]
-[ext_resource type="PackedScene" uid="uid://erq61o72or04" path="res://Unidades/Enemigos/T0/enemy_rat.tscn" id="2_xcjm5"]
 [ext_resource type="PackedScene" uid="uid://dah76srhmroks" path="res://Unidades/Enemigos/T2/enemy_ghost.tscn" id="3_hvb1e"]
 [ext_resource type="PackedScene" uid="uid://b03rypvtp7066" path="res://Unidades/Enemigos/T1/enemy_bat.tscn" id="4_wnbtu"]
 [ext_resource type="PackedScene" uid="uid://cu4i4dn8cf4n1" path="res://Unidades/Enemigos/T1/enemy_spider.tscn" id="5_in7io"]
@@ -11,11 +10,11 @@
 
 [node name="SpawnManager" type="Node2D"]
 script = ExtResource("1_4kvhn")
-enemigo_rata = ExtResource("2_xcjm5")
 enemigo_fantasma = ExtResource("3_hvb1e")
 tier1_enemies = Array[PackedScene]([ExtResource("4_wnbtu"), ExtResource("5_in7io")])
 tier2_enemies = Array[PackedScene]([ExtResource("6_ie85y"), ExtResource("3_hvb1e")])
 tier3_enemies = Array[PackedScene]([ExtResource("7_8daqk"), ExtResource("8_yy1ul")])
+interval_enemy_level_up_value = 50.0
 timer_enemy_tier_value = 60
 
 [node name="Timer" type="Timer" parent="."]
@@ -33,7 +32,12 @@ autostart = true
 wait_time = 1.2
 autostart = true
 
+[node name="TimerSpawnWave" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="IntervalEnemyLevelUp" to="." method="_on_interval_enemy_level_up_timeout"]
 [connection signal="timeout" from="TimerEnemyTier" to="." method="_on_timer_enemy_tier_timeout"]
 [connection signal="timeout" from="TimerSpawn" to="." method="_on_timer_spawn_timeout"]
+[connection signal="timeout" from="TimerSpawnWave" to="." method="_on_timer_spawn_wave_timeout"]

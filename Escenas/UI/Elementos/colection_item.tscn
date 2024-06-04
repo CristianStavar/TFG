@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg4rxailqlnu4"]
+
+[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="1_bampq"]
+[ext_resource type="Script" path="res://Escenas/UI/Elementos/colection_item_button.gd" id="2_hljf2"]
+[ext_resource type="Resource" uid="uid://bbbki8jrdnmy" path="res://Ataques/Cards/AttackCards/card_attack_hammer.tres" id="3_uhr1l"]
+
+[node name="Button" type="Button"]
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(4, 4)
+icon = ExtResource("1_bampq")
+icon_alignment = 1
+vertical_icon_alignment = 0
+script = ExtResource("2_hljf2")
+item_holded = ExtResource("3_uhr1l")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

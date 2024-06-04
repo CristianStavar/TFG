@@ -13,7 +13,7 @@ sean menos frecuentes los masbajos.
 @export var current_lvl_enemy:=1
 @export var current_tier_enemy:=0
 
-@export var enemigo_rata:PackedScene
+@export var enemy_rat:PackedScene
 @export var enemigo_fantasma:PackedScene
 
 @export var tier1_enemies:Array[PackedScene]
@@ -31,13 +31,15 @@ sean menos frecuentes los masbajos.
 
 @export var interval_enemy_level_up_value:=30.0 # Enemy lvlup
 @export var timer_enemy_tier_value:=20
+@export var timer_spawn_value:=1.2
 
+@export var wave_enemy_quantity=20
 
 func _ready():
 	$IntervalEnemyLevelUp.set_wait_time(interval_enemy_level_up_value)
 	$TimerEnemyTier.set_wait_time(timer_enemy_tier_value)
-	
-	enemigo_rata=preload("res://Unidades/Enemigos/T0/enemy_rat.tscn")
+	$TimerSpawn.set_wait_time(timer_spawn_value)
+	enemy_rat=preload("res://Unidades/Enemigos/T0/enemy_rat.tscn")
 
 
 
@@ -47,7 +49,7 @@ func _on_timer_timeout():
 func spawn_enemy(type:String):
 	match type:
 		"Rata":
-			instantiate_specific_enemy(enemigo_rata)
+			instantiate_specific_enemy(enemy_rat)
 		"Fantasma":
 			instantiate_specific_enemy(enemigo_fantasma)
 
@@ -65,17 +67,19 @@ func spawn_random_enemy_tier(tier:int):
 
 
 func instantiate_enemy_tier(tier:Array):
-	var position:Vector2=randv_circle()
-	var b = tier.pick_random().instantiate()
-	b.global_position=position+game_manager.player.global_position
-	game_manager.add_child(b)
+	var enemy_position:Vector2=randv_circle()
+	var enemy = tier.pick_random().instantiate()
+	enemy.set_level(current_lvl_enemy)
+	enemy.global_position=enemy_position+game_manager.player.global_position
+	game_manager.add_child(enemy)
 	
 	
-func instantiate_specific_enemy(enemy:PackedScene):
-	var position:Vector2=randv_circle()
-	var b = enemy.instantiate()
-	b.global_position=position+game_manager.player.global_position
-	game_manager.add_child(b)
+func instantiate_specific_enemy(specific_enemy:PackedScene):
+	var enemy_position:Vector2=randv_circle()
+	var enemy = specific_enemy.instantiate()
+	enemy.set_level(current_lvl_enemy)
+	enemy.global_position=enemy_position+game_manager.player.global_position
+	game_manager.add_child(enemy)
 
 
 func spawn_enemy_wave(type:String,quantity:int):
@@ -91,10 +95,10 @@ func spawn_enemy_tier_wave(tier:int,quantity:int):
 func choose_enemy():
 	match current_tier_enemy:
 		0:	
-			return enemigo_rata
+			return enemy_rat
 		1:
 			if randf()>.5:
-				return enemigo_rata
+				return enemy_rat
 			else:
 				return tier1_enemies.pick_random()
 		2:
@@ -102,8 +106,8 @@ func choose_enemy():
 				return "Rata"#enemigo_rata.enemy_name
 			else:
 				return tier1_enemies.pick_random()
-	var v
-	return v
+
+	return enemy_rat
 	
 	
 func choose_tier_to_spawn():
@@ -174,3 +178,7 @@ func _on_timer_enemy_tier_timeout():
 		timer_enemy_tier_value+=60.0
 		$TimerEnemyTier.set_wait_time(timer_enemy_tier_value)
 		print("\n Sumamos Tier: "+str(current_tier_enemy))
+
+
+func _on_timer_spawn_wave_timeout():
+	spawn_enemy_tier_wave(current_tier_enemy,wave_enemy_quantity)

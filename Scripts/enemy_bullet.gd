@@ -15,13 +15,12 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
-		print("*-*-*-+++++++++++++++++++++++++++ CHOCO CON JUGADOR")
 		body.take_damage(damage)		
 		queue_free()
 	elif body.is_in_group("Orbital"):
 		SignalBus.damage_blocked.emit(damage)
-	print("/////////////////////////////////////////////////// He tocao algo, noseqes soy una bolita")
-
+	
+	
 func define_direction(defined_direction):
 #	add_constant_central_force(direction)
 	direction=defined_direction
@@ -37,3 +36,10 @@ func update_rotation():
 func _on_timer_timeout():
 #	print("-*-* MUERO POR TIEMPO")
 	queue_free()
+
+func set_damage(value:float):
+	damage=value
+
+
+func set_speed(value:float):
+	speed=value

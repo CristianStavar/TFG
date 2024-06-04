@@ -2,15 +2,15 @@ extends CharacterBody2D
 
 @export var tier:=0
 @export var enemy_name:String
-@export var health: int=5
-@export var damage: int=10
+@export var health: float=5
+@export var damage: float=10
 
 @export var move_speed:float=50
 @export var attack_range:float=22
 @export var attack_cooldown:float=.4
 
 @export var current_level:=0
-@export var lvl_upgrades: Array[int]=[4,2] #health, damage
+@export var lvl_upgrades: Array[float]=[0.0,0.0] #health, damage
 
 @export var experience_token:PackedScene
 
@@ -73,7 +73,7 @@ func substract_health(value):
 	sprite.modulate=Color.WHITE
 
 	if health<=0:
-		print("he muerto: - "+str(self))
+#		print("he muerto: - "+str(self))
 		spawn_experience_token()
 		SignalBus.enemy_killed.emit(enemy_name)
 		queue_free()

@@ -1,9 +1,11 @@
 extends Resource
 class_name CardSkill
 
-#Tipos: Congelado-Sangrado-Veneno
+
 @export var name="Dagge"
 @export_multiline var description:String
+@export var show_name:String
+@export_multiline var unique_upgrades:String
 @export var sprite:Texture2D
 @export var unlocked:=false
 @export var gotten:bool
@@ -38,8 +40,8 @@ var attack_type: String=""
 @export var dagger_extra_dagger_value:float
 @export_subgroup("Shotgun Card")
 @export var dagger_shotgun_upgrade:bool
-@export_subgroup("Bounce Card")
-@export var dagger_bounce_upgrade:bool
+@export_subgroup("Separation Card")
+@export var dagger_separation_upgrade:bool
 
 
 @export_group("Axe Tornado stats")
@@ -75,8 +77,10 @@ var attack_type: String=""
 @export_subgroup("CDR Card")
 @export var hammer_cooldown_value:float
 @export var hammer_speed_value:float
-@export_subgroup("Extra Spear Card")
+@export_subgroup("Extra Hammer Card")
 @export var hammer_extra_hammer_value:float
+@export_subgroup("Fragile")
+@export var hammer_fragile_upgrade:bool
 
 
 @export_group("SHIELD stats")

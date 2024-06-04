@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://d383axgfs4ng"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_00qqa"]
+
+[resource]
+script = ExtResource("1_00qqa")
+name = "Sobrevive 5"
+description = "Consigue sobrevivir cinco minutos"
+unlocked = false

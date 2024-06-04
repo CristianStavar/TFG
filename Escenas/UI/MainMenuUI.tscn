@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkabrjh8phksx"]
+[gd_scene load_steps=9 format=3 uid="uid://dkabrjh8phksx"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_it0pd"]
+[ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="2_6yc1x"]
 [ext_resource type="PackedScene" uid="uid://drq8v8a5opngh" path="res://Escenas/UI/ColectionUI.tscn" id="2_8ka6j"]
+[ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="2_p3um0"]
+[ext_resource type="PackedScene" uid="uid://fvh70jxidati" path="res://Escenas/UI/OptionsMenuUI.tscn" id="4_fkk8t"]
+[ext_resource type="Script" path="res://Scripts/Managers/statistics_manager.gd" id="5_7o8eg"]
+[ext_resource type="Texture2D" uid="uid://bcrjv4mvtkhhy" path="res://Arte/UI/panelInset_beige.png" id="7_xjeq0"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gm30x"]
+texture = ExtResource("7_xjeq0")
 
 [node name="MainMenu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -22,37 +31,52 @@ layout_mode = 0
 offset_right = 1153.0
 offset_bottom = 651.0
 
-[node name="Botones" type="PanelContainer" parent="MainPanel"]
-layout_mode = 2
-offset_left = 433.0
-offset_top = 181.0
-offset_right = 677.0
-offset_bottom = 347.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MainPanel/Botones"]
-layout_mode = 2
-theme_override_constants/separation = 120
-
-[node name="Button" type="Button" parent="MainPanel/Botones/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Comenzar Partida"
-
-[node name="Button2" type="Button" parent="MainPanel/Botones/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 40
-text = "Colección
-"
-
 [node name="Button" type="Button" parent="MainPanel"]
 layout_mode = 0
-offset_left = 44.0
-offset_top = 42.0
-offset_right = 187.0
-offset_bottom = 92.0
+offset_left = 24.0
+offset_top = 29.0
+offset_right = 267.0
+offset_bottom = 102.0
 theme_override_font_sizes/font_size = 30
 text = "Opciones
 "
+icon = ExtResource("2_6yc1x")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Botones" type="Control" parent="MainPanel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button2" type="Button" parent="MainPanel"]
+layout_mode = 2
+offset_left = 359.0
+offset_top = 152.0
+offset_right = 768.0
+offset_bottom = 263.0
+theme_override_font_sizes/font_size = 40
+text = "Comenzar Partida"
+icon = ExtResource("2_p3um0")
+flat = true
+text_overrun_behavior = 4
+icon_alignment = 1
+expand_icon = true
+
+[node name="Button3" type="Button" parent="MainPanel"]
+layout_mode = 2
+offset_left = 336.0
+offset_top = 346.0
+offset_right = 781.0
+offset_bottom = 473.0
+theme_override_font_sizes/font_size = 40
+text = "Colección
+"
+icon = ExtResource("2_6yc1x")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="CollectionPanel" type="Panel" parent="."]
 visible = false
@@ -63,5 +87,31 @@ offset_bottom = 648.0
 [node name="ColectionUI" parent="CollectionPanel" instance=ExtResource("2_8ka6j")]
 layout_mode = 1
 
-[connection signal="pressed" from="MainPanel/Botones/VBoxContainer/Button" to="." method="start_game"]
-[connection signal="pressed" from="MainPanel/Botones/VBoxContainer/Button2" to="." method="show_colection_UI"]
+[node name="OptionsPanel" parent="." instance=ExtResource("4_fkk8t")]
+visible = false
+layout_mode = 1
+
+[node name="StatisticsManager" type="Node" parent="."]
+script = ExtResource("5_7o8eg")
+
+[node name="LoadingScreen" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 7.0
+offset_right = 1142.0
+offset_bottom = 627.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_gm30x")
+
+[node name="Label" type="Label" parent="LoadingScreen"]
+layout_mode = 0
+offset_left = 224.0
+offset_top = 222.0
+offset_right = 897.0
+offset_bottom = 335.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 80
+text = "Cargando Partida"
+
+[connection signal="pressed" from="MainPanel/Button" to="." method="show_options_UI"]
+[connection signal="pressed" from="MainPanel/Button2" to="." method="start_game"]
+[connection signal="pressed" from="MainPanel/Button3" to="." method="show_colection_UI"]

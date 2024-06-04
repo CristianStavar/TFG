@@ -32,10 +32,12 @@ radius = 28.4429
 
 [node name="TornadoHachas" type="Node2D"]
 script = ExtResource("1_1p58r")
-attack_name = "AxeTornado"
+attack_name = "AxeStorm"
 cooldown = 5.0
 duration = 1.2
 area_group_name = "AxeTornado"
+show_name = "Tormenta de hachas"
+description = "Un potente ataque en area que crea una tormenta estatica que daña a los enemigos"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 12
@@ -52,7 +54,7 @@ lifetime = 1.2
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_43xki")

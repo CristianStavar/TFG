@@ -9,4 +9,4 @@ func _on_area_2d_body_entered(body):
 
 
 func update_experience(tier:int,level:int):
-	experience_given=(tier+level)/2 +55.5# 5.5
+	experience_given=(tier+level)/2 +5.5# 5.5

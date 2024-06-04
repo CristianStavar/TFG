@@ -19,6 +19,7 @@ func _on_timer_shoot_timeout():
 
 func shoot_bullet():
 	var b = bullet.instantiate()	
+	b.set_damage(damage)
 	b.global_position=self.global_position
 	b.define_direction( global_position.direction_to(target.position))
 	get_parent().add_child(b)

@@ -4,11 +4,16 @@ extends CharacterBody2D
 @export_group("Player stats")
 
 @export var move_speed := 300.0  # speed in pixels/sec
-@export var max_health:=100.0
-var health:=0.0
+@export var max_health:=120.0
+var health:=max_health
+@export var lvl_up_extra_health:=4
 @export var health_regeneration:=0.1
 @export var extra_damage:=0.0
-@export var experience_level_multiplier:=1.2
+@export var experience_level_multiplier:=1.14
+
+var experience_points:=0.0
+var experience_points_to_level:=14.0
+var current_level:=1
 
 
 @export_group("")
@@ -20,24 +25,27 @@ var health:=0.0
 					#DAGGER
 @export var attack_dagger:PackedScene
 @export var dagger_cooldown:=1.2
-@export var dagger_cooldown_min:=0.2
+@export var dagger_cooldown_min:=0.4
 var dagger_upgrades: Array[float]=[0.0,0.0,0.0,1.0] # Damage,speed,coldoown reduction, quantity
 var dagger_shotgun_mode:=false
 
 					#SPEAR
+var spear_gotten:=false
 @export var attack_spear:PackedScene
 @export var spear_cooldown:=3.0
 @export var spear_cooldown_min:=0.9
 var spear_upgrades:Array[float]=[0.0,0.0,3.0]#Damage,cdr,quantity
 
-
+					#HAMMER
+var hammer_gotten:=false
 @export var attack_hammer:PackedScene
 @export var hammer_cooldown:=2
 @export var hammer_cooldown_min:=0.8
 var hammer_upgrades:Array[float]=[0.0,0.0,0.0,1.0]#Damage,speed, cdr, quantity
 var hammer_shatter_mode:=false
 
-
+					#AXE TORNADO
+var axe_tornado_gotten:=false
 @export var attack_axe_tornado:PackedScene
 @export var axe_tornado_cooldown:=3.5
 @export var axe_tornado_cooldown_min:=1.0
@@ -45,19 +53,19 @@ var axe_tornado_upgrades:Array[float]=[0.0,0.0,0.0,0.0,1.0]# Damage,size,duratio
 var axe_tornado_wild_mode:=false
 var axe_tornado_moving_mode:=false
 
+					#SHIELD
+var shield_gotten:=false
 @export var attack_orbital_shield:PackedScene
+var orbital_shields_array:Array[PackedScene]
 var orbital_shield_upgrades:Array[float]=[0.0,0.0,1.0]# Damage, speed, quantity
 var orbital_shield_block_mode:=false
+var last_shield_quantity:=0
+@export var max_shield_quantity:=4
 
 
 var direction
 var direction_shoot=Vector2(1,0)
 
-
-
-
-
-@onready var orbital1:=get_node("Orbital")
 
 
 var cooldownSkill1:=false
@@ -67,9 +75,6 @@ var cooldownHoming1:=false
 @export var nearby_enemies:=[]
 
 
-var experience_points:=0.0
-var experience_points_to_level:=14.0
-var current_level:=1
 
 
 var aim_direction:Vector2
@@ -83,21 +88,49 @@ var estrellaActiva:=false
 var cooldown_press:=false
 
 
-
-
 @onready var timer_dagger:=get_node("TimerDagger")
 @onready var timer_spear:=get_node("TimerSpear")
 @onready var timer_hammer:=get_node("TimerHammer")
 @onready var timer_axe_tornado:=get_node("TimerAxeTornado")
 
 
+@onready var health_bar:=get_node("HealthBar")
+@onready var experience_bar:=get_node("ExperienceProgressBar"	)
 
 
+
+
+@export_group("Unlockable Cards")
+@export var unlockable_dagger_shotgun:=CardSkill
+@export var unlockable_dagger_separation:=CardSkill
+@export var unlockable_axe_tornado:=CardSkill
+var axe_tornado_time_passed:=false
+@export var unlockable_orbital_shield:=CardSkill
+var shield_time_passed:=false
+@export var unlockable_hammer_fragile:=CardSkill
+
+@onready var sound_shoot = $Sounds/SoundShoot
+@onready var sound_shotgun = $Sounds/SoundShotgun
+@onready var sound_heal = $Sounds/SoundHeal
+@onready var sound_level_up = $Sounds/SoundLevelUp
+@onready var sound_player_dead = $Sounds/SoundPlayerDead
+
+
+
+
+#checks
+var only_dagger:=true
 
 func _ready():
 	SignalBus.connect("card_chosen",skill_card_chosen)
 	game_manager.player=self
 	add_to_group("Player")
+	health_bar.max_value=max_health
+	health_bar.value=max_health
+	health=max_health
+	
+	experience_bar.max_value=experience_points_to_level
+	experience_bar.value=0
 	#post_preparation()
 
 func post_preparation():
@@ -105,7 +138,6 @@ func post_preparation():
 
 
 func _physics_process(_delta):
-	game_manager.update_position(self.global_position)
 	aim_direction = global_position.direction_to(get_global_mouse_position())
 	
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -170,10 +202,10 @@ func _physics_process(_delta):
 
 	
 	
-func Shotgun():
+func dagger_shotgun():
 	var last_angle:=0.0
 	var angle:=0.0
-	for i in range(shotgun_bullets):
+	for i in range(dagger_upgrades[4]):
 		var radians = deg_to_rad(angle)
 		last_angle=angle
 		var bullet = attack_dagger.instantiate()
@@ -202,13 +234,17 @@ func Shotgun():
 
 func add_experience(quantity:float):
 	experience_points+=quantity
+	experience_bar.value=experience_points
 	if experience_points>=experience_points_to_level:
 		player_level_up()
 	game_manager.update_player_ui()
 
 func player_level_up():
 	current_level+=1
+	max_health+=lvl_up_extra_health
+	health+=lvl_up_extra_health
 	experience_points=experience_points-experience_points_to_level
+	experience_bar.value=experience_points
 	update_experience_to_level_up()
 	SignalBus.player_level_up.emit(current_level)
 
@@ -216,6 +252,7 @@ func player_level_up():
 
 func update_experience_to_level_up():
 	experience_points_to_level*=experience_level_multiplier
+	experience_bar.max_value=experience_points_to_level
 
 
 
@@ -228,14 +265,21 @@ func skill_card_chosen(skill:CardSkill):
 		match skill.attack:
 			
 			attack_spear:
-				print("ES UN MEGALANZAO DEL DEOMNIO ABISMAL AVERNO 4")
+				only_dagger=false
+				spear_gotten=true
 				timer_spear.start()
 			attack_hammer:
-				print(" DESBLOQUEO MARTILLO")
+				only_dagger=false
+				hammer_gotten=true
 				timer_hammer.start()
 			attack_axe_tornado:
-				print(" DESBLOQUEO TORNADO")
+				only_dagger=false
+				axe_tornado_gotten=true
 				timer_axe_tornado.start()
+			attack_orbital_shield:
+				only_dagger=false
+				shield_gotten=true
+				spawn_shield_orbital()
 	
 	
 	elif skill.get_type()=="Upgrade":
@@ -249,7 +293,8 @@ func skill_card_chosen(skill:CardSkill):
 			dagger_upgrades[1]+=skill.dagger_speed_value
 			dagger_upgrades[2]+=skill.dagger_cooldown_value
 			dagger_upgrades[3]+=skill.dagger_extra_dagger_value
-			dagger_shotgun_mode=skill.dagger_shotgun_upgrade
+			if skill.dagger_shotgun_upgrade:
+				dagger_shotgun_mode=skill.dagger_shotgun_upgrade
 		elif skill.axe_tornado_upgrade:
 			axe_tornado_upgrades[0]+=skill.axe_tornado_damage_value
 			axe_tornado_upgrades[1]+=skill.axe_tornado_size_value
@@ -265,10 +310,18 @@ func skill_card_chosen(skill:CardSkill):
 			hammer_upgrades[1]+=skill.hammer_speed_value
 			hammer_upgrades[2]+=skill.hammer_cooldown_value
 			hammer_upgrades[3]+=skill.hammer_extra_hammer_value
+			if skill.hammer_fragile_upgrade:
+				hammer_shatter_mode=skill.hammer_fragile_upgrade
 		elif skill.shield_upgrade:
 			orbital_shield_upgrades[0]+=skill.shield_damage_value
 			orbital_shield_upgrades[1]+=skill.shield_speed_value
-			orbital_shield_upgrades[2]+=skill.shield_extra_shield_value
+			if orbital_shield_upgrades[2]< max_shield_quantity:
+				orbital_shield_upgrades[2]+=skill.shield_extra_shield_value
+			if skill.shield_solid_shield:
+				orbital_shield_block_mode=true
+				make_solid_shields()
+			check_extra_shield()
+		check_for_new_upgrades()
 	else:
 		print("Error, el tipo no es correcto: "+str(skill.get_type()))
 	
@@ -276,7 +329,17 @@ func skill_card_chosen(skill:CardSkill):
 
 
 
-
+func check_for_new_upgrades():
+	if dagger_upgrades[3]>2:
+		SignalBus.card_unlocked.emit(unlockable_dagger_shotgun)
+	if game_manager.get_time_passed()>=500:
+		SignalBus.card_unlocked.emit(unlockable_dagger_separation)
+	if shield_time_passed: # Tiempo de partida pasado escudo
+		SignalBus.card_unlocked.emit(unlockable_orbital_shield)
+	if axe_tornado_time_passed:   # Tiempo para tornado
+		SignalBus.card_unlocked.emit(unlockable_axe_tornado)
+	if hammer_upgrades[0]>3:
+		var g
 
 
 
@@ -292,6 +355,7 @@ func update_attacks_timers():
 		timer_dagger.set_wait_time(dagger_cooldown - dagger_upgrades[2])
 	else:
 		timer_dagger.set_wait_time(dagger_cooldown_min)
+		
 
 	var spear_cdr_tmp:=spear_cooldown - spear_upgrades[1]
 	if spear_cdr_tmp>spear_cooldown_min:
@@ -325,23 +389,46 @@ func update_attacks_timers():
 
 
 func shoot_dagger():
+	sound_shoot.play()
 	var b = attack_dagger.instantiate()
 	if separacionActiva:
 		b.set_separation(separacionActiva)
 		
-	b.update_damage(dagger_upgrades[0])
+	b.update_damage(dagger_upgrades[0]+extra_damage)
 	b.update_speed(dagger_upgrades[1])
 	owner.add_child(b)
 	b.transform = $Muzzle.transform
 	b.global_position=$Muzzle.global_position
 	b.define_direction(direction_shoot)
 
+func dagger_shotgun2():
+	sound_shotgun.play()
+	var last_angle:=0.0
+	var angle:=0.0
+	for i in range(dagger_upgrades.back()):
+		var radians = deg_to_rad(angle)
+		last_angle=angle
+		var bullet = attack_dagger.instantiate()
+		bullet.direction = direction_shoot.rotated(radians)
+		bullet.global_position = self.global_position
+		bullet.update_rotation()
+		owner.add_child(bullet)
+		
+		angle = randf_range(-10, 10)
+		while abs(angle - last_angle) < 3:
+			angle = randf_range(-10, 10)
+		await get_tree().create_timer(0.01).timeout
+
+
+
 
 func throw_hammer():
 	if pick_random_nearby_enemy!=null:
+		sound_shoot.play()
 		var b = attack_hammer.instantiate()
-		b.update_damage(hammer_upgrades[0])
+		b.update_damage(hammer_upgrades[0]+extra_damage)
 		b.update_speed(hammer_upgrades[1])
+		b.fragile_active=hammer_shatter_mode
 		owner.add_child(b)
 		b.transform = $Muzzle.transform
 		b.global_position=$Muzzle.global_position
@@ -350,10 +437,11 @@ func throw_hammer():
 
 
 func throw_spear():
+	sound_shoot.play()
 	var point=randv_circle()+self.position
 	var b = attack_spear.instantiate()
 	
-	b.update_damage(spear_upgrades[0])
+	b.update_damage(spear_upgrades[0]+extra_damage)
 	owner.add_child(b)
 	b.transform = $Muzzle.transform
 	b.global_position=$Muzzle.global_position
@@ -370,12 +458,32 @@ func spawn_axe_tornado():
 	var enemy_target=pick_random_nearby_enemy()
 	if enemy_target!=null:
 		b.position = enemy_target.position
-		b.update_damage(axe_tornado_upgrades[0])
+		b.update_damage(axe_tornado_upgrades[0]+extra_damage)
 		b.increase_size(axe_tornado_upgrades[1])
 		b.update_duration(axe_tornado_upgrades[2])
 	else:
 		b.queue_free()
 
+
+
+func spawn_shield_orbital():
+	var shield = attack_orbital_shield.instantiate()
+
+	add_child(shield)
+	orbital_shields_array.append(shield)
+	if orbital_shield_block_mode:
+		make_solid_shields()
+
+
+func check_extra_shield():
+	if last_shield_quantity != orbital_shield_upgrades[2] :
+		last_shield_quantity=orbital_shield_upgrades[2]
+		spawn_shield_orbital()
+
+
+func make_solid_shields():
+	for shield in orbital_shields_array:
+		shield.activate_solid_shield()
 
 
 
@@ -414,9 +522,12 @@ func StarShot():
 
 
 func _on_timer_dagger_timeout():
-	for i in range(dagger_upgrades.back()):
-		shoot_dagger()
-		await get_tree().create_timer(0.04).timeout
+	if dagger_shotgun_mode:
+		dagger_shotgun2()
+	else:
+		for i in range(dagger_upgrades.back()):
+			shoot_dagger()
+			await get_tree().create_timer(0.09).timeout
 
 
 
@@ -437,7 +548,7 @@ func _on_timer_hammer_timeout():
 	cooldownHoming1=false
 	for i in range(hammer_upgrades.back()):
 		throw_hammer()
-		await get_tree().create_timer(0.05).timeout
+		await get_tree().create_timer(0.08).timeout
 
 
 
@@ -447,12 +558,19 @@ func _on_timer_hammer_timeout():
 
 
 
+func heal_player(value):
+	sound_heal.play()
+	health+=value
+	if health>max_health:
+		health=max_health
+#	game_manager.update_health(health)
 
 
 
-
-
-
+func regenerate():
+	health+=health_regeneration
+	health_bar.value=health
+#	game_manager.update_health(health)
 
 
 
@@ -460,7 +578,8 @@ func _on_timer_hammer_timeout():
 
 func take_damage(value:float):
 	health-=value
-	game_manager.update_health(health)
+#	game_manager.update_health(health)
+	health_bar.value=health
 	if health <=0:
 		health=0
 		player_died()
@@ -468,7 +587,9 @@ func take_damage(value:float):
 
 
 func player_died():
-	var g
+	sound_player_dead.play()
+	SignalBus.player_died.emit(only_dagger)
+	
 
 
 """ 

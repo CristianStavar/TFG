@@ -3,7 +3,8 @@
 [ext_resource type="Texture2D" uid="uid://db7r4bbmkiubx" path="res://Arte/shield_square.png" id="1_cwh7k"]
 [ext_resource type="Script" path="res://Scripts/enemy_bullet.gd" id="1_qtmwl"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_616cm"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cwa8y"]
+radius = 6.0
 
 [node name="EnemyBullet" type="Node2D"]
 script = ExtResource("1_qtmwl")
@@ -12,11 +13,11 @@ script = ExtResource("1_qtmwl")
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_616cm")
+shape = SubResource("CircleShape2D_cwa8y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 1, 1)
-scale = Vector2(1.8, 1.8)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("1_cwh7k")
 
 [node name="Timer" type="Timer" parent="."]

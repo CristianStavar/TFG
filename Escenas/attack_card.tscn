@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://4nw0yi4ljoan"]
+[gd_scene load_steps=5 format=3 uid="uid://4nw0yi4ljoan"]
 
 [ext_resource type="Script" path="res://Scripts/card_ui.gd" id="1_x2gfm"]
-[ext_resource type="Texture2D" uid="uid://1gqahfelhqqa" path="res://icon.svg" id="1_xbjc1"]
+[ext_resource type="Texture2D" uid="uid://bcrjv4mvtkhhy" path="res://Arte/UI/panelInset_beige.png" id="2_t8m1t"]
+[ext_resource type="Texture2D" uid="uid://dpy4swi4ev48t" path="res://Arte/axe.png" id="3_scbg2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3q2k2"]
 font_size = 18
@@ -12,13 +13,13 @@ outline_size = 2
 script = ExtResource("1_x2gfm")
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(0, 41.488)
-scale = Vector2(1.89063, 2.41425)
-texture = ExtResource("1_xbjc1")
+position = Vector2(2.12649, 32)
+scale = Vector2(2.32334, 3.12766)
+texture = ExtResource("2_t8m1t")
 
 [node name="Image" type="Sprite2D" parent="."]
-scale = Vector2(2, 1.899)
-texture = ExtResource("1_xbjc1")
+scale = Vector2(4, 3.798)
+texture = ExtResource("3_scbg2")
 
 [node name="LabelName" type="Label" parent="."]
 offset_left = -103.0
@@ -30,10 +31,10 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="LabelDescription" type="Label" parent="."]
-offset_left = -104.0
+offset_left = -87.0
 offset_top = 73.0
-offset_right = 109.0
-offset_bottom = 177.0
+offset_right = 106.0
+offset_bottom = 176.0
 text = "Description yes"
 label_settings = SubResource("LabelSettings_3q2k2")
 autowrap_mode = 2

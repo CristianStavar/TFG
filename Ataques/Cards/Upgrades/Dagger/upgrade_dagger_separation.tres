@@ -1,0 +1,52 @@
+[gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://dbo2u74r06vta"]
+
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_4oiol"]
+[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="2_r70dg"]
+
+[resource]
+script = ExtResource("1_4oiol")
+name = "Abanido de dagas"
+description = "Cada impacto de daga se separa en 4 dagas separadas con daño reducido."
+show_name = ""
+unique_upgrades = ""
+sprite = ExtResource("2_r70dg")
+unlocked = false
+gotten = false
+unique = true
+card_type = "Upgrade"
+attack_type = ""
+player_upgrade = false
+player_health_value = 0.0
+player_health_regen_value = 0.0
+player_move_speed_value = 0.0
+player_extra_damage_value = 0.0
+dagger_upgrade = true
+dagger_speed_value = 0.0
+dagger_cooldown_value = 0.0
+dagger_damage_value = 0.0
+dagger_extra_dagger_value = 0.0
+dagger_shotgun_upgrade = false
+dagger_separation_upgrade = true
+axe_tornado_upgrade = false
+axe_tornado_size_value = 0.0
+axe_tornado_duration_value = 0.0
+axe_tornado_damage_value = 0.0
+axe_tornado_cooldown_value = 0.0
+axe_tornado_extra_tornado_value = 0.0
+axe_tornado_wild_upgrade = false
+axe_tornado_move_upgrade = false
+spear_upgrade = false
+spear_damage_value = 0.0
+spear_cooldown_value = 0.0
+spear_extra_spear_value = 0.0
+hammer_upgrade = false
+hammer_damage_value = 0.0
+hammer_cooldown_value = 0.0
+hammer_speed_value = 0.0
+hammer_extra_hammer_value = 0.0
+hammer_fragile_upgrade = false
+shield_upgrade = false
+shield_damage_value = 0.0
+shield_speed_value = 0.0
+shield_extra_shield_value = 0.0
+shield_solid_shield = false

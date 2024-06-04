@@ -1,7 +1,7 @@
 extends Node
 
 @export var attack_name:String
-var damage:float=1.0
+@export var damage:float=1.0
 
 var speed = 800
 var direction
@@ -24,6 +24,10 @@ var axes_ammount:int
 var last_axe_addition:=2
 @export var threshold_add_axes:=0.15
 
+
+@export var show_name:String
+@export_multiline var description:String
+@export_multiline var unique_upgrades:String
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -70,7 +74,7 @@ func damage_enemies_inside():
 			SignalBus.damage_dealt.emit(damage,attack_name)
 	
 	if wild_tornado:
-		var spawnhacha
+		pass
 
 
 func _on_body_exited(body):

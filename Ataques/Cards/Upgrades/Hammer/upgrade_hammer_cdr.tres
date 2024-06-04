@@ -1,13 +1,15 @@
 [gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://dndho73oidj0c"]
 
 [ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_jikq0"]
-[ext_resource type="Texture2D" uid="uid://yp0own211qyj" path="res://Arte/spear.png" id="2_uakoo"]
+[ext_resource type="Texture2D" uid="uid://cw4crwrepqh7x" path="res://Arte/hammer.png" id="2_pm1rd"]
 
 [resource]
 script = ExtResource("1_jikq0")
-name = "CDR lanza"
-description = "Se lanzan mas a menudo."
-sprite = ExtResource("2_uakoo")
+name = "Cadencia martillo"
+description = "Se lanzan martillos mas a menudo."
+show_name = ""
+unique_upgrades = ""
+sprite = ExtResource("2_pm1rd")
 unlocked = false
 gotten = false
 unique = false
@@ -46,3 +48,4 @@ shield_upgrade = false
 shield_damage_value = 0.0
 shield_speed_value = 0.0
 shield_extra_shield_value = 0.0
+shield_solid_shield = false

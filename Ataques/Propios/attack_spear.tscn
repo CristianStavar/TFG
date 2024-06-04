@@ -4,18 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://yp0own211qyj" path="res://Arte/spear.png" id="2_y7gkx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nebor"]
-radius = 7.0
-height = 28.0
+radius = 5.0
+height = 18.0
 
 [node name="AttackSpear" type="Node2D"]
 script = ExtResource("1_52i43")
 attack_name = "Spear"
-speed = 1010
+speed = 600
 cooldown = 3.0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(7, 0)
@@ -24,7 +24,7 @@ shape = SubResource("CapsuleShape2D_nebor")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(1.8, 2.713)
+scale = Vector2(1.47063, 2.03315)
 texture = ExtResource("2_y7gkx")
 
 [node name="TimerDeath" type="Timer" parent="."]

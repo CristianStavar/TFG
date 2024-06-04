@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://p54wqpwabycu"]
+[gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://byx2wknk8mxg2"]
 
-[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_knsbv"]
-[ext_resource type="Texture2D" uid="uid://xyu77mjlrpbt" path="res://Arte/shield_metal.png" id="2_w15uv"]
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_vhldh"]
+[ext_resource type="Texture2D" uid="uid://xyu77mjlrpbt" path="res://Arte/shield_metal.png" id="2_bjugi"]
 
 [resource]
-script = ExtResource("1_knsbv")
-name = "velocidad escudo"
-description = "va mas rapido"
-sprite = ExtResource("2_w15uv")
+script = ExtResource("1_vhldh")
+name = "Daño escudo"
+description = "El escudo hace más daño."
+show_name = ""
+unique_upgrades = ""
+sprite = ExtResource("2_bjugi")
 unlocked = false
 gotten = false
 unique = false
@@ -24,7 +26,7 @@ dagger_cooldown_value = 0.0
 dagger_damage_value = 0.0
 dagger_extra_dagger_value = 0.0
 dagger_shotgun_upgrade = false
-dagger_bounce_upgrade = false
+dagger_separation_upgrade = false
 axe_tornado_upgrade = false
 axe_tornado_size_value = 0.0
 axe_tornado_duration_value = 0.0
@@ -42,8 +44,9 @@ hammer_damage_value = 0.0
 hammer_cooldown_value = 0.0
 hammer_speed_value = 0.0
 hammer_extra_hammer_value = 0.0
+hammer_fragile_upgrade = false
 shield_upgrade = true
-shield_damage_value = 0.0
-shield_speed_value = 15.0
+shield_damage_value = 1.5
+shield_speed_value = 0.0
 shield_extra_shield_value = 0.0
 shield_solid_shield = false

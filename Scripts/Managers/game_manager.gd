@@ -6,68 +6,107 @@ var upgrades_manager
 @onready var spawner:=get_node("Spawner")
 
 @onready var statistics_manager:=get_node("StatisticsManager")
-@onready var label_stats:=get_node("Stats")
 
-@onready var labelEscopeta:=get_node("CharacterBody2D/Camera2D/LabelEscopeta")
-@onready var labelSeparacion:=get_node("CharacterBody2D/Camera2D/LabelSeparacion")
-@onready var labelEstrella:=get_node("CharacterBody2D/Camera2D/LabelSeparacion2")
 
-@onready var labelCoordenadas:=get_node("CharacterBody2D/Camera2D/LAbelPosition")
-@onready var label_health:=get_node("CharacterBody2D/Camera2D/LabelHealth")
+
+
 
 @onready var label_experience:=get_node("CharacterBody2D/Camera2D/LabelExperience")
 @onready var label_experience2:=get_node("CharacterBody2D/Camera2D/LabelExperience2")
-@onready var label_level:=get_node("CharacterBody2D/Camera2D/LabelLevel")
+
 
 
 @onready var panel_player_level_up:=get_node("UI/Control")
 @onready var panel_button:=get_node("UI/Control/ContinuaJuego")
-@onready var botonaso:=get_node("Botonaso")
 
 
-@onready var experience_progress_bar:=get_node("UI/ExperienceProgressBar")
+
+@onready var UI_button_pause_game:=get_node("UI/ButtonPauseGame")
+
+
+@onready var pause_menu_ui:=get_node("UI/PauseMenuUI")
+@onready var game_ended_panel:=get_node("UI/PauseMenuUI/GameEndedPanel")
+@onready var game_paused_panel:=get_node("UI/PauseMenuUI/GamePausedPanel")
+@onready var options_panel:=get_node("UI/OptionsMenuUI")
+
+
+@onready var pause_menu_options_button:=get_node("UI/PauseMenuUI/ButtonOptions")
+@onready var pause_menu_restart_game_button:=get_node("UI/PauseMenuUI/GameEndedPanel/ButtonRestartGame")
+@onready var pause_menu_resume_game_button:=get_node("UI/PauseMenuUI/GamePausedPanel/ButtonResumeGame")
+@onready var go_main_menu_button:=get_node("UI/PauseMenuUI/ButtonMainMenu")
+@onready var panel_go_to_main_menu:=get_node("UI/PauseMenuUI/PanelGoToMain")
+@onready var button_confirmation_main_menu:=get_node("UI/PauseMenuUI/PanelGoToMain/ButtonConfirmationMenu")
+@onready var button_deny_main_menu:=get_node("UI/PauseMenuUI/PanelGoToMain/ButtonDenyMenu")
+
+
+var weapon_pause_array:Array[Control]
+
+
+
+var game_is_paused:=false
+var time_passed:=0.0
+var time_label
+
+@onready var label_level = $UI/LabelLevel
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.connect("player_level_up",show_player_level_up)
 	SignalBus.connect("card_chosen",hide_player_level_up)
-	panel_button.pressed.connect(hide_player_level_up)
-	botonaso.pressed.connect(hide_player_level_up)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+	SignalBus.connect("player_died",player_died)
 	
-	pass
+	
+	pause_menu_options_button.connect("pressed", show_options)
+	pause_menu_resume_game_button.connect("pressed",resume_game)
+	pause_menu_restart_game_button.connect("pressed",restart_game)
+	UI_button_pause_game.connect("pressed",pause_game)
+	go_main_menu_button.connect("pressed",go_to_main_menu_button_pressed)
+	
+	button_deny_main_menu.connect("pressed",go_to_main_menu_button_pressed)
+	button_confirmation_main_menu.connect("pressed",go_to_main_menu)
+	
+	panel_button.pressed.connect(hide_player_level_up)
+
+	
+	
+	
+	weapon_pause_array.append($UI/PauseMenuUI/UnlockedWeapons/WeaponPauseDagger)
+	weapon_pause_array.append($UI/PauseMenuUI/UnlockedWeapons/WeaponPauseSpear)
+	weapon_pause_array.append($UI/PauseMenuUI/UnlockedWeapons/WeaponPauseHammer)
+	weapon_pause_array.append($UI/PauseMenuUI/UnlockedWeapons/WeaponPauseShield)
+	weapon_pause_array.append($UI/PauseMenuUI/UnlockedWeapons/WeaponPauseAxeStorm)
+	
+	time_label=$UI/LabelTime
+	
+	statistics_manager.load_from_file()
+	
+#	update_player_ui()
 
 
-func _physics_process(_delta):
+
+
+
+
+func _physics_process(delta):
 	
 	if Input.is_action_pressed("spawn"):
 		spawner.spawn_enemy("Rata")
-		statistics_manager.print_stats()
+
 	if Input.is_action_pressed("spawn2"):
 		spawner.spawn_enemy("Fantasma")
+		
+	
+	
+	if not game_is_paused :
+		time_passed+=delta
+	var minutes=time_passed/60
+	var seconds=fmod(time_passed,60)
+	var time_text="%02d:%02d"%[minutes,seconds]#  ; 
+	time_label.text= time_text
 
 
-func ActivarEstadoArma(estado:String,activo:bool):
-	if activo:
-		match estado:
-			"Escopeta":
-				labelEscopeta.modulate=Color.WEB_GREEN   #.add_color_override("default_color", Color(1,0,0,1))
-			"Separacion":
-				labelSeparacion.modulate=Color.WEB_GREEN
-			"Estrella":
-				labelEstrella.modulate=Color.WEB_GREEN
-				
-	elif not activo:
-		match estado:
-			"Escopeta":
-				labelEscopeta.modulate=Color.DARK_RED
-			"Separacion":
-				labelSeparacion.modulate=Color.DARK_RED
-			"Estrella":
-				labelEstrella.modulate=Color.DARK_RED
 
 
 
@@ -75,33 +114,48 @@ func ActivarEstadoArma(estado:String,activo:bool):
 
 func show_player_level_up(_player_current_level):
 	get_tree().paused = true
+	game_is_paused=true
 	panel_player_level_up.visible=true
 	#await get_tree().create_timer(5).timeout
 #	hide_player_level_up().
 	
 
 func hide_player_level_up(_skill:CardSkill):
+	update_player_ui()
 	print("\nHe puslado seguir\n")
 	panel_player_level_up.visible=false
 	get_tree().paused = false
+	game_is_paused=false
 
 
 
-func update_position(valor:Vector2):
-	labelCoordenadas.text=str(valor)
+func show_options():
+	options_panel.visible=!options_panel.visible
 
-func update_health(value:float):
-	label_health.text="Health: "+str(value)
+
+
+
+
+
+
+
+
+
 	
 func update_player_ui():
-	label_experience.text="Experience: "+str(player.experience_points)
-	label_experience2.text="Experience2: "+str(player.experience_points_to_level)
-	label_level.text="Level: "+str(player.current_level)
+	label_level.text="Nivel: "+str(player.current_level)
 	
 	
 	
 	
-	
+func player_died(only_dagger_value:bool):
+	pause_menu_ui.visible=true
+	game_ended_panel.visible=true
+	game_paused_panel.visible=false
+	get_tree().paused = true
+	game_is_paused=true
+	statistics_manager.save_to_file()
+	statistics_manager.check
 	
 	
 
@@ -111,3 +165,88 @@ func set_player(new_player):
 func set_upgrades_manager(new_upgrades_manager):
 	upgrades_manager=new_upgrades_manager
 
+#PASUE GAME
+
+func pause_game():
+	pause_menu_ui.visible=true
+	game_ended_panel.visible=false
+	game_paused_panel.visible=true
+	update_pause_menu()
+	get_tree().paused = true
+	game_is_paused=true
+
+
+func update_pause_menu():
+	var damage_array:Array[float]
+	damage_array=statistics_manager.return_stats()
+	if player.spear_gotten:
+		weapon_pause_array[1].visible=true
+	if player.hammer_gotten:
+		weapon_pause_array[2].visible=true
+	if player.shield_gotten:
+		weapon_pause_array[3].visible=true
+	if player.axe_tornado_gotten:
+		weapon_pause_array[4].visible=true
+	for i in damage_array.size():
+		weapon_pause_array[i].update_damage_label(damage_array[i])
+	
+
+
+
+func resume_game():
+	pause_menu_ui.visible=false
+
+	get_tree().paused = false
+	game_is_paused=false
+
+
+func restart_game():
+
+	print("\n Voy a reiniciar sisisis")
+	if get_tree():
+		print("\n hay un arbol miral que majo\n")
+		print("EScena escenita mirlaa que bonita:\n "+str(get_tree().get_current_scene()))
+#		get_tree().reload_current_scene()
+		muvin()
+#	await get_tree().create_timer(0.1).timeout
+#	get_tree().paused = false
+#	game_is_paused=false
+
+func muvin():
+	get_tree().reload_current_scene()
+
+func go_to_main_menu_button_pressed():
+	panel_go_to_main_menu.visible=!panel_go_to_main_menu.visible
+
+
+func go_to_main_menu():
+#	get_tree().paused = false
+#	pause_menu_ui.visible=false
+#	self.visible=false
+	statistics_manager.add_round_stats_to_total()
+	statistics_manager.save_to_file()
+	var scene = load("res://Escenas/UI/MainMenuUI.tscn")
+	var scene_instance = scene.instantiate()
+	scene_instance.set_name("MainMenu")
+	var root=get_node("/root")
+	root.add_child(scene_instance)
+	get_tree().paused = false
+	game_is_paused=false
+	queue_free()
+
+
+
+func get_time_passed():
+	return time_passed
+
+
+#Timer
+
+func _on_timer_shield_unlock_timeout():
+	player.shield_time_passed=true
+	player.check_for_new_upgrades()
+
+
+func _on_timer_axe_storm_unlock_timeout():
+	player.axe_tornado_time_passed=true
+	player.check_for_new_upgrades()

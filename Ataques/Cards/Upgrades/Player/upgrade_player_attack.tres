@@ -1,29 +1,32 @@
 [gd_resource type="Resource" script_class="CardSkill" load_steps=3 format=3 uid="uid://dkq8qy6fgifh2"]
 
 [ext_resource type="Script" path="res://Scripts/card_skill.gd" id="1_8aha8"]
-[ext_resource type="Texture2D" uid="uid://d4i6723lwsl58" path="res://Arte/soldier.png" id="2_48pqp"]
+[ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="2_egabb"]
 
 [resource]
 script = ExtResource("1_8aha8")
 name = "Mejora ataque"
-description = "+ 1 daño"
-sprite = ExtResource("2_48pqp")
+description = "Aumenta ligeramente el daño de  todos los ataques."
+show_name = ""
+unique_upgrades = ""
+sprite = ExtResource("2_egabb")
 unlocked = true
-gotten = null
-unique = null
-card_type = null
+gotten = false
+unique = false
+card_type = "Upgrade"
+attack_type = ""
 player_upgrade = true
 player_health_value = 0.0
 player_health_regen_value = 0.0
 player_move_speed_value = 0.0
-player_extra_damage_value = 1.0
+player_extra_damage_value = 0.3
 dagger_upgrade = false
 dagger_speed_value = 0.0
 dagger_cooldown_value = 0.0
 dagger_damage_value = 0.0
 dagger_extra_dagger_value = 0.0
 dagger_shotgun_upgrade = false
-dagger_bounce_upgrade = false
+dagger_separation_upgrade = false
 axe_tornado_upgrade = false
 axe_tornado_size_value = 0.0
 axe_tornado_duration_value = 0.0
@@ -41,7 +44,9 @@ hammer_damage_value = 0.0
 hammer_cooldown_value = 0.0
 hammer_speed_value = 0.0
 hammer_extra_hammer_value = 0.0
+hammer_fragile_upgrade = false
 shield_upgrade = false
 shield_damage_value = 0.0
 shield_speed_value = 0.0
 shield_extra_shield_value = 0.0
+shield_solid_shield = false

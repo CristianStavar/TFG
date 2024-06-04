@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://b27tncrsyt5bi"]
+
+[ext_resource type="Script" path="res://Scripts/building.gd" id="1_50v4c"]
+[ext_resource type="Texture2D" uid="uid://c3j6cpfbd7on8" path="res://Arte/Mio/building3.jpg" id="2_n26tm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qdulu"]
+size = Vector2(350.996, 262.077)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0hlue"]
+size = Vector2(154, 79)
+
+[node name="building_3" type="Node2D"]
+script = ExtResource("1_50v4c")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_n26tm")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+collision_layer = 16
+collision_mask = 19
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(2.33997, -16.3798)
+shape = SubResource("RectangleShape2D_qdulu")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 16
+collision_mask = 3
+mass = 1000.0
+gravity_scale = 0.0
+freeze = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, -15.5)
+shape = SubResource("RectangleShape2D_0hlue")
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

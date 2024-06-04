@@ -1,8 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://bx528sl58swbt"]
+[gd_scene load_steps=12 format=3 uid="uid://bx528sl58swbt"]
 
+[ext_resource type="Texture2D" uid="uid://bcrjv4mvtkhhy" path="res://Arte/UI/panelInset_beige.png" id="1_3j7n6"]
+[ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="1_dn8sp"]
 [ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="1_qugnm"]
+[ext_resource type="PackedScene" uid="uid://4k8q22huyrth" path="res://Escenas/UI/Elementos/weapon_pause.tscn" id="1_x6fow"]
+[ext_resource type="Texture2D" uid="uid://yp0own211qyj" path="res://Arte/spear.png" id="2_081aj"]
+[ext_resource type="Texture2D" uid="uid://cw4crwrepqh7x" path="res://Arte/hammer.png" id="3_1pdsl"]
+[ext_resource type="Texture2D" uid="uid://xyu77mjlrpbt" path="res://Arte/shield_metal.png" id="4_5uqf7"]
+[ext_resource type="Texture2D" uid="uid://dpy4swi4ev48t" path="res://Arte/axe.png" id="5_4y388"]
+[ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="9_81o30"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qbjxv"]
+texture = ExtResource("1_3j7n6")
+modulate_color = Color(0.65098, 0.65098, 0.65098, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4gmn8"]
+texture = ExtResource("1_3j7n6")
 
 [node name="PauseMenuUI" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,44 +31,170 @@ layout_mode = 0
 offset_right = 1178.0
 offset_bottom = 681.0
 
-[node name="ButtonResumeGame" type="Button" parent="."]
+[node name="ButtonOptions" type="Button" parent="."]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 33.0
+offset_right = 312.0
+offset_bottom = 156.0
+theme_override_font_sizes/font_size = 30
+text = "Opciones"
+icon = ExtResource("1_dn8sp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonMainMenu" type="Button" parent="."]
+layout_mode = 0
+offset_left = 780.0
+offset_top = 23.0
+offset_right = 1138.0
+offset_bottom = 136.0
+theme_override_font_sizes/font_size = 30
+text = "Volver al menu principal"
+icon = ExtResource("1_dn8sp")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="GameEndedPanel" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = -8.0
+offset_top = 287.0
+offset_right = 1159.0
+offset_bottom = 547.0
+
+[node name="Label" type="Label" parent="GameEndedPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 21.0
+offset_right = 1153.0
+offset_bottom = 459.0
+theme_override_font_sizes/font_size = 106
+text = "AAAA MORISTE PERRO"
+
+[node name="ButtonRestartGame" type="Button" parent="GameEndedPanel"]
+layout_mode = 0
+offset_left = 451.0
+offset_top = -188.0
+offset_right = 721.0
+offset_bottom = -24.0
+text = "Reiniciar partida"
+
+[node name="GamePausedPanel" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 390.0
+offset_top = 98.0
+offset_right = 610.0
+offset_bottom = 271.0
+
+[node name="ButtonResumeGame" type="Button" parent="GamePausedPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 442.0
-offset_top = 148.0
-offset_right = -436.0
-offset_bottom = -379.0
+offset_right = 145.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 38
 text = "Reanudar partida"
+icon = ExtResource("1_dn8sp")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
-[node name="ButtonOptions" type="Button" parent="."]
+[node name="UnlockedWeapons" type="Control" parent="."]
+anchors_preset = 0
+offset_left = -34.0
+offset_top = 423.0
+offset_right = 1152.0
+offset_bottom = 756.0
+
+[node name="Panel" type="Panel" parent="UnlockedWeapons"]
 layout_mode = 0
-offset_left = 71.0
-offset_top = 51.0
-offset_right = 310.0
-offset_bottom = 158.0
-text = "Opciones"
+offset_left = 34.0
+offset_top = -11.0
+offset_right = 1172.0
+offset_bottom = 220.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_qbjxv")
 
-[node name="ButtonMainMenu" type="Button" parent="."]
+[node name="WeaponPauseDagger" parent="UnlockedWeapons" instance=ExtResource("1_x6fow")]
+layout_mode = 1
+offset_left = 107.0
+offset_top = 68.0
+offset_right = -1045.0
+offset_bottom = -293.0
+sprite = ExtResource("1_qugnm")
+
+[node name="WeaponPauseSpear" parent="UnlockedWeapons" instance=ExtResource("1_x6fow")]
+visible = false
+layout_mode = 1
+offset_left = 328.0
+offset_top = 74.0
+offset_right = -824.0
+offset_bottom = -287.0
+sprite = ExtResource("2_081aj")
+
+[node name="WeaponPauseHammer" parent="UnlockedWeapons" instance=ExtResource("1_x6fow")]
+visible = false
+layout_mode = 1
+offset_left = 554.0
+offset_top = 67.0
+offset_right = -598.0
+offset_bottom = -294.0
+sprite = ExtResource("3_1pdsl")
+
+[node name="WeaponPauseShield" parent="UnlockedWeapons" instance=ExtResource("1_x6fow")]
+visible = false
+layout_mode = 1
+offset_left = 820.0
+offset_top = 61.0
+offset_right = -332.0
+offset_bottom = -300.0
+sprite = ExtResource("4_5uqf7")
+
+[node name="WeaponPauseAxeStorm" parent="UnlockedWeapons" instance=ExtResource("1_x6fow")]
+visible = false
+layout_mode = 1
+offset_left = 1042.0
+offset_top = 57.0
+offset_right = -110.0
+offset_bottom = -304.0
+sprite = ExtResource("5_4y388")
+
+[node name="PanelGoToMain" type="Panel" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 822.0
-offset_top = 58.0
-offset_right = 1106.0
-offset_bottom = 171.0
-text = "Volver al menu principal"
+offset_left = 35.0
+offset_top = 19.0
+offset_right = 1137.0
+offset_bottom = 404.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_4gmn8")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(171, 355)
-scale = Vector2(6.8125, 6.125)
-texture = ExtResource("1_qugnm")
+[node name="ButtonConfirmationMenu" type="Button" parent="PanelGoToMain"]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 65.0
+offset_right = 672.001
+offset_bottom = 152.0
+theme_override_font_sizes/font_size = 40
+text = "Ir al menu"
+icon = ExtResource("9_81o30")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
-[node name="Label" type="Label" parent="Sprite2D"]
-offset_left = -21.4312
-offset_top = 3.7551
-offset_right = 33.5688
-offset_bottom = 29.7551
-theme_override_font_sizes/font_size = 16
-text = "Daño:4"
+[node name="ButtonDenyMenu" type="Button" parent="PanelGoToMain"]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 223.0
+offset_right = 652.0
+offset_bottom = 306.0
+theme_override_font_sizes/font_size = 29
+text = "Volver al juego"
+icon = ExtResource("1_dn8sp")
+flat = true
+icon_alignment = 1
+expand_icon = true

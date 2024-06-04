@@ -4,6 +4,10 @@ signal player_level_up(current_level)
 #Emited by: Player
 #Received by: UpgradesManager, GameManager
 
+signal player_died(only_dagger_value)
+#Emited by: Player
+#Received by: GameManager
+
 signal card_chosen(skill)
 #Emited by: CardUI
 #Received by: Player, UpgradesManager, GameManager
@@ -38,8 +42,33 @@ signal give_statistics_dictionary(dictionary)
 
 
 
+
+signal card_unlocked(skill_card)
+#Emited by:  player
+#Received by: upgradesManager
+
+
+signal secret_discovered()
+#Emited by:  secret
+#Received by: StatisticsManager
+
+
 		#MENUS
 
 signal back_to_menu()
 #Emited by: CollectionsManager
-#Received by: MainMenu
+#Received by: MainMenu, gameManager
+
+
+signal colection_item_pressed(item)
+#Emited by:  colection_item_button
+#Received by: CollectionsManager
+
+signal colection_achievement_pressed(achievement)
+#Emited by:  colection_achievement_button
+#Received by: CollectionsManager
+
+
+signal delete_save_file()
+#Emited by: OptionsMenuUI
+#Received by: StatisticsManager

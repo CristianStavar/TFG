@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://4k8q22huyrth"]
+
+[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="1_echd4"]
+[ext_resource type="Script" path="res://Escenas/UI/Elementos/weapon_pause.gd" id="1_kaiwa"]
+
+[node name="WeaponPause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1152.0
+offset_bottom = -646.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kaiwa")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(6.21875, 6.21875)
+texture = ExtResource("1_echd4")
+
+[node name="LabelDamage" type="Label" parent="."]
+layout_mode = 0
+offset_left = -44.0
+offset_top = 86.0
+offset_right = 131.0
+offset_bottom = 154.0
+theme_override_font_sizes/font_size = 22
+text = "Daño causado: 
+3.240"
+autowrap_mode = 2

@@ -6,7 +6,9 @@
 [resource]
 script = ExtResource("1_iv6i3")
 name = "Daño lanza"
-description = "Hace mas pupita"
+description = "Las lanzas hacen más daño."
+show_name = ""
+unique_upgrades = ""
 sprite = ExtResource("2_qpcio")
 unlocked = false
 gotten = false
@@ -24,7 +26,7 @@ dagger_cooldown_value = 0.0
 dagger_damage_value = 0.0
 dagger_extra_dagger_value = 0.0
 dagger_shotgun_upgrade = false
-dagger_bounce_upgrade = false
+dagger_separation_upgrade = false
 axe_tornado_upgrade = false
 axe_tornado_size_value = 0.0
 axe_tornado_duration_value = 0.0
@@ -42,6 +44,7 @@ hammer_damage_value = 0.0
 hammer_cooldown_value = 0.0
 hammer_speed_value = 0.0
 hammer_extra_hammer_value = 0.0
+hammer_fragile_upgrade = false
 shield_upgrade = false
 shield_damage_value = 0.0
 shield_speed_value = 0.0

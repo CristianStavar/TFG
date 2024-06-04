@@ -3,26 +3,34 @@
 [ext_resource type="Script" path="res://Scripts/enemy_ranged.gd" id="1_jsrsx"]
 [ext_resource type="Texture2D" uid="uid://bd324dfe0brge" path="res://Arte/ghost_1.png" id="2_3gof0"]
 [ext_resource type="PackedScene" uid="uid://c3g3xxfejaisr" path="res://Ataques/Enemigos/enemy_bullet.tscn" id="2_udnc7"]
-[ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://experience_token.tscn" id="3_ruehg"]
+[ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://Escenas/Items/experience_token.tscn" id="3_ruehg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s5hm"]
-height = 20.0
+radius = 5.0
+height = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfj13"]
-radius = 120.934
+radius = 107.005
 
 [node name="EnemyGhost" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 3
+collision_mask = 19
+motion_mode = 1
 script = ExtResource("1_jsrsx")
 bullet = ExtResource("2_udnc7")
+tier = 2
+enemy_name = "Ghost"
+health = 10
+damage = 7
+attack_cooldown = 1.2
+lvl_upgrades = Array[float]([2.0, 2.0])
 experience_token = ExtResource("3_ruehg")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_5s5hm")
 
 [node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(1.5, 1.5)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_3gof0")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
