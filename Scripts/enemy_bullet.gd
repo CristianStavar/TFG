@@ -17,8 +17,7 @@ func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		body.take_damage(damage)		
 		queue_free()
-	elif body.is_in_group("Orbital"):
-		SignalBus.damage_blocked.emit(damage)
+	
 	
 	
 func define_direction(defined_direction):
@@ -43,3 +42,6 @@ func set_damage(value:float):
 
 func set_speed(value:float):
 	speed=value
+
+
+	

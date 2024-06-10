@@ -7,9 +7,9 @@
 [resource]
 script = ExtResource("2_vyxmd")
 name = "Tormenta de hachas"
-description = "Crea una tormenta de hachas encima de un enemigo aleatorio que daña a todo lo que entre en su area."
+description = "Crea una tormenta de hachas encima de un enemigo dañando a todo lo que entre en su area."
 show_name = "Tormenta de hachas"
-unique_upgrades = ""
+unique_upgrades = "Daño, frecuencia, tamaño, duración y tormentas extra."
 sprite = ExtResource("3_u4w31")
 unlocked = false
 gotten = false

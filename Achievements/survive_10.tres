@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://d383axgfs4ng"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://d383axgfs4ng"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_00qqa"]
+[ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="2_m6ysd"]
 
 [resource]
 script = ExtResource("1_00qqa")
-name = "Sobrevive 5"
-description = "Consigue sobrevivir cinco minutos"
+name = "Sobrevive 10"
+description = "Consigue sobrevivir diez minutos. Lo hiciste huyendo del mago enemigo a que si?"
+sprite = ExtResource("2_m6ysd")
 unlocked = false

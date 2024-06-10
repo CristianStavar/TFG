@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://md6gwyolenyp"]
+[gd_scene load_steps=6 format=3 uid="uid://md6gwyolenyp"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_cno7d"]
 [ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://Escenas/Items/experience_token.tscn" id="2_3vgrf"]
 [ext_resource type="Texture2D" uid="uid://crkqjkmhkm0bg" path="res://Arte/cyclops.png" id="3_y5pus"]
+[ext_resource type="AudioStream" uid="uid://b372gref4fd52" path="res://Sonidos/Hit.ogg" id="4_ybhnm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s5hm"]
-radius = 11.0
-height = 28.0
+radius = 9.0
+height = 26.0
 
 [node name="EnemyGiant" type="CharacterBody2D"]
 collision_layer = 2
@@ -15,8 +16,9 @@ motion_mode = 1
 script = ExtResource("1_cno7d")
 tier = 3
 enemy_name = "Giant"
+health = 10.0
 move_speed = 60.0
-lvl_upgrades = Array[float]([3.0, 2.0])
+lvl_upgrades = Array[float]([1.5, 1.0])
 experience_token = ExtResource("2_3vgrf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -35,6 +37,11 @@ autostart = true
 [node name="TimerAttackCooldown" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ybhnm")
+volume_db = -5.0
+bus = &"Sound"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerAttackCooldown" to="." method="_on_timer_attack_cooldown_timeout"]

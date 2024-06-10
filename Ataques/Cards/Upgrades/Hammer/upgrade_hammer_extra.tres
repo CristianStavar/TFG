@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_2gygg")
-name = "martillo extra"
-description = "Lanza otro martillo mas."
+name = "Martillo extra"
+description = "Lanza otro martillo más."
 show_name = ""
 unique_upgrades = ""
 sprite = ExtResource("2_5prev")

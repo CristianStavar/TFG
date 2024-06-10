@@ -7,7 +7,7 @@
 size = Vector2(547.554, 727.732)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0hlue"]
-size = Vector2(209, 286)
+size = Vector2(209, 280)
 
 [node name="building_1" type="Node2D"]
 script = ExtResource("1_ieua2")
@@ -17,6 +17,7 @@ scale = Vector2(0.427355, 0.427355)
 texture = ExtResource("1_des1g")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
+visible = false
 collision_layer = 16
 collision_mask = 19
 input_pickable = false
@@ -32,7 +33,7 @@ gravity_scale = 0.0
 freeze = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(-0.5, 1)
+position = Vector2(-0.5, -2)
 shape = SubResource("RectangleShape2D_0hlue")
 
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

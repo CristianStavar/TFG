@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dkabrjh8phksx"]
+[gd_scene load_steps=38 format=3 uid="uid://dkabrjh8phksx"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_it0pd"]
 [ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="2_6yc1x"]
@@ -7,8 +7,39 @@
 [ext_resource type="PackedScene" uid="uid://fvh70jxidati" path="res://Escenas/UI/OptionsMenuUI.tscn" id="4_fkk8t"]
 [ext_resource type="Script" path="res://Scripts/Managers/statistics_manager.gd" id="5_7o8eg"]
 [ext_resource type="Texture2D" uid="uid://bcrjv4mvtkhhy" path="res://Arte/UI/panelInset_beige.png" id="7_xjeq0"]
+[ext_resource type="Resource" uid="uid://d1wb3p8qsqfok" path="res://Achievements/survive_5.tres" id="8_pt2q1"]
+[ext_resource type="Resource" uid="uid://d383axgfs4ng" path="res://Achievements/survive_10.tres" id="9_hdn8s"]
+[ext_resource type="Resource" uid="uid://cwk1q70wne3ee" path="res://Achievements/survive_15.tres" id="10_lg81b"]
+[ext_resource type="Resource" uid="uid://0v6plgs6we8y" path="res://Achievements/survive_20.tres" id="11_psmcg"]
+[ext_resource type="Resource" uid="uid://c20fouyxp2s52" path="res://Achievements/survive_30.tres" id="12_6ixsn"]
+[ext_resource type="Resource" uid="uid://pdk2h0cwda18" path="res://Achievements/kill_rats_200.tres" id="13_185bm"]
+[ext_resource type="Resource" uid="uid://dby48i7hdjuf5" path="res://Achievements/kill_rats_1000.tres" id="14_vqbkh"]
+[ext_resource type="Resource" uid="uid://mwbi200o12cw" path="res://Achievements/kill_rats_5000.tres" id="15_viafb"]
+[ext_resource type="Resource" uid="uid://c2btpyvp0ocx5" path="res://Achievements/kill_bats_200.tres" id="16_gkqeu"]
+[ext_resource type="Resource" uid="uid://d1np0solx0n67" path="res://Achievements/kill_bats_2000.tres" id="17_d158v"]
+[ext_resource type="Resource" uid="uid://d2gv5cp5y2h4f" path="res://Achievements/kill_spiders_200.tres" id="18_mdyqv"]
+[ext_resource type="Resource" uid="uid://2tfr62k34ray" path="res://Achievements/kill_spiders_1000.tres" id="19_sx4p5"]
+[ext_resource type="Resource" uid="uid://cfgxqmxm8kyoe" path="res://Achievements/kill_crabs_200.tres" id="20_c5tes"]
+[ext_resource type="Resource" uid="uid://dwwwp7qu1rfgl" path="res://Achievements/kill_crabs_1000.tres" id="21_xvn76"]
+[ext_resource type="Resource" uid="uid://ca8nkdx6o0k2f" path="res://Achievements/kill_ghosts_200.tres" id="22_b8h1i"]
+[ext_resource type="Resource" uid="uid://cqsunbg1lj3c" path="res://Achievements/kill_ghosts_1000.tres" id="23_2j2hy"]
+[ext_resource type="Resource" uid="uid://clk5dcyoggs6o" path="res://Achievements/kill_giants_200.tres" id="24_027n6"]
+[ext_resource type="Resource" uid="uid://ddfwsvs4fcj7f" path="res://Achievements/kill_giants_1000.tres" id="25_j4ibl"]
+[ext_resource type="Resource" uid="uid://7jx7je2ebx6y" path="res://Achievements/kill_big_ghosts_500.tres" id="26_pf5iv"]
+[ext_resource type="Resource" uid="uid://bw42gwf0b4tl1" path="res://Achievements/kill_big_ghosts_1000.tres" id="27_gshr2"]
+[ext_resource type="Resource" uid="uid://ceuqsitl7gklm" path="res://Achievements/kill_boss.tres" id="28_c7tc3"]
+[ext_resource type="Resource" uid="uid://bb74v8olsrp6p" path="res://Achievements/kill_boss_5.tres" id="29_vynvf"]
+[ext_resource type="Resource" uid="uid://bd3c2fawimgh8" path="res://Achievements/secret_1.tres" id="30_qo2ty"]
+[ext_resource type="Resource" uid="uid://dnacyxtmygdya" path="res://Achievements/secret_10.tres" id="31_dc4bk"]
+[ext_resource type="Resource" uid="uid://cg18aec4g8biy" path="res://Achievements/barrels_destroyed_5.tres" id="32_3wxwt"]
+[ext_resource type="Resource" uid="uid://bicwt7hde3a5i" path="res://Achievements/barrels_destroyed_20.tres" id="33_ab4cw"]
+[ext_resource type="AudioStream" uid="uid://wdu1k3iehkda" path="res://Sonidos/Musica/IntroSong.ogg" id="34_p5cha"]
+[ext_resource type="Resource" uid="uid://bypfyqp6m28cg" path="res://Achievements/only_dagger.tres" id="34_t613t"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gm30x"]
+texture = ExtResource("7_xjeq0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fbnru"]
 texture = ExtResource("7_xjeq0")
 
 [node name="MainMenu" type="Control"]
@@ -91,9 +122,6 @@ layout_mode = 1
 visible = false
 layout_mode = 1
 
-[node name="StatisticsManager" type="Node" parent="."]
-script = ExtResource("5_7o8eg")
-
 [node name="LoadingScreen" type="Panel" parent="."]
 visible = false
 layout_mode = 0
@@ -111,6 +139,37 @@ offset_bottom = 335.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 80
 text = "Cargando Partida"
+
+[node name="StatisticsManager" type="Node" parent="."]
+script = ExtResource("5_7o8eg")
+array_achievements = Array[Resource("res://Scripts/achievement.gd")]([ExtResource("8_pt2q1"), ExtResource("9_hdn8s"), ExtResource("10_lg81b"), ExtResource("11_psmcg"), ExtResource("12_6ixsn"), ExtResource("13_185bm"), ExtResource("14_vqbkh"), ExtResource("15_viafb"), ExtResource("16_gkqeu"), ExtResource("17_d158v"), ExtResource("18_mdyqv"), ExtResource("19_sx4p5"), ExtResource("20_c5tes"), ExtResource("21_xvn76"), ExtResource("22_b8h1i"), ExtResource("23_2j2hy"), ExtResource("24_027n6"), ExtResource("25_j4ibl"), ExtResource("26_pf5iv"), ExtResource("27_gshr2"), ExtResource("28_c7tc3"), ExtResource("29_vynvf"), ExtResource("30_qo2ty"), ExtResource("31_dc4bk"), ExtResource("32_3wxwt"), ExtResource("33_ab4cw"), ExtResource("34_t613t")])
+
+[node name="PanelNewAchievements" type="Panel" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 298.0
+offset_top = 13.0
+offset_right = 868.0
+offset_bottom = 121.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_fbnru")
+
+[node name="Label" type="Label" parent="PanelNewAchievements"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 7.0
+offset_right = 549.0
+offset_bottom = 99.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 24
+text = "Conseguiste nuevos logros! 
+Visita la colección para verlos."
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("34_p5cha")
+volume_db = -10.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="pressed" from="MainPanel/Button" to="." method="show_options_UI"]
 [connection signal="pressed" from="MainPanel/Button2" to="." method="start_game"]

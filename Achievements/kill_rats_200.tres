@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://pdk2h0cwda18"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://pdk2h0cwda18"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_m2qxb"]
+[ext_resource type="Texture2D" uid="uid://didksfivvufou" path="res://Arte/rat_2.png" id="2_sdfrc"]
 
 [resource]
 script = ExtResource("1_m2qxb")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "Caza ratones"
+description = "Acaba con 200 ratas."
+sprite = ExtResource("2_sdfrc")
 unlocked = false

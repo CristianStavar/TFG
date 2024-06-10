@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://dwwwp7qu1rfgl"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://dwwwp7qu1rfgl"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_hnvms"]
+[ext_resource type="Texture2D" uid="uid://1bct0jkwpj88" path="res://Arte/crab.png" id="2_t7xyb"]
 
 [resource]
 script = ExtResource("1_hnvms")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "Cangrejero maestro"
+description = "Mata muchos cangrejos.
+Cazaste 2222 cangrejos para la cena familiar."
+sprite = ExtResource("2_t7xyb")
 unlocked = false

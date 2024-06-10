@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://ca8nkdx6o0k2f"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_2bctt"]
+[ext_resource type="Texture2D" uid="uid://bd324dfe0brge" path="res://Arte/ghost_1.png" id="2_6w3wr"]
+
+[resource]
+script = ExtResource("1_2bctt")
+name = "Vence fantasmitas"
+description = "Consigue acabar con unos cuantos fantasmitas. 200 o así."
+sprite = ExtResource("2_6w3wr")
+unlocked = false

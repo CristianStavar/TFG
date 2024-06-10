@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://018a4ufmyjnn"]
+[gd_scene load_steps=23 format=3 uid="uid://018a4ufmyjnn"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pl71v"]
 [ext_resource type="PackedScene" uid="uid://b7xxari67wnwx" path="res://Ataques/Propios/attack_dagger.tscn" id="2_ybly8"]
@@ -12,10 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://dedbtqy3d4xog" path="res://Arte/buttonLong_beige.png" id="8_bninj"]
 [ext_resource type="Resource" uid="uid://y4nv34qlp5ad" path="res://Ataques/Cards/AttackCards/card_axe_tornado.tres" id="8_dxl7b"]
 [ext_resource type="Resource" uid="uid://b6frtlih546hw" path="res://Ataques/Cards/AttackCards/card_attack_orbital_shield.tres" id="9_3sw8v"]
+[ext_resource type="Resource" uid="uid://b75slxbvkur5d" path="res://Ataques/Cards/Upgrades/Shield/upgrade_shield_solid.tres" id="11_iba4x"]
 [ext_resource type="Resource" uid="uid://c3yn7aksdx20y" path="res://Ataques/Cards/Upgrades/Hammer/upgrade_hammer_fragile.tres" id="11_oychy"]
 [ext_resource type="AudioStream" uid="uid://0pd6ihud452y" path="res://Sonidos/Shoot.ogg" id="12_k06rk"]
 [ext_resource type="AudioStream" uid="uid://bbl24lj2ui20h" path="res://Sonidos/Heal.ogg" id="13_0chn7"]
 [ext_resource type="AudioStream" uid="uid://buscx3yentnqj" path="res://Sonidos/Shotgun.ogg" id="13_4rwef"]
+[ext_resource type="Texture2D" uid="uid://06i4cygnh5qg" path="res://Arte/indicator.png" id="18_lvu85"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6iki7"]
 radius = 6.0
@@ -28,19 +30,28 @@ size = Vector2(779, 413)
 radius = 7.0
 height = 20.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gn0kc"]
+size = Vector2(838, 578)
+
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 25
 script = ExtResource("1_pl71v")
 move_speed = 100.0
 attack_dagger = ExtResource("2_ybly8")
+dagger_cooldown_min = 0.5
 attack_spear = ExtResource("3_yvsj1")
+spear_cooldown_min = 1.5
 attack_hammer = ExtResource("4_oyqx5")
+hammer_cooldown_min = 1.0
 attack_axe_tornado = ExtResource("5_o0u2n")
+axe_tornado_cooldown = 5.5
+axe_tornado_cooldown_min = 2.0
 attack_orbital_shield = ExtResource("6_x1vcf")
 unlockable_dagger_shotgun = ExtResource("7_ml43i")
 unlockable_dagger_separation = ExtResource("8_3r1og")
 unlockable_axe_tornado = ExtResource("8_dxl7b")
 unlockable_orbital_shield = ExtResource("9_3sw8v")
+unlockable_orbital_shield_solid = ExtResource("11_iba4x")
 unlockable_hammer_fragile = ExtResource("11_oychy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -98,9 +109,9 @@ tint_progress = Color(1, 0.184314, 0.109804, 1)
 [node name="ExperienceProgressBar" type="TextureProgressBar" parent="."]
 z_index = 11
 offset_left = -170.0
-offset_top = -215.0
+offset_top = -194.0
 offset_right = 20.0
-offset_bottom = -166.0
+offset_bottom = -145.0
 scale = Vector2(1.77405, 0.415547)
 value = 43.0
 texture_under = ExtResource("8_bninj")
@@ -131,8 +142,26 @@ bus = &"Sound"
 [node name="SoundLevelUp" type="AudioStreamPlayer" parent="Sounds"]
 bus = &"Sound"
 
-[node name="SoundPlayerDead" type="AudioStreamPlayer" parent="Sounds"]
-bus = &"Sound"
+[node name="AreaKill" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaKill"]
+shape = SubResource("RectangleShape2D_gn0kc")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -178.0
+offset_top = -148.0
+offset_right = -138.0
+offset_bottom = -125.0
+text = "Position: "
+
+[node name="AimPoint" type="Node2D" parent="."]
+z_index = 1
+
+[node name="AimAid" type="Sprite2D" parent="AimPoint"]
+position = Vector2(14, 0)
+rotation = 1.5708
+texture = ExtResource("18_lvu85")
 
 [connection signal="timeout" from="TimerDagger" to="." method="_on_timer_dagger_timeout"]
 [connection signal="timeout" from="TimerSpear" to="." method="_on_timer_spear_timeout"]
@@ -144,3 +173,4 @@ bus = &"Sound"
 [connection signal="body_entered" from="AreaDamage" to="." method="_on_area_damage_body_entered"]
 [connection signal="body_exited" from="AreaDamage" to="." method="_on_area_damage_body_exited"]
 [connection signal="timeout" from="TimerRegeneration" to="." method="regenerate"]
+[connection signal="body_exited" from="AreaKill" to="." method="_on_area_kill_body_exited"]

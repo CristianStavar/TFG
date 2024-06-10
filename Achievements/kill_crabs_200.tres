@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://cfgxqmxm8kyoe"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cfgxqmxm8kyoe"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_7eq6e"]
+[ext_resource type="Texture2D" uid="uid://1bct0jkwpj88" path="res://Arte/crab.png" id="2_7651g"]
 
 [resource]
 script = ExtResource("1_7eq6e")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "Cangrejero"
+description = "Caza unos cangrejos para la merienda. Con 200 vale."
+sprite = ExtResource("2_7651g")
 unlocked = false

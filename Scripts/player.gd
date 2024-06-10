@@ -28,6 +28,7 @@ var current_level:=1
 @export var dagger_cooldown_min:=0.4
 var dagger_upgrades: Array[float]=[0.0,0.0,0.0,1.0] # Damage,speed,coldoown reduction, quantity
 var dagger_shotgun_mode:=false
+var dagger_separation_mode:=false
 
 					#SPEAR
 var spear_gotten:=false
@@ -56,10 +57,10 @@ var axe_tornado_moving_mode:=false
 					#SHIELD
 var shield_gotten:=false
 @export var attack_orbital_shield:PackedScene
-var orbital_shields_array:Array[PackedScene]
+var orbital_shields_array:Array[Node2D]
 var orbital_shield_upgrades:Array[float]=[0.0,0.0,1.0]# Damage, speed, quantity
 var orbital_shield_block_mode:=false
-var last_shield_quantity:=0
+var last_shield_quantity:=1
 @export var max_shield_quantity:=4
 
 
@@ -82,8 +83,8 @@ var aim_direction:Vector2
 var shotgun_bullets:=8
 
 
-var separacionActiva:=false
-var estrellaActiva:=false
+
+
 
 var cooldown_press:=false
 
@@ -107,22 +108,31 @@ var cooldown_press:=false
 var axe_tornado_time_passed:=false
 @export var unlockable_orbital_shield:=CardSkill
 var shield_time_passed:=false
+@export var unlockable_orbital_shield_solid:=CardSkill
 @export var unlockable_hammer_fragile:=CardSkill
+
+
 
 @onready var sound_shoot = $Sounds/SoundShoot
 @onready var sound_shotgun = $Sounds/SoundShotgun
 @onready var sound_heal = $Sounds/SoundHeal
 @onready var sound_level_up = $Sounds/SoundLevelUp
-@onready var sound_player_dead = $Sounds/SoundPlayerDead
 
 
+
+@onready var label_cords = $Label
 
 
 #checks
 var only_dagger:=true
 
+var in_touchscreen:=false
+
+@onready var aim_aid:=$AimPoint
+
 func _ready():
 	SignalBus.connect("card_chosen",skill_card_chosen)
+	SignalBus.connect("ask_for_only_dagger",send_only_dagger)
 	game_manager.player=self
 	add_to_group("Player")
 	health_bar.max_value=max_health
@@ -131,92 +141,41 @@ func _ready():
 	
 	experience_bar.max_value=experience_points_to_level
 	experience_bar.value=0
-	#post_preparation()
-
-func post_preparation():
-	game_manager.player=self
+	in_touchscreen=touchscreen_check()
 
 
 func _physics_process(_delta):
 	aim_direction = global_position.direction_to(get_global_mouse_position())
+	label_cords.text=str(global_position)
 	
-	direction = Input.get_vector("left", "right", "up", "down")
-	velocity = direction * move_speed
-	if direction!=Vector2(0,0):
-		direction_shoot=direction
-
+	if not in_touchscreen:
+		direction = Input.get_vector("left", "right", "up", "down")
+		velocity = direction * move_speed
+		if direction!=Vector2(0,0):
+			direction_shoot=direction
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and in_touchscreen:
+		direction=global_position.direction_to(get_global_mouse_position())
+		velocity = direction * move_speed
+		if direction!=Vector2(0,0):
+			direction_shoot=direction
+	aim_aid.look_at(global_position+direction_shoot)
 	move_and_slide()
 	
-	
-#	if Input.is_action_pressed("cambioescopeta") and not cooldown_press:
-#		cooldown_press=true
-#		$TimerPulsador.start()
-#		dagger_shotgun_mode= not dagger_shotgun_mode
-#		print("PASAMOS ESCOPETA A: "+str(dagger_shotgun_mode))
-#		game_manager.ActivarEstadoArma("Escopeta",dagger_shotgun_mode)
-#
-#	if Input.is_action_pressed("cambioseparacion") and not cooldown_press:
-#		cooldown_press=true
-#		$TimerPulsador.start()
-#		separacionActiva= not separacionActiva
-#		print("PASAMOS separacionActiva A: "+str(separacionActiva))
-#		game_manager.ActivarEstadoArma("Separacion",separacionActiva)
-#
-#	if Input.is_action_pressed("cambioestrella") and not cooldown_press:
-#		cooldown_press=true
-#		$TimerPulsador.start()
-#		estrellaActiva= not estrellaActiva
-#		print("PASAMOS separacionActiva A: "+str(estrellaActiva))
-#		game_manager.ActivarEstadoArma("Estrella",estrellaActiva)
-#
-#
-#	if Input.is_action_pressed("action") and not cooldownSkill1:
-#		cooldownSkill1=true
-#		$TimerTornado.start()
-#		spawn_axe_tornado()
-#	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT) and not cooldownHoming1:
-#		cooldownHoming1=true
-#		$TimerHoming.start()
-#		throw_hammer()
-#
-#	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not cooldownHoming1 and not dagger_shotgun_mode and not estrellaActiva:
-#		cooldownHoming1=true
-#		$TimerHoming.start()
-#		Pistol()
-#	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not cooldownHoming1 and dagger_shotgun_mode and not estrellaActiva:
-#		cooldownHoming1=true
-#		$TimerHoming.start()
-#		Shotgun()
-#	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not cooldownHoming1 and not dagger_shotgun_mode and estrellaActiva:
-#		cooldownHoming1=true
-#		$TimerHoming.start()
-#		StarShot()
 
 
 
-
-
-
-
-
-
-	
-	
-func dagger_shotgun():
-	var last_angle:=0.0
-	var angle:=0.0
-	for i in range(dagger_upgrades[4]):
-		var radians = deg_to_rad(angle)
-		last_angle=angle
-		var bullet = attack_dagger.instantiate()
-		bullet.direction = aim_direction.rotated(radians)
-		bullet.global_position = self.global_position
-		bullet.update_rotation()
-		owner.add_child(bullet)
+func touchscreen_check():
+	var check=JavaScriptBridge.eval("""
+	"ontouchstart" in document.documentElement
+	""")
+	#DEVUELVE 0 en PC
+	if check>0:  
+		return true
+	else:
+		return false
 		
-		angle = randf_range(-15, 15)
-		while abs(angle - last_angle) < 12:
-			angle = randf_range(-15, 15)
+
 
 
 
@@ -295,6 +254,8 @@ func skill_card_chosen(skill:CardSkill):
 			dagger_upgrades[3]+=skill.dagger_extra_dagger_value
 			if skill.dagger_shotgun_upgrade:
 				dagger_shotgun_mode=skill.dagger_shotgun_upgrade
+			if skill.dagger_separation_upgrade:
+				dagger_separation_mode=skill.dagger_separation_upgrade
 		elif skill.axe_tornado_upgrade:
 			axe_tornado_upgrades[0]+=skill.axe_tornado_damage_value
 			axe_tornado_upgrades[1]+=skill.axe_tornado_size_value
@@ -317,6 +278,8 @@ func skill_card_chosen(skill:CardSkill):
 			orbital_shield_upgrades[1]+=skill.shield_speed_value
 			if orbital_shield_upgrades[2]< max_shield_quantity:
 				orbital_shield_upgrades[2]+=skill.shield_extra_shield_value
+			elif orbital_shield_upgrades[2]< max_shield_quantity:
+				SignalBus.lock_maxed_card.emit("Shield")
 			if skill.shield_solid_shield:
 				orbital_shield_block_mode=true
 				make_solid_shields()
@@ -336,12 +299,12 @@ func check_for_new_upgrades():
 		SignalBus.card_unlocked.emit(unlockable_dagger_separation)
 	if shield_time_passed: # Tiempo de partida pasado escudo
 		SignalBus.card_unlocked.emit(unlockable_orbital_shield)
+	if orbital_shield_upgrades[2]>=3:
+		SignalBus.card_unlocked.emit(unlockable_orbital_shield_solid)
 	if axe_tornado_time_passed:   # Tiempo para tornado
 		SignalBus.card_unlocked.emit(unlockable_axe_tornado)
 	if hammer_upgrades[0]>3:
-		var g
-
-
+		SignalBus.card_unlocked.emit(unlockable_hammer_fragile)
 
 
 
@@ -355,6 +318,7 @@ func update_attacks_timers():
 		timer_dagger.set_wait_time(dagger_cooldown - dagger_upgrades[2])
 	else:
 		timer_dagger.set_wait_time(dagger_cooldown_min)
+		SignalBus.lock_maxed_card.emit("Dagger")
 		
 
 	var spear_cdr_tmp:=spear_cooldown - spear_upgrades[1]
@@ -362,18 +326,21 @@ func update_attacks_timers():
 		timer_spear.set_wait_time(spear_cooldown - spear_upgrades[1])
 	else:
 		timer_spear.set_wait_time(spear_cooldown_min)
+		SignalBus.lock_maxed_card.emit("Spear")
 
 	var hammer_cdr_tmp:=hammer_cooldown - hammer_upgrades[2]
 	if hammer_cdr_tmp>hammer_cooldown_min:
 		timer_hammer.set_wait_time(hammer_cooldown - hammer_upgrades[2])
 	else:
 		timer_hammer.set_wait_time(hammer_cooldown_min)
+		SignalBus.lock_maxed_card.emit("Hammer")
 
 	var axe_tornado_cdr_tmp:=axe_tornado_cooldown - axe_tornado_upgrades[2]
 	if axe_tornado_cdr_tmp>axe_tornado_cooldown_min:
 		timer_axe_tornado.set_wait_time(axe_tornado_cooldown - axe_tornado_upgrades[2])
 	else:
 		timer_axe_tornado.set_wait_time(axe_tornado_cooldown_min)	
+		SignalBus.lock_maxed_card.emit("AxeStorm")
 
 
 
@@ -391,8 +358,8 @@ func update_attacks_timers():
 func shoot_dagger():
 	sound_shoot.play()
 	var b = attack_dagger.instantiate()
-	if separacionActiva:
-		b.set_separation(separacionActiva)
+	if dagger_separation_mode:
+		b.set_separation(dagger_separation_mode)
 		
 	b.update_damage(dagger_upgrades[0]+extra_damage)
 	b.update_speed(dagger_upgrades[1])
@@ -409,6 +376,11 @@ func dagger_shotgun2():
 		var radians = deg_to_rad(angle)
 		last_angle=angle
 		var bullet = attack_dagger.instantiate()
+		if dagger_separation_mode:
+			bullet.set_separation(dagger_separation_mode)
+		
+		bullet.update_damage(dagger_upgrades[0]+extra_damage)
+		bullet.update_speed(dagger_upgrades[1])
 		bullet.direction = direction_shoot.rotated(radians)
 		bullet.global_position = self.global_position
 		bullet.update_rotation()
@@ -469,15 +441,19 @@ func spawn_axe_tornado():
 func spawn_shield_orbital():
 	var shield = attack_orbital_shield.instantiate()
 
+
 	add_child(shield)
+	shield.update_damage(orbital_shield_upgrades[0]+extra_damage)
+	shield.update_rotation_speed(orbital_shield_upgrades[1])
 	orbital_shields_array.append(shield)
 	if orbital_shield_block_mode:
 		make_solid_shields()
 
 
 func check_extra_shield():
-	if last_shield_quantity != orbital_shield_upgrades[2] :
-		last_shield_quantity=orbital_shield_upgrades[2]
+	if orbital_shields_array.size() != orbital_shield_upgrades[2]:
+
+		print(" Añadimos escudo sisi y tenemos: "+str(orbital_shields_array.size()))
 		spawn_shield_orbital()
 
 
@@ -488,20 +464,6 @@ func make_solid_shields():
 
 
 
-
-
-
-
-func Pistol():
-	var b = attack_dagger.instantiate()
-	if separacionActiva:
-		b.set_separation(separacionActiva)
-		
-	owner.add_child(b)
-	b.transform = $Muzzle.transform
-	b.global_position=$Muzzle.global_position
-	b.define_direction(aim_direction)
-	
 
 func StarShot():
 	for angle in [-45,-90,-135,-190,135,90,45,0]:
@@ -587,10 +549,12 @@ func take_damage(value:float):
 
 
 func player_died():
-	sound_player_dead.play()
-	SignalBus.player_died.emit(only_dagger)
+	SignalBus.player_died.emit()
+	
 	
 
+func send_only_dagger():
+	SignalBus.send_only_dagger.emit(only_dagger)
 
 """ 
 
@@ -648,5 +612,10 @@ func _on_area_damage_body_entered(body):
 func _on_area_damage_body_exited(body):
 	if body.is_in_group("Enemy"):
 		body.stop_attack_player()
+
+
+func _on_area_kill_body_exited(body):
+	if body.is_in_group("Enemy") and not body.is_in_group("Boss"):
+		body.queue_free()
 
 

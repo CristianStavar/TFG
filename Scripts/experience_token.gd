@@ -1,6 +1,7 @@
 extends Node2D
 
-@export var experience_given:=14.0
+@export var min_experience:=5.0
+var experience_given:=14.0
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
@@ -8,5 +9,5 @@ func _on_area_2d_body_entered(body):
 		queue_free()
 
 
-func update_experience(tier:int,level:int):
-	experience_given=(tier+level)/2 +5.5# 5.5
+func update_experience(tier:int,level:int, extra_xp:float):
+	experience_given=(tier+level)/2 +min_experience+extra_xp

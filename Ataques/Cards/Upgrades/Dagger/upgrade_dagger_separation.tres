@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_4oiol")
-name = "Abanido de dagas"
-description = "Cada impacto de daga se separa en 4 dagas separadas con daño reducido."
+name = "Abanico de dagas"
+description = "Cada impacto de daga se separa en 4 dagas con daño reducido."
 show_name = ""
 unique_upgrades = ""
 sprite = ExtResource("2_r70dg")

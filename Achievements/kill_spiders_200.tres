@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://d2gv5cp5y2h4f"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://d2gv5cp5y2h4f"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_44f3d"]
+[ext_resource type="Texture2D" uid="uid://bcuiw7xutym6v" path="res://Arte/spider.png" id="2_w3kwc"]
 
 [resource]
 script = ExtResource("1_44f3d")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "Aracnofobia"
+description = "Matalos matalos! 200 veces."
+sprite = ExtResource("2_w3kwc")
 unlocked = false

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://clk5dcyoggs6o"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_g3182"]
+[ext_resource type="Texture2D" uid="uid://crkqjkmhkm0bg" path="res://Arte/cyclops.png" id="2_upasb"]
+
+[resource]
+script = ExtResource("1_g3182")
+name = "Matagigantes"
+description = "Mata 200 gigantes."
+sprite = ExtResource("2_upasb")
+unlocked = false

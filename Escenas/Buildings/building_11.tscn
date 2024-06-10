@@ -5,13 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://cqyvspu7t7c8i" path="res://Escenas/Items/barrel.tscn" id="3_fx6qb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdulu"]
-size = Vector2(386, 284)
+size = Vector2(380, 284)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_714hp"]
-size = Vector2(91, 67)
+size = Vector2(90, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_57bcv"]
-size = Vector2(95, 116)
+size = Vector2(96, 116)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jqrc0"]
 size = Vector2(23, 35)
@@ -24,13 +24,12 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_402gl")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
-visible = false
 collision_layer = 16
 collision_mask = 19
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(-3, 2)
+position = Vector2(-6, 2)
 shape = SubResource("RectangleShape2D_qdulu")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
@@ -41,11 +40,11 @@ gravity_scale = 0.0
 freeze = true
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(45.5, 10.5)
+position = Vector2(45, 9)
 shape = SubResource("RectangleShape2D_714hp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-position = Vector2(-34.5, 0)
+position = Vector2(-34, 0)
 shape = SubResource("RectangleShape2D_57bcv")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="RigidBody2D"]
@@ -53,6 +52,6 @@ position = Vector2(25.5, -40.5)
 shape = SubResource("RectangleShape2D_jqrc0")
 
 [node name="Barrel" parent="." instance=ExtResource("3_fx6qb")]
-position = Vector2(63, -42)
+position = Vector2(65, -47)
 
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

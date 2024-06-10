@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bicwt7hde3a5i"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_hcg44"]
+[ext_resource type="Texture2D" uid="uid://cebvyxnkgr6a2" path="res://Arte/barrel.png" id="2_hnh0k"]
+
+[resource]
+script = ExtResource("1_hcg44")
+name = "Barriles 20"
+description = "Destruye 100 barriles."
+sprite = ExtResource("2_hnh0k")
+unlocked = false

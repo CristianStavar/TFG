@@ -6,11 +6,11 @@
 
 [resource]
 script = ExtResource("2_6y3f8")
-name = "Lanzarlanza"
+name = "Lanza"
 description = "Lanzazo poderosisimo que atraviesa enemigos.
 "
-show_name = "Lanzita"
-unique_upgrades = ""
+show_name = "Lanza"
+unique_upgrades = "Daño, frecuencia y lanzas extra."
 sprite = ExtResource("3_4fejc")
 unlocked = true
 gotten = false

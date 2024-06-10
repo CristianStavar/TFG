@@ -7,7 +7,7 @@
 [node name="Button" type="Button"]
 offset_right = 24.0
 offset_bottom = 24.0
-scale = Vector2(4, 4)
+scale = Vector2(6, 6)
 icon = ExtResource("1_bampq")
 icon_alignment = 1
 vertical_icon_alignment = 0

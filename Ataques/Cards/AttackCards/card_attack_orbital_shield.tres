@@ -6,10 +6,11 @@
 
 [resource]
 script = ExtResource("2_e582k")
-name = "Orbital"
-description = "Da vueltas a tu alrededor dañano a los enemigos que toca."
+name = "Escudo orbital"
+description = "Da vueltas a tu alrededor dañando a los enemigos que toca."
 show_name = "Escudo orbital"
-unique_upgrades = "Escudo solido: Ahora el escudo bloquea los proyectiles enemigos con los que choque."
+unique_upgrades = "Daño, velocidad de movimiento y escudos extra.
++Escudo solido: Ahora el escudo bloquea los proyectiles enemigos con los que choque."
 sprite = ExtResource("3_nh4nm")
 unlocked = false
 gotten = false
@@ -28,7 +29,7 @@ dagger_cooldown_value = 0.0
 dagger_damage_value = 0.0
 dagger_extra_dagger_value = 0.0
 dagger_shotgun_upgrade = false
-dagger_bounce_upgrade = false
+dagger_separation_upgrade = false
 axe_tornado_upgrade = false
 axe_tornado_size_value = 0.0
 axe_tornado_duration_value = 0.0
@@ -46,6 +47,7 @@ hammer_damage_value = 0.0
 hammer_cooldown_value = 0.0
 hammer_speed_value = 0.0
 hammer_extra_hammer_value = 0.0
+hammer_fragile_upgrade = false
 shield_upgrade = false
 shield_damage_value = 0.0
 shield_speed_value = 0.0

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cg18aec4g8biy"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_ju3s1"]
+[ext_resource type="Texture2D" uid="uid://cebvyxnkgr6a2" path="res://Arte/barrel.png" id="2_l5t2a"]
+
+[resource]
+script = ExtResource("1_ju3s1")
+name = "Destruye 5"
+description = "Destruye unos barriles. Dentro hay regalitos!"
+sprite = ExtResource("2_l5t2a")
+unlocked = false

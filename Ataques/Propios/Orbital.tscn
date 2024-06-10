@@ -15,7 +15,7 @@ unique_upgrades = "-Bloqueo: El escudo bloquea los proyectiles enemigos que le i
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 10
+collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_41m2a")
@@ -25,4 +25,5 @@ modulate = Color(0, 0.254902, 1, 1)
 scale = Vector2(1.5, 1.5)
 texture = ExtResource("2_w3sqh")
 
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]

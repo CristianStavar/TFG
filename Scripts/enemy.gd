@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var lvl_upgrades: Array[float]=[0.0,0.0] #health, damage
 
 @export var experience_token:PackedScene
+@export var extra_experience:=0.0
 
 var can_attack:=false
 var last_attack_time:float
@@ -22,7 +23,7 @@ var target: CharacterBody2D
 var gameManager:Node2D
 var agent:NavigationAgent2D
 var sprite:Sprite2D
-var audio:AudioStreamPlayer2D
+var audio_hit:AudioStreamPlayer2D
 var timer:Timer
 var timer_attack_cooldown:Timer
 
@@ -31,13 +32,15 @@ var estadoDentro:=false
 
 var target_direction
 
+
+
 func _ready():
 	agent=$NavigationAgent2D
 	sprite=$Sprite
 	timer=$Timer
 	timer_attack_cooldown=$TimerAttackCooldown
 	timer_attack_cooldown.set_wait_time(attack_cooldown)
-#	audio=$Audio
+	audio_hit=$AudioStreamPlayer2D
 	gameManager=get_node("/root/MainGame")
 	target=gameManager.player
 	add_to_group("Enemy")
@@ -66,6 +69,7 @@ func set_level(new_level:int):
 
 
 func substract_health(value):
+	audio_hit.play()
 	health-=value
 #	print("Me hicieron pupa: "+str(value))
 	sprite.modulate=Color.DARK_RED
@@ -81,7 +85,7 @@ func substract_health(value):
 
 func spawn_experience_token():
 	var b = experience_token.instantiate()
-	b.update_experience(tier,current_level)
+	b.update_experience(tier,current_level,extra_experience)
 	
 	b.global_position=self.global_position
 	get_parent().add_child(b)

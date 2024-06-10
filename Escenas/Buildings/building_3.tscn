@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b27tncrsyt5bi"]
+[gd_scene load_steps=6 format=3 uid="uid://b27tncrsyt5bi"]
 
 [ext_resource type="Script" path="res://Scripts/building.gd" id="1_50v4c"]
 [ext_resource type="Texture2D" uid="uid://c3j6cpfbd7on8" path="res://Arte/Mio/building3.jpg" id="2_n26tm"]
+[ext_resource type="PackedScene" uid="uid://cqyvspu7t7c8i" path="res://Escenas/Items/barrel.tscn" id="3_ruik3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdulu"]
 size = Vector2(350.996, 262.077)
@@ -17,6 +18,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_n26tm")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
+visible = false
 collision_layer = 16
 collision_mask = 19
 input_pickable = false
@@ -35,5 +37,8 @@ freeze = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_0hlue")
+
+[node name="Barrel" parent="." instance=ExtResource("3_ruik3")]
+position = Vector2(91, 22)
 
 [connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

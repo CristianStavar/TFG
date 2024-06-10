@@ -4,9 +4,9 @@ signal player_level_up(current_level)
 #Emited by: Player
 #Received by: UpgradesManager, GameManager
 
-signal player_died(only_dagger_value)
+signal player_died()
 #Emited by: Player
-#Received by: GameManager
+#Received by: GameManager StatisticsManager
 
 signal card_chosen(skill)
 #Emited by: CardUI
@@ -20,11 +20,15 @@ signal damage_dealt(quantity,weapon)
 #Emited by: Attacks
 #Received by: StatisticsManager
 
-signal damage_blocked(quantity)
-#Emited by: EnemyBullet
+signal projectile_blocked()
+#Emited by: attack_shield
 #Received by: StatisticsManager
 
-signal item_picked(item)
+signal barrel_destroyed()
+#Emited by: barrel
+#Received by: StatisticsManager
+
+signal potion_taken()
 #Emited by: pickable_item
 #Received by: StatisticsManager
 
@@ -42,6 +46,9 @@ signal give_statistics_dictionary(dictionary)
 
 
 
+signal lock_maxed_card(skill_card)
+#Emited by:  player
+#Received by: upgradesManager
 
 signal card_unlocked(skill_card)
 #Emited by:  player
@@ -52,6 +59,23 @@ signal secret_discovered()
 #Emited by:  secret
 #Received by: StatisticsManager
 
+
+signal boss_spawned()
+#Emited by:  Spawner
+#Received by: GameManager
+
+signal boss_killed()
+#Emited by:  StatisticsManager
+#Received by: GameManager
+
+signal ask_for_only_dagger()
+#Emited by:  statisticsManageer
+#Received by: player
+
+
+signal send_only_dagger()
+#Emited by:  player
+#Received by: statisticsManageer
 
 		#MENUS
 

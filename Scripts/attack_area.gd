@@ -84,7 +84,6 @@ func _on_body_exited(body):
 
 
 func _on_body_entered(body):
-	print("Entra en AREA")
 	if body.is_in_group("Enemy")and not body.is_in_group(area_group_name):
 		bodies_inside.append(body)
 		body.add_to_group(area_group_name)

@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://bypfyqp6m28cg"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bypfyqp6m28cg"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_b8bw3"]
+[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="2_pyv3s"]
 
 [resource]
 script = ExtResource("1_b8bw3")
 name = "Solo cuchillo."
-description = "Vence al jefe final habiendo usado solo las dagas y mejoras generales."
+description = "Vence al jefe final habiendo usado solo las dagas y mejoras generales. Solo digno de los más poderosos Hierromantes."
+sprite = ExtResource("2_pyv3s")
 unlocked = false

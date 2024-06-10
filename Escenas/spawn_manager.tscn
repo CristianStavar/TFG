@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://clifhfykt3f42"]
+[gd_scene load_steps=9 format=3 uid="uid://clifhfykt3f42"]
 
 [ext_resource type="Script" path="res://Scripts/Spawner.gd" id="1_4kvhn"]
 [ext_resource type="PackedScene" uid="uid://dah76srhmroks" path="res://Unidades/Enemigos/T2/enemy_ghost.tscn" id="3_hvb1e"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cu4i4dn8cf4n1" path="res://Unidades/Enemigos/T1/enemy_spider.tscn" id="5_in7io"]
 [ext_resource type="PackedScene" uid="uid://ds68oalf0aryw" path="res://Unidades/Enemigos/T2/enemy_crab.tscn" id="6_ie85y"]
 [ext_resource type="PackedScene" uid="uid://ue5ojwqysk3q" path="res://Unidades/Enemigos/T3/enemy_ghost_strong.tscn" id="7_8daqk"]
+[ext_resource type="PackedScene" uid="uid://bi61vu3en7lni" path="res://Unidades/Enemigos/Boss/enemy_boss.tscn" id="8_ogw6k"]
 [ext_resource type="PackedScene" uid="uid://md6gwyolenyp" path="res://Unidades/Enemigos/T3/enemy_giant.tscn" id="8_yy1ul"]
 
 [node name="SpawnManager" type="Node2D"]
@@ -14,30 +15,33 @@ enemigo_fantasma = ExtResource("3_hvb1e")
 tier1_enemies = Array[PackedScene]([ExtResource("4_wnbtu"), ExtResource("5_in7io")])
 tier2_enemies = Array[PackedScene]([ExtResource("6_ie85y"), ExtResource("3_hvb1e")])
 tier3_enemies = Array[PackedScene]([ExtResource("7_8daqk"), ExtResource("8_yy1ul")])
-interval_enemy_level_up_value = 50.0
-timer_enemy_tier_value = 60
+boss = ExtResource("8_ogw6k")
+interval_enemy_level_up_value = 60.0
+timer_enemy_tier_value = 80.0
+timer_spawn_value = 1.1
+wave_enemy_quantity = 20
+wave_enemy_frecuency = 38.0
 
 [node name="Timer" type="Timer" parent="."]
 
 [node name="IntervalEnemyLevelUp" type="Timer" parent="."]
-autostart = true
 
 [node name="TimerBoss" type="Timer" parent="."]
+wait_time = 500.0
+one_shot = true
 
 [node name="TimerEnemyTier" type="Timer" parent="."]
 wait_time = 35.0
-autostart = true
 
 [node name="TimerSpawn" type="Timer" parent="."]
 wait_time = 1.2
-autostart = true
 
 [node name="TimerSpawnWave" type="Timer" parent="."]
-wait_time = 30.0
-autostart = true
+wait_time = 38.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="IntervalEnemyLevelUp" to="." method="_on_interval_enemy_level_up_timeout"]
+[connection signal="timeout" from="TimerBoss" to="." method="_on_timer_boss_timeout"]
 [connection signal="timeout" from="TimerEnemyTier" to="." method="_on_timer_enemy_tier_timeout"]
 [connection signal="timeout" from="TimerSpawn" to="." method="_on_timer_spawn_timeout"]
 [connection signal="timeout" from="TimerSpawnWave" to="." method="_on_timer_spawn_wave_timeout"]

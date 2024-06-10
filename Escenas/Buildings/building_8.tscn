@@ -17,6 +17,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_stel1")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
+visible = false
 collision_layer = 16
 collision_mask = 19
 input_pickable = false

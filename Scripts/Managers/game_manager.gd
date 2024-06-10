@@ -48,7 +48,12 @@ var time_passed:=0.0
 var time_label
 
 @onready var label_level = $UI/LabelLevel
+@onready var panel_loading_game:=$UI/PauseMenuUI/LoadingScreen
 
+
+@onready var bg_song:=$BGSong
+@onready var boss_song:=$BossSong
+@onready var sound_player_dead = $SoundPlayerDead
 
 
 # Called when the node enters the scene tree for the first time.
@@ -56,7 +61,10 @@ func _ready():
 	SignalBus.connect("player_level_up",show_player_level_up)
 	SignalBus.connect("card_chosen",hide_player_level_up)
 	SignalBus.connect("player_died",player_died)
+	SignalBus.connect("boss_killed",boss_killed)
+	SignalBus.connect("boss_spawned",boss_spawned)
 	
+#	get_tree().current_scene.set_name("MainGame")
 	
 	pause_menu_options_button.connect("pressed", show_options)
 	pause_menu_resume_game_button.connect("pressed",resume_game)
@@ -89,25 +97,13 @@ func _ready():
 
 
 
-func _physics_process(delta):
-	
-	if Input.is_action_pressed("spawn"):
-		spawner.spawn_enemy("Rata")
-
-	if Input.is_action_pressed("spawn2"):
-		spawner.spawn_enemy("Fantasma")
-		
-	
-	
+func _physics_process(delta):	
 	if not game_is_paused :
 		time_passed+=delta
 	var minutes=time_passed/60
 	var seconds=fmod(time_passed,60)
 	var time_text="%02d:%02d"%[minutes,seconds]#  ; 
 	time_label.text= time_text
-
-
-
 
 
 
@@ -138,25 +134,22 @@ func show_options():
 
 
 
-
-
-
 	
 func update_player_ui():
 	label_level.text="Nivel: "+str(player.current_level)
+
 	
-	
-	
-	
-func player_died(only_dagger_value:bool):
+func player_died():
+	sound_player_dead.play()
+	update_pause_menu()
 	pause_menu_ui.visible=true
 	game_ended_panel.visible=true
 	game_paused_panel.visible=false
 	get_tree().paused = true
 	game_is_paused=true
+	SignalBus.time_passed.emit(time_passed)
+	statistics_manager.check_new_achievements()
 	statistics_manager.save_to_file()
-	statistics_manager.check
-	
 	
 
 func set_player(new_player):
@@ -204,16 +197,28 @@ func restart_game():
 
 	print("\n Voy a reiniciar sisisis")
 	if get_tree():
-		print("\n hay un arbol miral que majo\n")
-		print("EScena escenita mirlaa que bonita:\n "+str(get_tree().get_current_scene()))
+		panel_loading_game.visible=true
+		reload_game()
 #		get_tree().reload_current_scene()
-		muvin()
+
 #	await get_tree().create_timer(0.1).timeout
 #	get_tree().paused = false
 #	game_is_paused=false
 
-func muvin():
-	get_tree().reload_current_scene()
+func reload_game():
+#	get_tree().reload_current_scene()
+
+	await get_tree().create_timer(0.1).timeout
+	var scene = load("res://Escenas/MainGame.tscn")
+	var scene_instance = scene.instantiate()
+#	get_tree().unload_current_scene()
+	self.set_name("pepe")
+	scene_instance.set_name("MainGame")
+	var root=get_node("/root")
+	root.add_child(scene_instance)
+	get_tree().paused = false
+	game_is_paused=false
+	queue_free()
 
 func go_to_main_menu_button_pressed():
 	panel_go_to_main_menu.visible=!panel_go_to_main_menu.visible
@@ -223,7 +228,8 @@ func go_to_main_menu():
 #	get_tree().paused = false
 #	pause_menu_ui.visible=false
 #	self.visible=false
-	statistics_manager.add_round_stats_to_total()
+	
+	statistics_manager.check_new_achievements()
 	statistics_manager.save_to_file()
 	var scene = load("res://Escenas/UI/MainMenuUI.tscn")
 	var scene_instance = scene.instantiate()
@@ -233,6 +239,22 @@ func go_to_main_menu():
 	get_tree().paused = false
 	game_is_paused=false
 	queue_free()
+
+	
+
+
+
+func boss_spawned():
+	bg_song.stop()
+	boss_song.play()
+
+func boss_killed():
+	boss_song.stop()
+	bg_song.play()
+
+
+
+
 
 
 

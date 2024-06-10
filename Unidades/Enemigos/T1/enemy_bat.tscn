@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b03rypvtp7066"]
+[gd_scene load_steps=6 format=3 uid="uid://b03rypvtp7066"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_curjx"]
 [ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://Escenas/Items/experience_token.tscn" id="2_2sqkx"]
 [ext_resource type="Texture2D" uid="uid://da2uh2pr6gqnx" path="res://Arte/bat.png" id="3_bwg1o"]
+[ext_resource type="AudioStream" uid="uid://b372gref4fd52" path="res://Sonidos/Hit.ogg" id="4_5x4hy"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s5hm"]
 radius = 7.0
@@ -36,6 +37,11 @@ autostart = true
 [node name="TimerAttackCooldown" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_5x4hy")
+volume_db = -5.0
+bus = &"Sound"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerAttackCooldown" to="." method="_on_timer_attack_cooldown_timeout"]

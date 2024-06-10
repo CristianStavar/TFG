@@ -6,11 +6,13 @@
 
 [resource]
 script = ExtResource("2_jt6g0")
-name = "Lanzarlanza"
+name = "Daga"
 description = "Lanzas una daga en la direccion que esstas mirando.
 "
 show_name = "Daga"
-unique_upgrades = "Escopeta: Las dagas se lanzan de forma dispersa en vez de todas en linea recta."
+unique_upgrades = "Daño,velocidad, frecuencia y dagas extra.
++Escopeta: Las dagas se lanzan de forma dispersa en vez de todas en linea recta.
++Mejora secreta."
 sprite = ExtResource("3_2kxdr")
 unlocked = true
 gotten = false

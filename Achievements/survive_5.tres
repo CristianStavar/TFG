@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://d1wb3p8qsqfok"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://d1wb3p8qsqfok"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_tdd4o"]
+[ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="2_js7o4"]
 
 [resource]
 script = ExtResource("1_tdd4o")
 name = "Sobrevive 5"
-description = "Consigue sobrevivir cinco minutos"
+description = "Consigue sobrevivir cinco minutos."
+sprite = ExtResource("2_js7o4")
 unlocked = false

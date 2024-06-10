@@ -1,15 +1,40 @@
-[gd_scene load_steps=11 format=3 uid="uid://drq8v8a5opngh"]
+[gd_scene load_steps=36 format=3 uid="uid://drq8v8a5opngh"]
 
-[ext_resource type="Texture2D" uid="uid://dpy4swi4ev48t" path="res://Arte/axe.png" id="1_7gdgi"]
 [ext_resource type="Script" path="res://Scripts/Managers/CollectionsManager.gd" id="1_qma4b"]
-[ext_resource type="Texture2D" uid="uid://da2uh2pr6gqnx" path="res://Arte/bat.png" id="2_ej822"]
+[ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="2_q0cyn"]
 [ext_resource type="PackedScene" uid="uid://cyoqt8fg4nrsy" path="res://Escenas/UI/Elementos/colection_achievement.tscn" id="3_oc0me"]
+[ext_resource type="Resource" uid="uid://d1wb3p8qsqfok" path="res://Achievements/survive_5.tres" id="3_r65wq"]
+[ext_resource type="Resource" uid="uid://d383axgfs4ng" path="res://Achievements/survive_10.tres" id="4_0d1qv"]
 [ext_resource type="PackedScene" uid="uid://cg4rxailqlnu4" path="res://Escenas/UI/Elementos/colection_item.tscn" id="4_0irhc"]
-[ext_resource type="Resource" uid="uid://d1wb3p8qsqfok" path="res://Achievements/survive_5.tres" id="4_80n7j"]
+[ext_resource type="Resource" uid="uid://cwk1q70wne3ee" path="res://Achievements/survive_15.tres" id="5_vie0m"]
+[ext_resource type="Resource" uid="uid://0v6plgs6we8y" path="res://Achievements/survive_20.tres" id="6_lwe5r"]
+[ext_resource type="Resource" uid="uid://c20fouyxp2s52" path="res://Achievements/survive_30.tres" id="7_fp5eu"]
 [ext_resource type="Resource" uid="uid://b6frtlih546hw" path="res://Ataques/Cards/AttackCards/card_attack_orbital_shield.tres" id="7_kxqqj"]
 [ext_resource type="Resource" uid="uid://b3i4e5287olmj" path="res://Ataques/Cards/AttackCards/card_dagger.tres" id="8_6hul8"]
+[ext_resource type="Resource" uid="uid://pdk2h0cwda18" path="res://Achievements/kill_rats_200.tres" id="8_inloy"]
+[ext_resource type="Resource" uid="uid://dby48i7hdjuf5" path="res://Achievements/kill_rats_1000.tres" id="9_valbt"]
 [ext_resource type="Resource" uid="uid://y4nv34qlp5ad" path="res://Ataques/Cards/AttackCards/card_axe_tornado.tres" id="9_vb0gf"]
+[ext_resource type="Resource" uid="uid://mwbi200o12cw" path="res://Achievements/kill_rats_5000.tres" id="10_6nptk"]
 [ext_resource type="Resource" uid="uid://qnmicgktt2lh" path="res://Ataques/Cards/AttackCards/card_spear.tres" id="10_stgir"]
+[ext_resource type="Resource" uid="uid://c2btpyvp0ocx5" path="res://Achievements/kill_bats_200.tres" id="11_bhudh"]
+[ext_resource type="Resource" uid="uid://d1np0solx0n67" path="res://Achievements/kill_bats_2000.tres" id="12_8c3g2"]
+[ext_resource type="Resource" uid="uid://d2gv5cp5y2h4f" path="res://Achievements/kill_spiders_200.tres" id="13_p2b52"]
+[ext_resource type="Resource" uid="uid://2tfr62k34ray" path="res://Achievements/kill_spiders_1000.tres" id="14_qi56d"]
+[ext_resource type="Resource" uid="uid://cfgxqmxm8kyoe" path="res://Achievements/kill_crabs_200.tres" id="15_ut7wn"]
+[ext_resource type="Resource" uid="uid://dwwwp7qu1rfgl" path="res://Achievements/kill_crabs_1000.tres" id="16_1j6q6"]
+[ext_resource type="Resource" uid="uid://ca8nkdx6o0k2f" path="res://Achievements/kill_ghosts_200.tres" id="17_34qqy"]
+[ext_resource type="Resource" uid="uid://cqsunbg1lj3c" path="res://Achievements/kill_ghosts_1000.tres" id="18_j4xpg"]
+[ext_resource type="Resource" uid="uid://clk5dcyoggs6o" path="res://Achievements/kill_giants_200.tres" id="19_t7yq1"]
+[ext_resource type="Resource" uid="uid://ddfwsvs4fcj7f" path="res://Achievements/kill_giants_1000.tres" id="20_fh7mj"]
+[ext_resource type="Resource" uid="uid://7jx7je2ebx6y" path="res://Achievements/kill_big_ghosts_500.tres" id="21_vnqia"]
+[ext_resource type="Resource" uid="uid://bw42gwf0b4tl1" path="res://Achievements/kill_big_ghosts_1000.tres" id="22_gojta"]
+[ext_resource type="Resource" uid="uid://ceuqsitl7gklm" path="res://Achievements/kill_boss.tres" id="23_vas0f"]
+[ext_resource type="Resource" uid="uid://bb74v8olsrp6p" path="res://Achievements/kill_boss_5.tres" id="24_nbkw1"]
+[ext_resource type="Resource" uid="uid://bd3c2fawimgh8" path="res://Achievements/secret_1.tres" id="25_bivlt"]
+[ext_resource type="Resource" uid="uid://dnacyxtmygdya" path="res://Achievements/secret_10.tres" id="26_cjypl"]
+[ext_resource type="Resource" uid="uid://cg18aec4g8biy" path="res://Achievements/barrels_destroyed_5.tres" id="27_r0sqb"]
+[ext_resource type="Resource" uid="uid://bicwt7hde3a5i" path="res://Achievements/barrels_destroyed_20.tres" id="28_fbpuy"]
+[ext_resource type="Resource" uid="uid://bypfyqp6m28cg" path="res://Achievements/only_dagger.tres" id="30_ixh7r"]
 
 [node name="ColectionUI" type="Control"]
 layout_mode = 3
@@ -27,9 +52,14 @@ offset_bottom = 702.0
 
 [node name="ButtonBackToMenu" type="Button" parent="Background"]
 layout_mode = 0
-offset_right = 144.0
-offset_bottom = 62.0
-text = "Back to menu"
+offset_right = 219.0
+offset_bottom = 76.0
+theme_override_font_sizes/font_size = 28
+text = "Atrás"
+icon = ExtResource("2_q0cyn")
+flat = true
+icon_alignment = 1
+expand_icon = true
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 0
@@ -42,6 +72,7 @@ theme_override_constants/icon_separation = 20
 theme_override_constants/icon_max_width = 20
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 24
+tabs_rearrange_group = 0
 
 [node name="Logros" type="Control" parent="TabContainer"]
 layout_mode = 2
@@ -51,7 +82,7 @@ layout_mode = 0
 offset_left = 66.0
 offset_right = 938.0
 offset_bottom = 26.0
-text = "Pepe viyuela el mejor"
+text = "Nombre logro"
 autowrap_mode = 2
 
 [node name="LabelDescription" type="Label" parent="TabContainer/Logros"]
@@ -59,9 +90,7 @@ layout_mode = 0
 offset_top = 23.0
 offset_right = 1028.0
 offset_bottom = 91.0
-text = " nose asldjasbjdhlasjd sakdn basbkdjhasjkd asjdhsak jhdasjd khaksj dhksaj dhsak djhsadk jsahdk jash dkjashd ksaj hdskaj hdskaj ha
-Primpoprimafnapore paom
-loaosdksadoksd "
+text = "Descripción"
 autowrap_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="TabContainer/Logros"]
@@ -71,27 +100,149 @@ offset_top = 34.0
 offset_right = 1040.0
 offset_bottom = 158.0
 
-[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Logros"]
-position = Vector2(67, 127)
-scale = Vector2(4.4375, 3.8125)
-texture = ExtResource("1_7gdgi")
-
-[node name="Achievement" parent="TabContainer/Logros" instance=ExtResource("3_oc0me")]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Logros"]
 layout_mode = 0
-offset_left = 163.0
-offset_top = 120.0
-offset_right = 187.0
-offset_bottom = 144.0
-achivement_holded = ExtResource("4_80n7j")
+offset_left = 10.0
+offset_top = 110.0
+offset_right = 264.0
+offset_bottom = 199.0
+scale = Vector2(4, 4)
+vertical_scroll_mode = 2
+
+[node name="Control" type="VBoxContainer" parent="TabContainer/Logros/ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Logros/ScrollContainer/Control"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Achievement" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("3_r65wq")
+
+[node name="Achievement2" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("4_0d1qv")
+
+[node name="Achievement3" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("5_vie0m")
+
+[node name="Achievement4" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("6_lwe5r")
+
+[node name="Achievement5" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("7_fp5eu")
+
+[node name="Achievement6" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("8_inloy")
+
+[node name="Achievement7" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("9_valbt")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/Logros/ScrollContainer/Control"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Achievement" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer2" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("10_6nptk")
+
+[node name="Achievement2" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer2" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("11_bhudh")
+
+[node name="Achievement3" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer2" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("12_8c3g2")
+
+[node name="Achievement4" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer2" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("13_p2b52")
+
+[node name="Achievement5" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer2" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("14_qi56d")
+
+[node name="Achievement6" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer2" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("15_ut7wn")
+
+[node name="Achievement7" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer2" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("16_1j6q6")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="TabContainer/Logros/ScrollContainer/Control"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Achievement" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer3" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("17_34qqy")
+
+[node name="Achievement2" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer3" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("18_j4xpg")
+
+[node name="Achievement3" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer3" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("19_t7yq1")
+
+[node name="Achievement4" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer3" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("20_fh7mj")
+
+[node name="Achievement5" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer3" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("21_vnqia")
+
+[node name="Achievement6" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer3" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("22_gojta")
+
+[node name="Achievement7" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer3" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("23_vas0f")
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="TabContainer/Logros/ScrollContainer/Control"]
+layout_direction = 2
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Achievement" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer4" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("24_nbkw1")
+
+[node name="Achievement2" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer4" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("25_bivlt")
+
+[node name="Achievement3" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer4" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("26_cjypl")
+
+[node name="Achievement4" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer4" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("27_r0sqb")
+
+[node name="Achievement5" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer4" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("28_fbpuy")
+
+[node name="Achievement6" parent="TabContainer/Logros/ScrollContainer/Control/HBoxContainer4" instance=ExtResource("3_oc0me")]
+layout_mode = 2
+achievement_holded = ExtResource("30_ixh7r")
 
 [node name="Objetos" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="TabContainer/Objetos"]
-position = Vector2(110, 419)
-scale = Vector2(6.0625, 5.6875)
-texture = ExtResource("2_ej822")
 
 [node name="PanelInfo" type="Panel" parent="TabContainer/Objetos"]
 layout_mode = 0
@@ -114,7 +265,7 @@ offset_left = 3.0
 offset_top = 49.0
 offset_right = 358.0
 offset_bottom = 127.0
-text = "Descripcion asdjansd sadjnoasjdn askjd nsakdj nasdj naskdj nas djsand kjasnd kjsand ksaj d"
+text = "Descripcion "
 autowrap_mode = 2
 
 [node name="Label3" type="Label" parent="TabContainer/Objetos/PanelInfo"]
@@ -132,62 +283,69 @@ offset_left = 14.0
 offset_top = 269.0
 offset_right = 368.0
 offset_bottom = 435.0
-text = "Mejora1
-Mejora2
-Mejora5 "
 autowrap_mode = 2
 
 [node name="colection_item" parent="TabContainer/Objetos" instance=ExtResource("4_0irhc")]
 layout_mode = 1
-offset_left = 64.0
-offset_top = 62.0001
-offset_right = 88.0
-offset_bottom = 86.0001
+offset_left = 34.0
+offset_top = 29.0
+offset_right = 58.0
+offset_bottom = 53.0
 
 [node name="colection_item2" parent="TabContainer/Objetos" instance=ExtResource("4_0irhc")]
 layout_mode = 1
-offset_left = 221.0
-offset_top = 62.0
-offset_right = 245.0
-offset_bottom = 86.0
+offset_left = 250.0
+offset_top = 29.0
+offset_right = 274.0
+offset_bottom = 53.0
 item_holded = ExtResource("7_kxqqj")
 
 [node name="colection_item3" parent="TabContainer/Objetos" instance=ExtResource("4_0irhc")]
 layout_mode = 1
-offset_left = 61.0
-offset_top = 147.0
-offset_right = 85.0
-offset_bottom = 171.0
+offset_left = 468.0
+offset_top = 29.0
+offset_right = 492.0
+offset_bottom = 53.0
 item_holded = ExtResource("8_6hul8")
 
 [node name="colection_item4" parent="TabContainer/Objetos" instance=ExtResource("4_0irhc")]
 layout_mode = 1
-offset_left = 183.0
-offset_top = 178.0
-offset_right = 207.0
-offset_bottom = 202.0
+offset_left = 125.0
+offset_top = 253.0
+offset_right = 149.0
+offset_bottom = 277.0
 item_holded = ExtResource("9_vb0gf")
 
 [node name="colection_item5" parent="TabContainer/Objetos" instance=ExtResource("4_0irhc")]
 layout_mode = 1
-offset_left = 299.0
-offset_top = 209.0
-offset_right = 323.0
-offset_bottom = 233.0
+offset_left = 367.0
+offset_top = 253.0
+offset_right = 391.0
+offset_bottom = 277.0
 item_holded = ExtResource("10_stgir")
 
 [node name="Estadisticas" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="EnemiesKilled" type="Control" parent="TabContainer/Estadisticas"]
-anchors_preset = 0
-offset_left = -27.0
-offset_top = -141.0
-offset_right = -27.0
-offset_bottom = -141.0
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Estadisticas"]
+layout_mode = 0
+offset_right = 1030.0
+offset_bottom = 467.0
 
-[node name="LabelEnemiesKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="Control" type="Control" parent="TabContainer/Estadisticas/ScrollContainer"]
+custom_minimum_size = Vector2(1000, 1000)
+layout_mode = 2
+
+[node name="EnemiesKilled" type="Control" parent="TabContainer/Estadisticas/ScrollContainer/Control"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = -24.0
+offset_top = -153.0
+offset_right = -24.0
+offset_bottom = -153.0
+
+[node name="LabelEnemiesKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 187.0
 offset_top = 165.0
@@ -195,7 +353,7 @@ offset_right = 341.0
 offset_bottom = 198.0
 text = "Enemigos vencidos"
 
-[node name="LabelRatsKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="LabelRatsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 53.0
 offset_top = 209.0
@@ -203,7 +361,7 @@ offset_right = 280.0
 offset_bottom = 235.0
 text = "Ratas eliminadas : 83.458.327"
 
-[node name="LabelBatsKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="LabelBatsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 55.0
 offset_top = 241.0
@@ -211,7 +369,7 @@ offset_right = 282.0
 offset_bottom = 267.0
 text = "Ratas eliminadas : 83.458.327"
 
-[node name="LabelSpidersKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="LabelSpidersKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 51.0
 offset_top = 276.0
@@ -219,7 +377,7 @@ offset_right = 278.0
 offset_bottom = 302.0
 text = "Ratas eliminadas : 83.458.327"
 
-[node name="LabelCrabsKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="LabelCrabsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 53.0
 offset_top = 312.0
@@ -227,7 +385,7 @@ offset_right = 280.0
 offset_bottom = 338.0
 text = "Ratas eliminadas : 83.458.327"
 
-[node name="LabelGhostsKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="LabelGhostsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 711.0
 offset_top = 216.0
@@ -235,7 +393,7 @@ offset_right = 938.0
 offset_bottom = 242.0
 text = "Ratas eliminadas : 83.458.327"
 
-[node name="LabelStrongGhostsKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="LabelStrongGhostsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 713.0
 offset_top = 258.0
@@ -243,7 +401,7 @@ offset_right = 940.0
 offset_bottom = 284.0
 text = "Ratas eliminadas : 83.458.327"
 
-[node name="LabelGiantsKilled" type="Label" parent="TabContainer/Estadisticas/EnemiesKilled"]
+[node name="LabelGiantsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 714.0
 offset_top = 301.0
@@ -251,14 +409,21 @@ offset_right = 941.0
 offset_bottom = 327.0
 text = "Ratas eliminadas : 83.458.327"
 
-[node name="DamageDealt" type="Control" parent="TabContainer/Estadisticas"]
+[node name="LabelBossesKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
+layout_mode = 0
+offset_left = 718.0
+offset_top = 331.0
+offset_right = 758.0
+offset_bottom = 354.0
+
+[node name="DamageDealt" type="Control" parent="TabContainer/Estadisticas/ScrollContainer/Control"]
 anchors_preset = 0
 offset_left = -30.0
 offset_top = -129.0
 offset_right = -30.0
 offset_bottom = -129.0
 
-[node name="LabelTitle" type="Label" parent="TabContainer/Estadisticas/DamageDealt"]
+[node name="LabelTitle" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
 offset_left = 146.0
 offset_top = 372.0
@@ -266,7 +431,7 @@ offset_right = 186.0
 offset_bottom = 395.0
 text = "Daño causado"
 
-[node name="DamageDagger" type="Label" parent="TabContainer/Estadisticas/DamageDealt"]
+[node name="DamageDagger" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
 offset_left = 69.0
 offset_top = 438.0
@@ -274,7 +439,7 @@ offset_right = 109.0
 offset_bottom = 461.0
 text = "Daño dagas : 5.268"
 
-[node name="DamageSpear" type="Label" parent="TabContainer/Estadisticas/DamageDealt"]
+[node name="DamageSpear" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 485.0
@@ -282,7 +447,7 @@ offset_right = 217.0
 offset_bottom = 511.0
 text = "Daño dagas : 5.268"
 
-[node name="DamageHammer" type="Label" parent="TabContainer/Estadisticas/DamageDealt"]
+[node name="DamageHammer" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
 offset_left = 75.0
 offset_top = 530.0
@@ -290,7 +455,7 @@ offset_right = 220.0
 offset_bottom = 556.0
 text = "Daño dagas : 5.268"
 
-[node name="DamageShield" type="Label" parent="TabContainer/Estadisticas/DamageDealt"]
+[node name="DamageShield" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
 offset_left = 455.0
 offset_top = 439.0
@@ -298,13 +463,64 @@ offset_right = 600.0
 offset_bottom = 465.0
 text = "Daño dagas : 5.268"
 
-[node name="DamageAxeStorm" type="Label" parent="TabContainer/Estadisticas/DamageDealt"]
+[node name="DamageAxeStorm" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
 offset_left = 458.0
 offset_top = 493.0
 offset_right = 603.0
 offset_bottom = 519.0
 text = "Daño dagas : 5.268"
+
+[node name="Misc" type="Control" parent="TabContainer/Estadisticas/ScrollContainer/Control"]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 489.0
+offset_right = 1007.0
+offset_bottom = 713.0
+
+[node name="LabelTitle" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Extras"
+
+[node name="LabelSecrets" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 62.0
+offset_right = 41.0
+offset_bottom = 85.0
+text = "Secretos encontrados: 200"
+
+[node name="LabelPotions" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 110.0
+offset_right = 178.0
+offset_bottom = 136.0
+text = "Pociones tomadas: 200"
+
+[node name="LabelBarrels" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
+layout_mode = 0
+offset_left = 366.0
+offset_top = 41.0
+offset_right = 513.0
+offset_bottom = 93.0
+text = "Barriles destruidos
+: 200"
+
+[node name="LabelProjectiles" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
+layout_mode = 0
+offset_left = 566.0
+offset_top = 82.0
+offset_right = 606.0
+offset_bottom = 105.0
+text = "Proyectiles"
+
+[node name="Control" type="Control" parent="TabContainer/Estadisticas/ScrollContainer/Control"]
+anchors_preset = 0
+offset_right = 1017.0
+offset_bottom = 679.0
 
 [connection signal="pressed" from="Background/ButtonBackToMenu" to="." method="_on_button_back_to_menu_pressed"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]

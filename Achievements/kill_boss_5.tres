@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://bb74v8olsrp6p"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bb74v8olsrp6p"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_dxe3a"]
+[ext_resource type="Texture2D" uid="uid://b8hu6gsh68xy8" path="res://Arte/mage_dark.png" id="2_hd4q6"]
 
 [resource]
 script = ExtResource("1_dxe3a")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "Duelista de magos"
+description = "Consigue acabar con más jefes finales. Resulta que no son tan finales. Vence a 5 magos enemigos."
+sprite = ExtResource("2_hd4q6")
 unlocked = false

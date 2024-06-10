@@ -5,14 +5,14 @@
 
 [resource]
 script = ExtResource("1_spg2g")
-name = "Martillos fragiles"
-description = "Al impactar los martillos se rompen en pedazos que ahcen daño a los enemigos que impacten."
+name = "Daño del martillo"
+description = "Mas fuerza para el martillo."
 show_name = ""
 unique_upgrades = ""
 sprite = ExtResource("2_6sf6e")
 unlocked = false
 gotten = false
-unique = true
+unique = false
 card_type = "Upgrade"
 attack_type = ""
 player_upgrade = false
@@ -40,7 +40,7 @@ spear_damage_value = 0.0
 spear_cooldown_value = 0.0
 spear_extra_spear_value = 0.0
 hammer_upgrade = true
-hammer_damage_value = 1.5
+hammer_damage_value = 1.2
 hammer_cooldown_value = 0.0
 hammer_speed_value = 0.0
 hammer_extra_hammer_value = 0.0

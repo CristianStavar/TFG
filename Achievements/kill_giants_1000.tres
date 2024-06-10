@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://ddfwsvs4fcj7f"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_6paxa"]
+[ext_resource type="Texture2D" uid="uid://crkqjkmhkm0bg" path="res://Arte/cyclops.png" id="2_imd1w"]
+
+[resource]
+script = ExtResource("1_6paxa")
+name = "Cazagigantes grande"
+description = "Mata MUCHOS gigantes.
+Ahora que me fijo creo que son ciclopes pero ya están muertos, ya no importa. 4000 gigantes/cíclopes eliminados."
+sprite = ExtResource("2_imd1w")
+unlocked = false

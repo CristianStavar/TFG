@@ -1,24 +1,24 @@
 [gd_scene load_steps=4 format=3 uid="uid://cyoqt8fg4nrsy"]
 
-[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="1_qyv3y"]
+[ext_resource type="Texture2D" uid="uid://cmikcg01adx0j" path="res://Arte/dagger.png" id="1_ppvm1"]
 [ext_resource type="Script" path="res://Escenas/UI/Elementos/colection_achievement_button.gd" id="2_hvc2u"]
-[ext_resource type="Texture2D" uid="uid://b3fupnbpxa83m" path="res://Arte/cursor.png" id="3_akt2j"]
+[ext_resource type="Texture2D" uid="uid://b8rhuo2xqlvqr" path="res://Arte/frame.png" id="3_h4ve1"]
 
 [node name="Button" type="Button"]
 offset_right = 24.0
 offset_bottom = 24.0
 scale = Vector2(4, 4)
-icon = ExtResource("1_qyv3y")
+icon = ExtResource("1_ppvm1")
 icon_alignment = 1
 vertical_icon_alignment = 0
 script = ExtResource("2_hvc2u")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
-modulate = Color(1, 1, 0, 0.815686)
-z_index = -1
+modulate = Color(1, 1, 0, 1)
+z_index = 1
 position = Vector2(12.375, 12)
 scale = Vector2(1.64063, 1.65625)
-texture = ExtResource("3_akt2j")
+texture = ExtResource("3_h4ve1")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]

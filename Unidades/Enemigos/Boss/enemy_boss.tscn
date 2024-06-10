@@ -1,16 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi61vu3en7lni"]
+[gd_scene load_steps=8 format=3 uid="uid://bi61vu3en7lni"]
 
 [ext_resource type="Script" path="res://Unidades/Enemigos/Boss/enemy_boss.gd" id="1_ec1vi"]
 [ext_resource type="PackedScene" uid="uid://c3g3xxfejaisr" path="res://Ataques/Enemigos/enemy_bullet.tscn" id="2_bh3wo"]
 [ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://Escenas/Items/experience_token.tscn" id="3_pig7b"]
 [ext_resource type="Texture2D" uid="uid://b8hu6gsh68xy8" path="res://Arte/mage_dark.png" id="4_fduy1"]
+[ext_resource type="AudioStream" uid="uid://b372gref4fd52" path="res://Sonidos/Hit.ogg" id="5_nh06e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5s5hm"]
 radius = 11.0
 height = 24.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gfj13"]
-radius = 321.45
+radius = 399.005
 
 [node name="EnemyBoss" type="CharacterBody2D"]
 collision_layer = 2
@@ -18,12 +19,15 @@ collision_mask = 19
 motion_mode = 1
 script = ExtResource("1_ec1vi")
 bullet = ExtResource("2_bh3wo")
+bullet_speed = 170
 tier = 4
-health = 200
-damage = 12
-move_speed = 70.0
+enemy_name = "Boss"
+health = 500.0
+damage = 12.0
+move_speed = 160.0
 attack_cooldown = 1.0
 experience_token = ExtResource("3_pig7b")
+extra_experience = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)
@@ -53,7 +57,17 @@ wait_time = 2.5
 wait_time = 0.4
 one_shot = true
 
+[node name="TimerStarShoot" type="Timer" parent="."]
+wait_time = 8.0
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_nh06e")
+volume_db = -5.0
+bus = &"Sound"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="TimerShoot" to="." method="_on_timer_shoot_timeout"]
+[connection signal="timeout" from="TimerStarShoot" to="." method="_on_timer_star_shoot_timeout"]

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://7jx7je2ebx6y"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_lpefr"]
+[ext_resource type="Texture2D" uid="uid://m6g4jec7oglg" path="res://Arte/ghost_big.png" id="2_7trny"]
+
+[resource]
+script = ExtResource("1_lpefr")
+name = "Vence fantasmones"
+description = "Consigue acabar con unos cuantos fantasmones. 
+De estos primeros 500 ningúno mordia pero no bajes la guardia."
+sprite = ExtResource("2_7trny")
+unlocked = false

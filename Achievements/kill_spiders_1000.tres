@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://2tfr62k34ray"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://2tfr62k34ray"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_vy667"]
+[ext_resource type="Texture2D" uid="uid://bcuiw7xutym6v" path="res://Arte/spider.png" id="2_n2yx4"]
 
 [resource]
 script = ExtResource("1_vy667")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "No Aracnofobia"
+description = "Venciste a tus miedos y a las arañas.
+2200 arañas menos en el mundo."
+sprite = ExtResource("2_n2yx4")
 unlocked = false

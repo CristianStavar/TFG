@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://c2btpyvp0ocx5"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://c2btpyvp0ocx5"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_0akhf"]
+[ext_resource type="Texture2D" uid="uid://da2uh2pr6gqnx" path="res://Arte/bat.png" id="2_xlxig"]
 
 [resource]
 script = ExtResource("1_0akhf")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "Caza murcielagos"
+description = "Abate 200 muercielagos."
+sprite = ExtResource("2_xlxig")
 unlocked = false

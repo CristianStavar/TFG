@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://cqsunbg1lj3c"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_u02gc"]
+[ext_resource type="Texture2D" uid="uid://bd324dfe0brge" path="res://Arte/ghost_1.png" id="2_222t3"]
+
+[resource]
+script = ExtResource("1_u02gc")
+name = "Cazafantasmasmicos"
+description = "Consigue acabar con tope fantasmas.
+Más de 2500."
+sprite = ExtResource("2_222t3")
+unlocked = false

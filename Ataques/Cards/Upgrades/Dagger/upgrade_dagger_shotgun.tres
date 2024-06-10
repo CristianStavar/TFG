@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_ilear")
 name = "Daga Escopeta"
-description = "Convierte tus disparos de daga en un disparo multiple desperdigado."
+description = "Convierte tus disparos de daga en un disparo multiple disperso. +2 Dagas"
 show_name = ""
 unique_upgrades = ""
 sprite = ExtResource("2_ys3f6")
@@ -24,7 +24,7 @@ dagger_upgrade = true
 dagger_speed_value = 0.0
 dagger_cooldown_value = 0.0
 dagger_damage_value = 0.0
-dagger_extra_dagger_value = 0.0
+dagger_extra_dagger_value = 2.0
 dagger_shotgun_upgrade = true
 dagger_separation_upgrade = false
 axe_tornado_upgrade = false

@@ -10,8 +10,8 @@ height = 18.0
 [node name="AttackSpear" type="Node2D"]
 script = ExtResource("1_52i43")
 attack_name = "Spear"
-speed = 600
-cooldown = 3.0
+speed = 550
+cooldown = 2.6
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

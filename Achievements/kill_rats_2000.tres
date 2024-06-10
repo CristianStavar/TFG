@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://mwbi200o12cw"]
-
-[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_77uor"]
-
-[resource]
-script = ExtResource("1_77uor")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
-unlocked = false

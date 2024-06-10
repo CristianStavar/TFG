@@ -8,7 +8,7 @@ extends Node2D
 var direction
 
 @export var cooldown:=1.0
-@export var tieneDuracion:=false
+
 
 var separation:=false
 
@@ -49,6 +49,8 @@ func _on_body_entered(body):
 				var bullet = self_attack.instantiate()
 				
 				bullet.set_separation(false)
+				bullet.update_damage(damage)
+				bullet.update_speed(speed)
 				bullet.define_direction( Vector2(1,0).rotated(radians))
 				get_parent().add_child.call_deferred(bullet)
 				

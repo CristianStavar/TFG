@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://bw42gwf0b4tl1"]
+
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_3inpr"]
+[ext_resource type="Texture2D" uid="uid://m6g4jec7oglg" path="res://Arte/ghost_big.png" id="2_tyxoc"]
+
+[resource]
+script = ExtResource("1_3inpr")
+name = "Vence fantasmones 2"
+description = "A quien van a llamar? A TI! Por acabar con esos 4000 fantasmas  que al final sí son mordedores."
+sprite = ExtResource("2_tyxoc")
+unlocked = false

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cu4i4dn8cf4n1"]
+[gd_scene load_steps=6 format=3 uid="uid://cu4i4dn8cf4n1"]
 
 [ext_resource type="Script" path="res://Unidades/Enemigos/T1/enemy_spider.gd" id="1_1b7vl"]
 [ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://Escenas/Items/experience_token.tscn" id="2_vheca"]
 [ext_resource type="Texture2D" uid="uid://bcuiw7xutym6v" path="res://Arte/spider.png" id="3_v4xny"]
+[ext_resource type="AudioStream" uid="uid://b372gref4fd52" path="res://Sonidos/Hit.ogg" id="4_cx78u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eomxq"]
 size = Vector2(16, 16)
@@ -14,9 +15,9 @@ motion_mode = 1
 script = ExtResource("1_1b7vl")
 tier = 1
 enemy_name = "Spider"
-health = 9
+health = 8.0
 damage = 6
-lvl_upgrades = Array[float]([2.0, 1.0])
+lvl_upgrades = Array[float]([0.5, 1.0])
 experience_token = ExtResource("2_vheca")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -37,6 +38,11 @@ autostart = true
 [node name="TimerAttackCooldown" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_cx78u")
+volume_db = -5.0
+bus = &"Sound"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerAttackCooldown" to="." method="_on_timer_attack_cooldown_timeout"]

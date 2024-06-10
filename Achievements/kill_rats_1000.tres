@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://dby48i7hdjuf5"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://dby48i7hdjuf5"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_q6qct"]
+[ext_resource type="Texture2D" uid="uid://didksfivvufou" path="res://Arte/rat_2.png" id="2_ml5xv"]
 
 [resource]
 script = ExtResource("1_q6qct")
-name = "Vence"
-description = "Consigue acabar con el jefe final."
+name = "Trampero maestro"
+description = "Tu cruzada contra los roedores va bien.
+3000 ratas eliminadas."
+sprite = ExtResource("2_ml5xv")
 unlocked = false

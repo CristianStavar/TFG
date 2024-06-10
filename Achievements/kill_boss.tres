@@ -1,9 +1,11 @@
-[gd_resource type="Resource" script_class="Achievement" load_steps=2 format=3 uid="uid://ceuqsitl7gklm"]
+[gd_resource type="Resource" script_class="Achievement" load_steps=3 format=3 uid="uid://ceuqsitl7gklm"]
 
 [ext_resource type="Script" path="res://Scripts/achievement.gd" id="1_vfpil"]
+[ext_resource type="Texture2D" uid="uid://b8hu6gsh68xy8" path="res://Arte/mage_dark.png" id="2_js6r4"]
 
 [resource]
 script = ExtResource("1_vfpil")
-name = "Vence"
+name = "Matajefes"
 description = "Consigue acabar con el jefe final."
+sprite = ExtResource("2_js6r4")
 unlocked = false

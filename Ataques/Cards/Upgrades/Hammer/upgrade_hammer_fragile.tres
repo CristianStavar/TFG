@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_vq8v8")
-name = "Martillo fragil"
+name = "Martillo frágil"
 description = "Al impactar con un enemigo se rompe en pedazos que salen volando."
 show_name = ""
 unique_upgrades = ""
