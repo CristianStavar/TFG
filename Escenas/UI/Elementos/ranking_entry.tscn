@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://dad8dsspnhavj"]
+
+[ext_resource type="Script" path="res://Scripts/UI/RankingEntry.gd" id="1_j7828"]
+
+[node name="RankingEntry" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -562.0
+offset_bottom = -585.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j7828")
+
+[node name="LabelPlayer" type="Label" parent="."]
+layout_mode = 2
+offset_top = 12.0
+offset_right = 156.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 26
+text = "Pepito perez"
+
+[node name="LabelScore" type="Label" parent="."]
+layout_mode = 2
+offset_left = 516.0
+offset_top = 12.0
+offset_right = 590.0
+offset_bottom = 51.0
+theme_override_font_sizes/font_size = 26
+text = " 345.5"

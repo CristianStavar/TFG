@@ -1,8 +1,9 @@
-[gd_scene load_steps=38 format=3 uid="uid://dkabrjh8phksx"]
+[gd_scene load_steps=42 format=3 uid="uid://dkabrjh8phksx"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_it0pd"]
 [ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="2_6yc1x"]
 [ext_resource type="PackedScene" uid="uid://drq8v8a5opngh" path="res://Escenas/UI/ColectionUI.tscn" id="2_8ka6j"]
+[ext_resource type="PackedScene" uid="uid://dad8dsspnhavj" path="res://Escenas/UI/Elementos/ranking_entry.tscn" id="2_gphpm"]
 [ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="2_p3um0"]
 [ext_resource type="PackedScene" uid="uid://fvh70jxidati" path="res://Escenas/UI/OptionsMenuUI.tscn" id="4_fkk8t"]
 [ext_resource type="Script" path="res://Scripts/Managers/statistics_manager.gd" id="5_7o8eg"]
@@ -35,12 +36,17 @@
 [ext_resource type="Resource" uid="uid://bicwt7hde3a5i" path="res://Achievements/barrels_destroyed_20.tres" id="33_ab4cw"]
 [ext_resource type="AudioStream" uid="uid://wdu1k3iehkda" path="res://Sonidos/Musica/IntroSong.ogg" id="34_p5cha"]
 [ext_resource type="Resource" uid="uid://bypfyqp6m28cg" path="res://Achievements/only_dagger.tres" id="34_t613t"]
+[ext_resource type="Texture2D" uid="uid://b66olnd4qtkud" path="res://Arte/UI/panelInset_beigeLight.png" id="36_d30p0"]
+[ext_resource type="PackedScene" uid="uid://mgkqhkf72c6a" path="res://Escenas/UI/panel_ranking.tscn" id="37_tqxrw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gm30x"]
 texture = ExtResource("7_xjeq0")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fbnru"]
 texture = ExtResource("7_xjeq0")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p46xu"]
+texture = ExtResource("36_d30p0")
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -51,6 +57,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_it0pd")
+ranking_entry = ExtResource("2_gphpm")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
@@ -63,11 +70,11 @@ offset_right = 1153.0
 offset_bottom = 651.0
 
 [node name="Button" type="Button" parent="MainPanel"]
-layout_mode = 0
-offset_left = 24.0
-offset_top = 29.0
-offset_right = 267.0
-offset_bottom = 102.0
+layout_mode = 2
+offset_left = 16.0
+offset_top = 26.0
+offset_right = 428.0
+offset_bottom = 101.0
 theme_override_font_sizes/font_size = 30
 text = "Opciones
 "
@@ -76,17 +83,13 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="Botones" type="Control" parent="MainPanel"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="Button2" type="Button" parent="MainPanel"]
 layout_mode = 2
-offset_left = 359.0
-offset_top = 152.0
-offset_right = 768.0
-offset_bottom = 263.0
+offset_left = 400.0
+offset_top = 134.0
+offset_right = 840.0
+offset_bottom = 256.0
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 40
 text = "Comenzar Partida"
 icon = ExtResource("2_p3um0")
@@ -95,12 +98,27 @@ text_overrun_behavior = 4
 icon_alignment = 1
 expand_icon = true
 
+[node name="ButtonRanking" type="Button" parent="MainPanel"]
+layout_mode = 2
+offset_left = 400.0
+offset_top = 416.0
+offset_right = 840.0
+offset_bottom = 538.0
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 40
+text = "Ranking"
+icon = ExtResource("2_p3um0")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
 [node name="Button3" type="Button" parent="MainPanel"]
 layout_mode = 2
-offset_left = 336.0
-offset_top = 346.0
-offset_right = 781.0
-offset_bottom = 473.0
+offset_left = 400.0
+offset_top = 272.0
+offset_right = 840.0
+offset_bottom = 394.0
+size_flags_vertical = 3
 theme_override_font_sizes/font_size = 40
 text = "Colección
 "
@@ -171,6 +189,110 @@ volume_db = -10.0
 autoplay = true
 bus = &"Music"
 
+[node name="PanelRanking" parent="." instance=ExtResource("37_tqxrw")]
+visible = false
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="PanelLogin" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 2.0
+offset_top = 1.0
+offset_right = 1149.0
+offset_bottom = 640.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_p46xu")
+
+[node name="LineEditEmail" type="LineEdit" parent="PanelLogin"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 144.0
+offset_right = 806.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Correo electronico"
+alignment = 1
+
+[node name="LineEditPassword" type="LineEdit" parent="PanelLogin"]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 261.0
+offset_right = 806.0
+offset_bottom = 334.0
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Contraseña"
+alignment = 1
+secret = true
+
+[node name="LabelFeedback" type="Label" parent="PanelLogin"]
+layout_mode = 0
+offset_left = 374.0
+offset_top = 39.0
+offset_right = 822.0
+offset_bottom = 135.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="LabelWarning" type="Label" parent="PanelLogin"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 127.0
+offset_right = 406.0
+offset_bottom = 287.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Por motivos de seguridad se recomienda usar una contraseña nueva, no compartida con ningúna  de tus cuentas."
+autowrap_mode = 2
+
+[node name="ButtonLogin" type="Button" parent="PanelLogin"]
+layout_mode = 0
+offset_left = 461.0
+offset_top = 357.0
+offset_right = 765.0
+offset_bottom = 434.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Iniciar sesion"
+icon = ExtResource("2_p3um0")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonSignup" type="Button" parent="PanelLogin"]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 452.0
+offset_right = 744.0
+offset_bottom = 517.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 22
+text = "Registrar cuenta"
+icon = ExtResource("2_p3um0")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="LabelWarning2" type="Label" parent="PanelLogin"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 327.0
+offset_right = 406.0
+offset_bottom = 487.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Una vez creada una cuenta correctamente se guardaran los datos de acceso para que en futuras ocasiones solo tengas que pulsar: Iniciar sesion"
+autowrap_mode = 2
+
 [connection signal="pressed" from="MainPanel/Button" to="." method="show_options_UI"]
 [connection signal="pressed" from="MainPanel/Button2" to="." method="start_game"]
+[connection signal="pressed" from="MainPanel/ButtonRanking" to="." method="_on_button_ranking_pressed"]
 [connection signal="pressed" from="MainPanel/Button3" to="." method="show_colection_UI"]
+[connection signal="text_changed" from="PanelLogin/LineEditEmail" to="." method="_on_line_edit_email_text_changed"]
+[connection signal="text_changed" from="PanelLogin/LineEditPassword" to="." method="_on_line_edit_password_text_changed"]
+[connection signal="pressed" from="PanelLogin/ButtonLogin" to="." method="_on_button_login_pressed"]
+[connection signal="pressed" from="PanelLogin/ButtonSignup" to="." method="_on_button_signup_pressed"]

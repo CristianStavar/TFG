@@ -8,6 +8,15 @@ signal player_died()
 #Emited by: Player
 #Received by: GameManager StatisticsManager
 
+
+signal player_take_damage(quantity)
+#Emited by: Player
+#Received by: StatisticsManager
+
+signal game_ended()
+#Emited by: GameManager
+#Received by: StatisticsManager
+
 signal card_chosen(skill)
 #Emited by: CardUI
 #Received by: Player, UpgradesManager, GameManager
@@ -76,6 +85,15 @@ signal ask_for_only_dagger()
 signal send_only_dagger()
 #Emited by:  player
 #Received by: statisticsManageer
+
+
+
+
+
+
+
+
+
 
 		#MENUS
 

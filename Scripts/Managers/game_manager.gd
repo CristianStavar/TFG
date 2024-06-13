@@ -90,7 +90,12 @@ func _ready():
 	
 	statistics_manager.load_from_file()
 	
+	
+	Firebase.Auth.login_with_email_and_password("cuenta1@test.po","123456")
+	
 #	update_player_ui()
+
+
 
 
 
@@ -114,7 +119,9 @@ func show_player_level_up(_player_current_level):
 	panel_player_level_up.visible=true
 	#await get_tree().create_timer(5).timeout
 #	hide_player_level_up().
-	
+
+#	var auth=Firebase.Auth.auth
+#	print("Sigo conectado porq esto funcoinabien: "+str(auth.localid))
 
 func hide_player_level_up(_skill:CardSkill):
 	update_player_ui()
@@ -148,6 +155,7 @@ func player_died():
 	get_tree().paused = true
 	game_is_paused=true
 	SignalBus.time_passed.emit(time_passed)
+	SignalBus.game_ended.emit()
 	statistics_manager.check_new_achievements()
 	statistics_manager.save_to_file()
 	
@@ -229,6 +237,8 @@ func go_to_main_menu():
 #	pause_menu_ui.visible=false
 #	self.visible=false
 	
+	SignalBus.time_passed.emit(time_passed)
+	SignalBus.game_ended.emit()
 	statistics_manager.check_new_achievements()
 	statistics_manager.save_to_file()
 	var scene = load("res://Escenas/UI/MainMenuUI.tscn")

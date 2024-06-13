@@ -141,7 +141,7 @@ func _ready():
 	
 	experience_bar.max_value=experience_points_to_level
 	experience_bar.value=0
-	in_touchscreen=touchscreen_check()
+#	in_touchscreen=touchscreen_check()
 
 
 func _physics_process(_delta):
@@ -542,6 +542,7 @@ func take_damage(value:float):
 	health-=value
 #	game_manager.update_health(health)
 	health_bar.value=health
+	SignalBus.player_take_damage.emit(value)
 	if health <=0:
 		health=0
 		player_died()

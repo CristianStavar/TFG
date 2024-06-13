@@ -178,6 +178,7 @@ visible = false
 on_main_menu = false
 
 [node name="StatisticsManager" type="Node" parent="."]
+process_mode = 3
 script = ExtResource("39_xpau7")
 array_achievements = Array[Resource("res://Scripts/achievement.gd")]([ExtResource("40_ibs67"), ExtResource("41_qnbln"), ExtResource("42_qbavc"), ExtResource("43_3xvoy"), ExtResource("44_ur8a2"), ExtResource("45_4ai3m"), ExtResource("46_21kau"), ExtResource("45_un61j"), ExtResource("48_fvklg"), ExtResource("47_hxykk"), ExtResource("50_f7tm0"), ExtResource("51_euapn"), ExtResource("52_hols1"), ExtResource("53_yp7ie"), ExtResource("54_462lj"), ExtResource("55_ow6w2"), ExtResource("56_kllne"), ExtResource("57_gx3kq"), ExtResource("56_e41rm"), ExtResource("59_pln2n"), ExtResource("60_neky3"), ExtResource("61_k2qfk"), ExtResource("62_idmyy"), ExtResource("63_twe7h"), ExtResource("64_qfdqj"), ExtResource("65_18d2v"), ExtResource("64_5v5em")])
 
