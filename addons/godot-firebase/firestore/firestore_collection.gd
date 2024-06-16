@@ -44,7 +44,6 @@ func get_doc(document_id : String, from_cache : bool = false, is_listener : bool
 	_process_request(task, document_id, url)
 	var result = await Firebase.Firestore._handle_task_finished(task)
 	if result != null:
-		print("He sacao documentos")
 		for child in get_children():
 			if child.doc_name == document_id:
 				child.replace(result, true)

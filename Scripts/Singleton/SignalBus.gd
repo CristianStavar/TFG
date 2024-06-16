@@ -1,5 +1,8 @@
 extends Node
 
+var game_type:="EXTRINSICAL"
+
+
 signal player_level_up(current_level)
 #Emited by: Player
 #Received by: UpgradesManager, GameManager
@@ -69,9 +72,22 @@ signal secret_discovered()
 #Received by: StatisticsManager
 
 
+signal collectible_found(col_name)
+#Emited by CollectibleITem
+#Received by: StatisticsManager
+
+signal ask_for_collectibles()
+#Emited by CollectibleITem
+#Received by: StatisticsManager
+
+signal send_collectibles(col_array)
+#Emited by StatisticsManager
+#Received by: CollectibleITem
+
+
 signal boss_spawned()
 #Emited by:  Spawner
-#Received by: GameManager
+#Received by: GameManager StatisticsManager
 
 signal boss_killed()
 #Emited by:  StatisticsManager
@@ -110,7 +126,22 @@ signal colection_achievement_pressed(achievement)
 #Emited by:  colection_achievement_button
 #Received by: CollectionsManager
 
+signal colection_collectible_pressed(collectible)
+#Emited by:  colection_collectible_button
+#Received by: CollectionsManager
+
 
 signal delete_save_file()
 #Emited by: OptionsMenuUI
+#Received by: StatisticsManager
+
+
+
+
+
+
+  # FIREBASE
+
+signal change_player_name
+#Emited by: MainMenu
 #Received by: StatisticsManager

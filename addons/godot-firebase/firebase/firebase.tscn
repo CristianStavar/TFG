@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://5xa6ulbllkjk" path="res://addons/godot-firebase/remote_config/firebase_remote_config.tscn" id="8_mvdf4"]
 
 [node name="Firebase" type="Node"]
+process_mode = 3
 script = ExtResource("3")
 
 [node name="Auth" type="HTTPRequest" parent="."]

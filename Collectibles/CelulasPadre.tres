@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Collectible" load_steps=3 format=3 uid="uid://cgiq4dojmsie7"]
+
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_2ky6h"]
+[ext_resource type="Texture2D" uid="uid://c3fb0a22k6nel" path="res://Arte/colectibles/Potion.png" id="2_qbjxy"]
+
+[resource]
+script = ExtResource("1_2ky6h")
+name = "Frasco misterioso"
+description = "La etiqueta pone que contiene......
+Celulas padre. Mejor lo dejo en suelo que seguro que alguien lo echa de menos y lo anda buscando."
+sprite = ExtResource("2_qbjxy")
+unlocked = false

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi61vu3en7lni"]
+[gd_scene load_steps=9 format=3 uid="uid://bi61vu3en7lni"]
 
 [ext_resource type="Script" path="res://Unidades/Enemigos/Boss/enemy_boss.gd" id="1_ec1vi"]
 [ext_resource type="PackedScene" uid="uid://c3g3xxfejaisr" path="res://Ataques/Enemigos/enemy_bullet.tscn" id="2_bh3wo"]
+[ext_resource type="PackedScene" uid="uid://bwv5jj37ggwj1" path="res://Escenas/Items/collectible_item.tscn" id="3_blc76"]
 [ext_resource type="PackedScene" uid="uid://ds1bua0otd6l8" path="res://Escenas/Items/experience_token.tscn" id="3_pig7b"]
 [ext_resource type="Texture2D" uid="uid://b8hu6gsh68xy8" path="res://Arte/mage_dark.png" id="4_fduy1"]
 [ext_resource type="AudioStream" uid="uid://b372gref4fd52" path="res://Sonidos/Hit.ogg" id="5_nh06e"]
@@ -20,6 +21,7 @@ motion_mode = 1
 script = ExtResource("1_ec1vi")
 bullet = ExtResource("2_bh3wo")
 bullet_speed = 170
+collectible_item = ExtResource("3_blc76")
 tier = 4
 enemy_name = "Boss"
 health = 500.0

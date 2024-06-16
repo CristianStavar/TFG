@@ -9,7 +9,7 @@ var player_score:=0.0
 func update_labels(player:String,score:float):
 	player_name=player
 	player_score=score
-	print("soy un entry:"+str(self)+"\n y este son mis labels: "+str(player_name) +"      "+str(player_score))
+#	print("soy un entry:"+str(self)+"\n y este son mis labels: "+str(player_name) +"      "+str(player_score))
 	$LabelPlayer.text=player_name
 	$LabelScore.text=str(player_score)
 

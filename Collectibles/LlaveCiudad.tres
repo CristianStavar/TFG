@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Collectible" load_steps=3 format=3 uid="uid://crd88fy03aqmt"]
+
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_js6tx"]
+[ext_resource type="Texture2D" uid="uid://bdvkdb14asvc2" path="res://Arte/colectibles/Key.png" id="2_8d7y7"]
+
+[resource]
+script = ExtResource("1_js6tx")
+name = "Llave de la ciudad"
+description = "Antaño abria la puerta trasera de la taberna. Ahora ya no hay puerta. Al menos es un bonito recuerdo."
+sprite = ExtResource("2_8d7y7")
+unlocked = false

@@ -36,11 +36,16 @@ var statistics_dictionary:Dictionary
 
 @onready var achievements:Array[Button]
 
+
+@onready var label_collectible_name:=$TabContainer/Coleccionables/LabelName
+@onready var label_collectible_description:=$TabContainer/Coleccionables/LabelDescription
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.connect("give_statistics_dictionary",update_statistics_dictionary)
 	SignalBus.connect("colection_item_pressed",update_colection_item_info)
 	SignalBus.connect("colection_achievement_pressed",update_achievements_info)
+	SignalBus.connect("colection_collectible_pressed",update_collectibles_info)
 	await get_tree().create_timer(0.1).timeout
 	add_buttons_to_achievements()
 	ask_for_statistics_dictionary()
@@ -96,6 +101,16 @@ func update_achievements_info(achievement):
 		label_achieevement_description.text=achievement.description
 	else:
 		label_achieevement_description.text=" ??? "
+
+
+func update_collectibles_info(collectible):
+	if collectible.unlocked:
+		label_collectible_description.text=collectible.description
+		label_collectible_name.text=collectible.name
+	else:
+		label_collectible_description.text=" ??? "
+		label_collectible_name.text=" ??? "
+
 
 
 func update_unlocked_achievements():

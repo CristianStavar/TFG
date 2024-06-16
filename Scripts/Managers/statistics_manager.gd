@@ -103,6 +103,8 @@ var last_game_score:=0.0
 var highest_score:=0.0
 
 
+
+@export var array_collectibles:Array[Collectible]
 ##  FIREBASE
 
 var collection_ranking_id:="leaderboard"
@@ -110,7 +112,10 @@ var player_display_name:=""
 
 
 
+var time_starded_game:Dictionary
 
+
+@export var in_main_menu:=false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.connect("enemy_killed",enemy_killed)
@@ -120,16 +125,24 @@ func _ready():
 	SignalBus.connect("potion_taken",potion_taken)
 	SignalBus.connect("secret_discovered",secret_discovered)
 	SignalBus.connect("barrel_destroyed",barrel_destroyed)
+	SignalBus.connect("collectible_found",unlock_collectible)
 	
 	SignalBus.connect("send_only_dagger",check_only_dagger)
 	
 	SignalBus.connect("ask_for_statistics_dictionary",asked_for_statistics_dictionary)
+	SignalBus.connect("ask_for_collectibles",asked_for_collectibles_array)
 
 	SignalBus.connect("player_take_damage",player_take_damage)
 	
 	SignalBus.connect("delete_save_file",delete_save_file)
 	
 	SignalBus.connect("game_ended",game_ended)
+	
+	time_starded_game=Time.get_datetime_dict_from_system ()
+	
+	SignalBus.connect("change_player_name",change_player_display_name)
+
+
 
 
 
@@ -280,6 +293,12 @@ func save_to_file():
 	
 
 
+func unlock_collectible(col_name:String):
+	for collectible in array_collectibles:
+		if collectible.name==col_name:
+			collectible.collectible_unlocked()
+
+
 func create_save_data():
 	
 	var array_unlocked_achievements:Array[int]
@@ -289,8 +308,16 @@ func create_save_data():
 		elif not array_achievements[i].unlocked:
 			array_unlocked_achievements.append(0)
 	
+	var array_found_collectibles:Array[int]
+	for i in array_collectibles.size():
+		if array_collectibles[i].unlocked:
+			array_found_collectibles.append(1)
+		elif not array_collectibles[i].unlocked:
+			array_found_collectibles.append(0)
+	
 	var data_dictionary:Dictionary={
 		"array_unlocked_achievements":array_unlocked_achievements,
+		"array_found_collectibles":array_found_collectibles,
 		"enemies_killed":
 			{
 				"rats":rats_killed_total,
@@ -325,7 +352,9 @@ func create_save_data():
 			},
 		
 		"gameStarted":gameStarted,
-		"new_achievement":new_achievement
+		"new_achievement":new_achievement,
+		"highest_score":highest_score,
+		"player_display_name":player_display_name
 		
 	}
 	return data_dictionary
@@ -339,8 +368,10 @@ func load_from_file():
 		print("\n **********************\n Tenemos data nuevaaaao algo. \n "+str(loaded_data)+"\n")
 		
 		var array_unlocked_achievements:Array
+		var array_found_collectibles
 		if loaded_data !=null:
 			array_unlocked_achievements=loaded_data.array_unlocked_achievements
+			array_found_collectibles=loaded_data.array_found_collectibles
 		
 			rats_killed_total=loaded_data.enemies_killed.rats
 			bats_killed_total=loaded_data.enemies_killed.bats
@@ -365,6 +396,9 @@ func load_from_file():
 			
 			new_achievement=loaded_data.new_achievement
 			
+			highest_score=loaded_data.highest_score
+			player_display_name=loaded_data.player_display_name
+			
 			if array_unlocked_achievements!=null:
 				for i in array_unlocked_achievements.size():
 					if array_unlocked_achievements[i]==0:
@@ -372,6 +406,15 @@ func load_from_file():
 					elif array_unlocked_achievements[i]==1:
 						array_achievements[i].unlocked=true
 				
+			if array_found_collectibles.size()>0:
+				for i in array_found_collectibles.size():
+					if array_found_collectibles[i]==0:
+						array_collectibles[i].unlocked=false
+					elif array_found_collectibles[i]==1:
+						array_collectibles[i].unlocked=true
+				
+			
+			
 		file.close()
 		
 	else:
@@ -505,6 +548,15 @@ func delete_save_file():
 func asked_for_statistics_dictionary():
 	SignalBus.give_statistics_dictionary.emit(create_save_data()) 
 
+
+func asked_for_collectibles_array():
+	var array:Array[Collectible]
+	for collectible in array_collectibles:
+		if not collectible.unlocked:
+			array.append(collectible)
+
+	SignalBus.send_collectibles.emit(array)
+
 func return_stats():
 	var damage_stats:Array[float]
 	damage_stats.append(dagger_damage_round)
@@ -537,16 +589,18 @@ func add_up_score() ->float :
 	final_score+=boss_killed_round*400
 	final_score-=player_hp_lost/2
 	
-	print("\n\n Puntuacion final de la partida!! : "+str(final_score)+"\n\n" )
+	print("\n\n Puntuacion final de la partida!! : "+str(final_score))
 	
 	return final_score
 
 func game_ended():
-	last_game_score=add_up_score()
-	if last_game_score>highest_score:
-		highest_score=last_game_score
-		save_score_to_firebase()
-	save_game_data_to_firebase()
+	if not in_main_menu:
+		last_game_score=add_up_score()
+		print("OTravez puntuacionfinalpartida pero ahora mejor :  "+str(last_game_score)+"\n\n" )
+		if last_game_score>highest_score:
+			highest_score=last_game_score
+			save_score_to_firebase()
+		save_game_data_to_firebase()
 
 
 
@@ -568,7 +622,8 @@ func game_ended():
 """
 
 
-
+func change_player_display_name(new_name:String):
+	player_display_name=new_name
 
 
 
@@ -577,23 +632,26 @@ func game_ended():
 
 func save_score_to_firebase():
 	print(" \n *************************************************\n*******************************")
+	print(" \n *************************************************\n*******************************")
 	print("PRocedemos a guardar los puntos")
 	var auth=Firebase.Auth.auth
 	var player_name:=""
 	if auth.localid:
-		print("Sesion de usuario comprobada")
+#		print("Sesion de usuario comprobada")
 		var collection:FirestoreCollection=Firebase.Firestore.collection(collection_ranking_id)
 		
-		print("\n\n A continuacion la coleccion enteera a ver que tiene: ")
-		print(collection)
-		print("ahora los trozos: "+str(collection._documents))
-		print("Ahora el nombre: "+str(collection.collection_name))
-		print("Ahora el auth: "+str(collection.auth))
-		print("\n")
+#		print("\n\n A continuacion la coleccion enteera a ver que tiene: ")
+#		print(collection)
+#		print("ahora los trozos: "+str(collection._documents))
+#		print("Ahora el nombre: "+str(collection.collection_name))
+#		print("Ahora el auth: "+str(collection.auth))
+#		print("\n")
 		
 		if player_display_name=="":
 			player_name="Anónimo"
-			print(" Le ponemos nuevo nombre al chorbo: "+player_name)
+#			print(" Le ponemos nuevo nombre al chorbo: "+player_name)
+		else:
+			player_name=player_display_name
 		
 		var data:={
 			"player_name":player_name,
@@ -601,35 +659,36 @@ func save_score_to_firebase():
 		}
 		
 		var document
-		print("Tenemos un localid: "+str(auth.localid))
+#		print("    ++Score +++  Tenemos un localid: "+str(auth.localid))
 		var document_exist
 		document_exist=await collection.get_doc(auth.localid)
-		print("Tenemoss un documento que existe tambien: "+str(document_exist))
+#		print("    ++Score +++  TTenemoss un documento que existe tambien: "+str(document_exist))
 		if document_exist==null:
-			print("No existe el documento asiq lo creamos")
+#			print("    ++Score +++  TNo existe el documento asiq lo creamos")
 			document=await collection.add(auth.localid,data)
-			print("Este es el peaso documento que envio: "+str(document))
+#			print("    ++Score +++  TEste es el peaso documento que envio: "+str(document))
 		else:
-			print("\nYa existe el documento, no hago nada")
+#			print("\n    ++Score +++  TYa existe el documento, no hago nada")
 			var document_to_update=await collection.get_doc(auth.localid)
-			print(" a ver ese documento que leo: ")
-			print(document_to_update)
+#			print("     ++Score +++  Ta ver ese documento que leo: ")
+#			print(document_to_update)
 			var db_score=document_to_update.document.score.doubleValue  # .documeent esdonde se guarda el data como tal.
-			if highest_score<db_score:
-				print("score viejo: "+str(db_score))
+#			print("\n     ++Score +++  TEste es el score nuevo y el viejo: "+str(highest_score)   +"    ----  "   + str(db_score))
+			if highest_score>db_score: #
+#				print("    ++Score +++  Tscore viejo: "+str(db_score))
 				document_to_update.add_or_update_field("score",highest_score)
-				print("score nuevo: "+str(highest_score))
+#				print("    ++Score +++  Tscore nuevo: "+str(highest_score))
 			
 			if player_display_name!="":
 				document_to_update.add_or_update_field("player_name",player_display_name)
-			print("\n despuesde cambio:")
-			print(document_to_update)
+#			print("\n     ++Score +++  Tdespuesde cambio:")
+#			print(document_to_update)
 			
 			var new_document= await collection.update(document_to_update)
-			print(" \nEldocumento ya actualizado en la BD : "+str(new_document))
+			print(" \n    ++Score +++  TEldocumento ya actualizado en la BD : "+str(new_document))
 			
 	else:
-		print("No hay una sesion de usuario.")
+		print("    ++Score +++  TNo hay una sesion de usuario.")
 
 
 
@@ -641,28 +700,41 @@ func save_game_data_to_firebase():
 	var auth=Firebase.Auth.auth
 	if auth.localid:
 		print("Sesion de usuario comprobada")
-		var collection:FirestoreCollection=Firebase.Firestore.collection(auth.localid)
+		var collection:FirestoreCollection=Firebase.Firestore.collection(str(auth.localid))
 		print("\n\n A continuacion la coleccion enteera a ver que tiene: ")
 		print(collection)
-		print("ahora los trozos: "+str(collection._documents))
+#		print("ahora los trozos: "+str(collection._documents))
 		print("Ahora el nombre: "+str(collection.collection_name))
-		print("Ahora el auth: "+str(collection.auth))
+#		print("Ahora el auth: "+str(collection.auth))
 		print("\n")
 		
+		var game_type:String
+		if SignalBus.game_type=="EXTRINSICAL":
+			game_type="EXTRINSICAL"
+		else:
+			game_type="INTRINSECAL"
 
 		var data:={
+			"game_starded":Time.get_datetime_string_from_datetime_dict(time_starded_game,true),
 			"game_duration":round_seconds_survived,
-			"score":last_game_score
+			"score":last_game_score,
+			"game_type":game_type
 		}
 		
 		var query: FirestoreQuery = FirestoreQuery.new()
-		query.from(auth.localid)
+		print("+++ Creo query")
+		query.from(str(auth.localid))
+		print("Le digo donde mirar: "+str(auth.localid))
+#		query.where("game_duration", FirestoreQuery.OPERATOR.GREATER_THAN,0)
+		print("Le digo el where y ahora espero los resultados")
 		var results = await Firebase.Firestore.query(query)
-		print("EL UQERY LO HACEE PERFE")
+#		print("EL UQERY LO HACEE PERFE:   "+str(results))
 
 		var doc_name="game"+str(results.size())
+		print("-*-*-*-*-*-*-*-*  nombredoc: "+doc_name)
+		print("El tamaño de los resultados:                                  "+str(results.size()))
+		print("EL data con sus cosas:        "+str(data))
 		var document=await collection.add(doc_name,data)
-		print("LOAÑADO SI HE LLEGADO AQUI")
 		print("Este es el peaso documento que envio: "+str(document))
 	
 	else:

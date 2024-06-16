@@ -1,0 +1,108 @@
+[gd_scene load_steps=10 format=3 uid="uid://di7mcy15hq0ir"]
+
+[ext_resource type="PackedScene" uid="uid://bmwu1ltixvb25" path="res://Escenas/UI/Elementos/colection_collectible_button.tscn" id="1_5cruk"]
+[ext_resource type="Resource" uid="uid://cgiq4dojmsie7" path="res://Collectibles/CelulasPadre.tres" id="2_lxhwn"]
+[ext_resource type="Resource" uid="uid://c5c2qpy4hrfig" path="res://Collectibles/Flecha.tres" id="3_727d1"]
+[ext_resource type="Resource" uid="uid://crd88fy03aqmt" path="res://Collectibles/LlaveCiudad.tres" id="4_jpqll"]
+[ext_resource type="Resource" uid="uid://cwuyf6u23ax6r" path="res://Collectibles/Log.tres" id="5_g2o32"]
+[ext_resource type="Resource" uid="uid://clc18sh8u8wq1" path="res://Collectibles/Moneda.tres" id="6_1jfk4"]
+[ext_resource type="Resource" uid="uid://csdn06jay30n" path="res://Collectibles/MuñecoNieve.tres" id="7_fuyen"]
+[ext_resource type="Resource" uid="uid://1yjib7wvu7ol" path="res://Collectibles/Pala.tres" id="8_210m1"]
+[ext_resource type="Resource" uid="uid://0hnuiwt587qs" path="res://Collectibles/Yunque.tres" id="9_aedo6"]
+
+[node name="PanelCollectibles" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 8.0
+offset_right = 928.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 20
+text = "Nombre logro"
+autowrap_mode = 2
+
+[node name="LabelDescription" type="Label" parent="."]
+layout_mode = 0
+offset_top = 39.0
+offset_right = 1017.0
+offset_bottom = 128.0
+text = "Descripción"
+autowrap_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 64.0
+offset_right = 1040.0
+offset_bottom = 188.0
+
+[node name="Button" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 144.0
+offset_right = 64.0
+offset_bottom = 168.0
+collectible_holded = ExtResource("2_lxhwn")
+
+[node name="Button2" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 144.0
+offset_right = 336.0
+offset_bottom = 168.0
+collectible_holded = ExtResource("3_727d1")
+
+[node name="Button3" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 144.0
+offset_right = 608.0
+offset_bottom = 168.0
+collectible_holded = ExtResource("4_jpqll")
+
+[node name="Button4" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 144.0
+offset_right = 880.0
+offset_bottom = 168.0
+collectible_holded = ExtResource("5_g2o32")
+
+[node name="Button5" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 368.0
+offset_right = 64.0
+offset_bottom = 392.0
+collectible_holded = ExtResource("6_1jfk4")
+
+[node name="Button6" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 312.0
+offset_top = 368.0
+offset_right = 336.0
+offset_bottom = 392.0
+collectible_holded = ExtResource("7_fuyen")
+
+[node name="Button7" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 584.0
+offset_top = 368.0
+offset_right = 608.0
+offset_bottom = 392.0
+collectible_holded = ExtResource("8_210m1")
+
+[node name="Button8" parent="." instance=ExtResource("1_5cruk")]
+layout_mode = 0
+offset_left = 856.0
+offset_top = 368.0
+offset_right = 880.0
+offset_bottom = 392.0
+collectible_holded = ExtResource("9_aedo6")

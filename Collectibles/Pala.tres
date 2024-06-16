@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Collectible" load_steps=3 format=3 uid="uid://1yjib7wvu7ol"]
+
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_xyulf"]
+[ext_resource type="Texture2D" uid="uid://deohpa2am450p" path="res://Arte/colectibles/Shovel.png" id="2_t8h7a"]
+
+[resource]
+script = ExtResource("1_xyulf")
+name = "La pala de Roberto"
+description = "El mejor paleador que ha visto nunca el reino. Ahora está en un lugar mejor.
+Se fue a Benidorm justo antes de la invasión a perseguir su sueño de convertirse en caballero. Es mi obligación mandarsela por burro mensajero. "
+sprite = ExtResource("2_t8h7a")
+unlocked = false

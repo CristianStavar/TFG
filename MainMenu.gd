@@ -46,6 +46,9 @@ var save_file_login:="user://saveLogin.dat"
 @onready var back_to_menu_from_ranking:=$PanelRanking/ButtonBackToMenu
 
 
+@onready var button_change_name:=$PanelRanking/ButtonChangeName
+@onready var line_change_name:=$PanelRanking/LineEditChangeName
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.connect("back_to_menu",back_to_menu)
@@ -59,6 +62,9 @@ func _ready():
 	Firebase.Auth.signup_succeeded.connect(on_signup_done)
 	Firebase.Auth.login_failed.connect(on_login_failed)
 	Firebase.Auth.signup_failed.connect(on_signup_failed)
+	
+	button_change_name.connect("pressed",change_player_name_pressed)
+	
 	var auth=Firebase.Auth.auth
 #	print("\nEsto es el authsea loq  sea: "+str(auth))
 	if auth.size()!=0:
@@ -87,7 +93,8 @@ func start_game():
 	scene_instance.set_name("MainGame")
 	var root=get_node("/root")
 	root.add_child(scene_instance)
-	queue_free()
+	self.visible=false
+#	queue_free()
 	
 	
 
@@ -214,19 +221,22 @@ func _on_line_edit_password_text_changed(new_text):
 
 
 
-
-
-
-
-
-
-
+func clean_ranking():
+	for entry in ranking_container.get_children():
+		entry.queue_free()
 
 
 
 func _on_button_ranking_pressed():
-	var auth=Firebase.Auth.auth
+	update_ranking()
 	
+
+
+func update_ranking():
+	var auth=Firebase.Auth.auth
+	clean_ranking()
+	
+#	save_score_to_firebase()
 	
 	ranking_panel.visible=true
 	
@@ -257,9 +267,9 @@ func _on_button_ranking_pressed():
 	
 	for entry in my_items:
 		var scene_entry=ranking_entry.instantiate()
-		print("existe scene entry: "+str(scene_entry))
-		print("El jugador: "+str(entry.document.player_name.stringValue))
-		print("La puntuacion: "+str(entry.document.score.doubleValue))
+#		print("existe scene entry: "+str(scene_entry))
+#		print("El jugador: "+str(entry.document.player_name.stringValue))
+#		print("La puntuacion: "+str(entry.document.score.doubleValue))
 		ranking_container.add_child(scene_entry)
 		scene_entry.update_labels(entry.document.player_name.stringValue,entry.document.score.doubleValue)
 		if auth.localid==entry.doc_name:
@@ -267,4 +277,50 @@ func _on_button_ranking_pressed():
 		
 	
 
+
+
+
+
+func _on_button_logout_pressed():
+	Firebase.Auth.logout()
+
+
+
+
+func change_player_name_pressed():
+	var new_player_name:String=line_change_name.text
+	print(" \n *************************************************\n*******************************")
+	print(" \n *************************************************\n*******************************")
+	print("PRocedemos a guardar los puntos")
+	var auth=Firebase.Auth.auth
+
+	if auth.localid:
+		var collection:FirestoreCollection=Firebase.Firestore.collection(collection_ranking_id)
+		
+		if new_player_name=="":
+			print("no hacemos nada")
+		
+
+		else:
+			var document
+
+			var document_exist
+			document_exist=await collection.get_doc(auth.localid)
+	#		print("    ++Score +++  TTenemoss un documento que existe tambien: "+str(document_exist))
+			if document_exist==null:
+				SignalBus.change_player_name.emit(new_player_name)
+
+			else:
+				SignalBus.change_player_name.emit(new_player_name)
+				var document_to_update=await collection.get_doc(auth.localid)
+				document_to_update.add_or_update_field("player_name",new_player_name)
+
+				var new_document= await collection.update(document_to_update)
+				print(" \n    ++Score +++  TEldocumento ya actualizado en la BD : "+str(new_document))
+			
+			await get_tree().create_timer(.5).timeout
+			update_ranking()
+				
+	else:
+		print("    ++Score +++  TNo hay una sesion de usuario.")
 

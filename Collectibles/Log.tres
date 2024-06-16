@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Collectible" load_steps=3 format=3 uid="uid://cwuyf6u23ax6r"]
+
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_b5gcw"]
+[ext_resource type="Texture2D" uid="uid://cm4u17miokj4l" path="res://Arte/colectibles/Log.png" id="2_id8kk"]
+
+[resource]
+script = ExtResource("1_b5gcw")
+name = "¡¡Un tronco!!"
+description = "Diría que es un tronco norma y corriente pero uf, lo has visto bien? Es el mejor tronco dle mundo, le haré un altar como se merece cuando acabe con los malvados magos del bosque."
+sprite = ExtResource("2_id8kk")
+unlocked = false

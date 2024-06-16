@@ -4,10 +4,12 @@ extends Node2D
 
 
 func _on_area_2d_body_entered(body):
-	if body.is_in_group("Player"):
-		body.heal_player(health_given)		
+	if body.is_in_group("Player"):	
+		body.heal_player(health_given)	
 		SignalBus.potion_taken.emit()
 		queue_free()
+
+
 
 
 func change_coordinates(position:Vector2):

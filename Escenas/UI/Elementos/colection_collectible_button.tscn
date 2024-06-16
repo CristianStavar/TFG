@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmwu1ltixvb25"]
+
+[ext_resource type="Texture2D" uid="uid://b3fupnbpxa83m" path="res://Arte/cursor.png" id="1_xxlp7"]
+[ext_resource type="Script" path="res://Escenas/UI/Elementos/colection_collectible_button.gd" id="2_6sjk2"]
+
+[node name="Button" type="Button"]
+offset_right = 24.0
+offset_bottom = 24.0
+scale = Vector2(6, 6)
+icon = ExtResource("1_xxlp7")
+icon_alignment = 1
+vertical_icon_alignment = 0
+script = ExtResource("2_6sjk2")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

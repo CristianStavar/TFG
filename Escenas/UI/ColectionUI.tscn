@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://drq8v8a5opngh"]
+[gd_scene load_steps=37 format=3 uid="uid://drq8v8a5opngh"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/CollectionsManager.gd" id="1_qma4b"]
 [ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="2_q0cyn"]
@@ -35,6 +35,7 @@
 [ext_resource type="Resource" uid="uid://cg18aec4g8biy" path="res://Achievements/barrels_destroyed_5.tres" id="27_r0sqb"]
 [ext_resource type="Resource" uid="uid://bicwt7hde3a5i" path="res://Achievements/barrels_destroyed_20.tres" id="28_fbpuy"]
 [ext_resource type="Resource" uid="uid://bypfyqp6m28cg" path="res://Achievements/only_dagger.tres" id="30_ixh7r"]
+[ext_resource type="PackedScene" uid="uid://di7mcy15hq0ir" path="res://Escenas/UI/panel_collectibles.tscn" id="36_1mh7y"]
 
 [node name="ColectionUI" type="Control"]
 layout_mode = 3
@@ -82,14 +83,15 @@ layout_mode = 0
 offset_left = 66.0
 offset_right = 938.0
 offset_bottom = 26.0
+theme_override_font_sizes/font_size = 20
 text = "Nombre logro"
 autowrap_mode = 2
 
 [node name="LabelDescription" type="Label" parent="TabContainer/Logros"]
 layout_mode = 0
-offset_top = 23.0
+offset_top = 25.0
 offset_right = 1028.0
-offset_bottom = 91.0
+offset_bottom = 93.0
 text = "Descripción"
 autowrap_mode = 2
 
@@ -521,6 +523,10 @@ text = "Proyectiles"
 anchors_preset = 0
 offset_right = 1017.0
 offset_bottom = 679.0
+
+[node name="Coleccionables" parent="TabContainer" instance=ExtResource("36_1mh7y")]
+visible = false
+layout_mode = 2
 
 [connection signal="pressed" from="Background/ButtonBackToMenu" to="." method="_on_button_back_to_menu_pressed"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]

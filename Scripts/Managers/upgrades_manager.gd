@@ -40,24 +40,24 @@ func _ready():
 func fill_available_card_attacks(): 
 	for card_attack in all_card_attacks:
 		if card_attack.unlocked and not card_attack.gotten:
-			print("Ataque: "+str(card_attack.name))
+#			print("Ataque: "+str(card_attack.name))
 			available_card_attacks.append(card_attack)
-	print("CARTAS ATAQUE:")
-	print(available_card_attacks)
+#	print("CARTAS ATAQUE:")
+#	print(available_card_attacks)
 
 
 #Añadimos a la lista de mejoras disponibles las cartas de mejora de ataques conseguidos.
 func fill_available_card_upgrades():
 	for card_upgrade in all_card_upgrades:
 		if card_upgrade.unlocked and not card_upgrade.gotten:
-			print("Mejora: "+str(card_upgrade.name))
+#			print("Mejora: "+str(card_upgrade.name))
 			available_card_upgrades.append(card_upgrade)
 
 
 
 
 func unlock_card(selected_card):
-	print(" \nDESBLOQUEOO   "+str(selected_card.name))
+#	print(" \nDESBLOQUEOO   "+str(selected_card.name))
 	if selected_card.card_type=="Upgrade":
 		for card in all_card_upgrades:
 			if card == selected_card:
@@ -131,10 +131,10 @@ func choose_available_cards():
 
 
 func choose_attack_card():
-	print("\n**********  ATAQUES DISPONIBLES"+str(available_card_attacks))
+#	print("\n**********  ATAQUES DISPONIBLES"+str(available_card_attacks))
 	if available_card_attacks.size()>0:
 		var chosen_attack:CardSkill=available_card_attacks.pick_random()
-		print(" ELIGO UN ATAQUEEEE ++++++++++++++++++++++++++++++++"+str(chosen_attack.name))
+#		print(" ELIGO UN ATAQUEEEE ++++++++++++++++++++++++++++++++"+str(chosen_attack.name))
 		chosen_cards.append(chosen_attack)
 		var index=available_card_attacks.find(chosen_attack)
 		available_card_attacks.remove_at(index)
@@ -144,7 +144,7 @@ func choose_attack_card():
 
 func choose_upgrade_card():
 	var chosen_upgrade:CardSkill=available_card_upgrades.pick_random()
-	print(" ELIGO UNA MEJORAAAA ------------------------------------"+str(chosen_upgrade.name))
+#	print(" ELIGO UNA MEJORAAAA ------------------------------------"+str(chosen_upgrade.name))
 	chosen_cards.append(chosen_upgrade)
 	var index=available_card_upgrades.find(chosen_upgrade)
 	available_card_upgrades.remove_at(index)
@@ -154,7 +154,7 @@ func choose_upgrade_card():
 
 
 func show_chosen_cards():
-	print("\n ESTAS SON LAS CARTAS ELEGIDAS:\n"+str(chosen_cards))
+#	print("\n ESTAS SON LAS CARTAS ELEGIDAS:\n"+str(chosen_cards))
 	var index:=0
 	for card in choose_cards_ui_array:
 		card.fill_card_information(chosen_cards[index])

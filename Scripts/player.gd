@@ -130,6 +130,9 @@ var in_touchscreen:=false
 
 @onready var aim_aid:=$AimPoint
 
+
+var player_alive:=true
+
 func _ready():
 	SignalBus.connect("card_chosen",skill_card_chosen)
 	SignalBus.connect("ask_for_only_dagger",send_only_dagger)
@@ -539,11 +542,14 @@ func regenerate():
 
 
 func take_damage(value:float):
-	health-=value
+	if  player_alive:
+		health-=value
+		SignalBus.player_take_damage.emit(value)
 #	game_manager.update_health(health)
 	health_bar.value=health
-	SignalBus.player_take_damage.emit(value)
+	
 	if health <=0:
+		player_alive=false
 		health=0
 		player_died()
 

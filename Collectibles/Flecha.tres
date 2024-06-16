@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Collectible" load_steps=3 format=3 uid="uid://c5c2qpy4hrfig"]
+
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_q0xer"]
+[ext_resource type="Texture2D" uid="uid://b76qpu54g1mjg" path="res://Arte/colectibles/Arrow.png" id="2_lcbrr"]
+
+[resource]
+script = ExtResource("1_q0xer")
+name = "Mi primera flecha"
+description = "Es mi flecha!! Lleva mi nombre grabado en la punta yy tiene las plumas torcidas! Mi bella primera creación como hierromante.
+Pagarán por habermela robado!"
+sprite = ExtResource("2_lcbrr")
+unlocked = false

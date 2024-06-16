@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dkabrjh8phksx"]
+[gd_scene load_steps=50 format=3 uid="uid://dkabrjh8phksx"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_it0pd"]
 [ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="2_6yc1x"]
@@ -36,8 +36,16 @@
 [ext_resource type="Resource" uid="uid://bicwt7hde3a5i" path="res://Achievements/barrels_destroyed_20.tres" id="33_ab4cw"]
 [ext_resource type="AudioStream" uid="uid://wdu1k3iehkda" path="res://Sonidos/Musica/IntroSong.ogg" id="34_p5cha"]
 [ext_resource type="Resource" uid="uid://bypfyqp6m28cg" path="res://Achievements/only_dagger.tres" id="34_t613t"]
+[ext_resource type="Resource" uid="uid://cgiq4dojmsie7" path="res://Collectibles/CelulasPadre.tres" id="36_amr4d"]
 [ext_resource type="Texture2D" uid="uid://b66olnd4qtkud" path="res://Arte/UI/panelInset_beigeLight.png" id="36_d30p0"]
+[ext_resource type="Resource" uid="uid://c5c2qpy4hrfig" path="res://Collectibles/Flecha.tres" id="37_dennb"]
 [ext_resource type="PackedScene" uid="uid://mgkqhkf72c6a" path="res://Escenas/UI/panel_ranking.tscn" id="37_tqxrw"]
+[ext_resource type="Resource" uid="uid://crd88fy03aqmt" path="res://Collectibles/LlaveCiudad.tres" id="38_5ivot"]
+[ext_resource type="Resource" uid="uid://cwuyf6u23ax6r" path="res://Collectibles/Log.tres" id="39_0hjlv"]
+[ext_resource type="Resource" uid="uid://clc18sh8u8wq1" path="res://Collectibles/Moneda.tres" id="40_rv1hk"]
+[ext_resource type="Resource" uid="uid://csdn06jay30n" path="res://Collectibles/MuñecoNieve.tres" id="41_l0ovl"]
+[ext_resource type="Resource" uid="uid://1yjib7wvu7ol" path="res://Collectibles/Pala.tres" id="42_g7e2o"]
+[ext_resource type="Resource" uid="uid://0hnuiwt587qs" path="res://Collectibles/Yunque.tres" id="43_ul0ir"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gm30x"]
 texture = ExtResource("7_xjeq0")
@@ -50,6 +58,7 @@ texture = ExtResource("36_d30p0")
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
+top_level = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -161,6 +170,8 @@ text = "Cargando Partida"
 [node name="StatisticsManager" type="Node" parent="."]
 script = ExtResource("5_7o8eg")
 array_achievements = Array[Resource("res://Scripts/achievement.gd")]([ExtResource("8_pt2q1"), ExtResource("9_hdn8s"), ExtResource("10_lg81b"), ExtResource("11_psmcg"), ExtResource("12_6ixsn"), ExtResource("13_185bm"), ExtResource("14_vqbkh"), ExtResource("15_viafb"), ExtResource("16_gkqeu"), ExtResource("17_d158v"), ExtResource("18_mdyqv"), ExtResource("19_sx4p5"), ExtResource("20_c5tes"), ExtResource("21_xvn76"), ExtResource("22_b8h1i"), ExtResource("23_2j2hy"), ExtResource("24_027n6"), ExtResource("25_j4ibl"), ExtResource("26_pf5iv"), ExtResource("27_gshr2"), ExtResource("28_c7tc3"), ExtResource("29_vynvf"), ExtResource("30_qo2ty"), ExtResource("31_dc4bk"), ExtResource("32_3wxwt"), ExtResource("33_ab4cw"), ExtResource("34_t613t")])
+array_collectibles = Array[Resource("res://Scripts/collectible.gd")]([ExtResource("36_amr4d"), ExtResource("37_dennb"), ExtResource("38_5ivot"), ExtResource("39_0hjlv"), ExtResource("40_rv1hk"), ExtResource("41_l0ovl"), ExtResource("42_g7e2o"), ExtResource("43_ul0ir")])
+in_main_menu = true
 
 [node name="PanelNewAchievements" type="Panel" parent="."]
 visible = false
@@ -288,6 +299,14 @@ theme_override_font_sizes/font_size = 20
 text = "Una vez creada una cuenta correctamente se guardaran los datos de acceso para que en futuras ocasiones solo tengas que pulsar: Iniciar sesion"
 autowrap_mode = 2
 
+[node name="ButtonLogout" type="Button" parent="."]
+layout_mode = 0
+offset_left = 987.0
+offset_top = 64.0
+offset_right = 1066.0
+offset_bottom = 95.0
+text = "Cerrar sesión"
+
 [connection signal="pressed" from="MainPanel/Button" to="." method="show_options_UI"]
 [connection signal="pressed" from="MainPanel/Button2" to="." method="start_game"]
 [connection signal="pressed" from="MainPanel/ButtonRanking" to="." method="_on_button_ranking_pressed"]
@@ -296,3 +315,4 @@ autowrap_mode = 2
 [connection signal="text_changed" from="PanelLogin/LineEditPassword" to="." method="_on_line_edit_password_text_changed"]
 [connection signal="pressed" from="PanelLogin/ButtonLogin" to="." method="_on_button_login_pressed"]
 [connection signal="pressed" from="PanelLogin/ButtonSignup" to="." method="_on_button_signup_pressed"]
+[connection signal="pressed" from="ButtonLogout" to="." method="_on_button_logout_pressed"]

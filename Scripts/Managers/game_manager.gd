@@ -91,14 +91,14 @@ func _ready():
 	statistics_manager.load_from_file()
 	
 	
-	Firebase.Auth.login_with_email_and_password("cuenta1@test.po","123456")
+#	Firebase.Auth.login_with_email_and_password("cuenta1@test.po","123456")
 	
 #	update_player_ui()
 
 
 
 
-
+@onready var main_menu_panel:=$/root/MainMenu
 
 
 
@@ -233,10 +233,11 @@ func go_to_main_menu_button_pressed():
 
 
 func go_to_main_menu():
-#	get_tree().paused = false
-#	pause_menu_ui.visible=false
-#	self.visible=false
-	
+	get_tree().paused = false
+	pause_menu_ui.visible=false
+	self.visible=false
+
+
 	SignalBus.time_passed.emit(time_passed)
 	SignalBus.game_ended.emit()
 	statistics_manager.check_new_achievements()
@@ -249,6 +250,12 @@ func go_to_main_menu():
 	get_tree().paused = false
 	game_is_paused=false
 	queue_free()
+
+#
+#	print("pulso elboton majopa iral menu principal.")
+#	main_menu_panel.visible=true
+#	boss_song.stop()
+#	bg_song.stop()
 
 	
 

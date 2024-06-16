@@ -6,8 +6,11 @@ var player_in_range:=false
 
 @export var bullet_speed:=180
 
+var collectibles_to_drop:Array[Collectible]
+@export var collectible_item:PackedScene
 
 func _ready():
+	SignalBus.connect("send_collectibles",fill_collectibles_array)
 	agent=$NavigationAgent2D
 	sprite=$Sprite
 	timer=$Timer
@@ -18,6 +21,8 @@ func _ready():
 	target=gameManager.player
 	add_to_group("Enemy")
 	add_to_group("Boss")
+	await get_tree().create_timer(1).timeout
+	
 	
 
 
@@ -33,6 +38,44 @@ func _physics_process(_delta):
 		var direction=target.position.direction_to(self.position)
 		velocity=direction*move_speed*1.2 # Velocity viene de CharacterBody2D
 		move_and_slide()	#PAra aplicar la velocity al characterBody2D
+
+
+
+
+func fill_collectibles_array(collectibles:Array[Collectible]):
+	collectibles_to_drop=collectibles
+
+
+
+func drop_collectible():
+	if collectibles_to_drop.size()>0:
+		var collectible=collectible_item.instantiate()
+		collectible.set_colectible(collectibles_to_drop.pick_random())
+		collectible.update_info()
+		
+		get_parent().add_child(collectible)
+		collectible.global_position=self.global_position
+		
+
+
+
+func substract_health(value):
+	audio_hit.play()
+	health-=value
+#	print("Me hicieron pupa: "+str(value))
+	sprite.modulate=Color.DARK_RED
+	await get_tree().create_timer(0.1).timeout
+	sprite.modulate=Color.WHITE
+
+	if health<=0:
+#		print("he muerto: - "+str(self))
+		spawn_experience_token()
+		drop_collectible()
+		SignalBus.enemy_killed.emit(enemy_name)
+		queue_free()
+		
+
+
 
 
 

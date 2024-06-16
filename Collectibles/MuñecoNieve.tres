@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Collectible" load_steps=3 format=3 uid="uid://csdn06jay30n"]
+
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_u2cak"]
+[ext_resource type="Texture2D" uid="uid://br4ebp4umkchw" path="res://Arte/colectibles/SnowMan.png" id="2_jmkth"]
+
+[resource]
+script = ExtResource("1_u2cak")
+name = "Un muñeco inquietante"
+description = "Es verano y el muñeco está intacto. No da buena espina. Lo mismo no tendría que haberlo cogido. Ahora solo queda tener esperanza de que no me coma mientras duermo."
+sprite = ExtResource("2_jmkth")
+unlocked = false

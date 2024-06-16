@@ -1,4 +1,4 @@
-[gd_scene load_steps=68 format=3 uid="uid://c1ajgh0vacds8"]
+[gd_scene load_steps=77 format=3 uid="uid://c1ajgh0vacds8"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_26bor"]
 [ext_resource type="Texture2D" uid="uid://1gqahfelhqqa" path="res://icon.svg" id="2_clwek"]
@@ -67,6 +67,15 @@
 [ext_resource type="AudioStream" uid="uid://3sc70rlbfwf" path="res://Sonidos/Musica/GameSong.ogg" id="65_pf18o"]
 [ext_resource type="AudioStream" uid="uid://cenn0kcu5610u" path="res://Sonidos/Musica/BossSong.ogg" id="66_dr7i6"]
 [ext_resource type="AudioStream" uid="uid://cn3mcy0sy1bo8" path="res://Sonidos/gameover4.ogg" id="67_105kh"]
+[ext_resource type="PackedScene" uid="uid://bwv5jj37ggwj1" path="res://Escenas/Items/collectible_item.tscn" id="68_t4yak"]
+[ext_resource type="Resource" uid="uid://cgiq4dojmsie7" path="res://Collectibles/CelulasPadre.tres" id="69_1olp6"]
+[ext_resource type="Resource" uid="uid://c5c2qpy4hrfig" path="res://Collectibles/Flecha.tres" id="70_pmd1i"]
+[ext_resource type="Resource" uid="uid://csdn06jay30n" path="res://Collectibles/MuñecoNieve.tres" id="70_qgu12"]
+[ext_resource type="Resource" uid="uid://crd88fy03aqmt" path="res://Collectibles/LlaveCiudad.tres" id="71_hqen6"]
+[ext_resource type="Resource" uid="uid://cwuyf6u23ax6r" path="res://Collectibles/Log.tres" id="72_hevrk"]
+[ext_resource type="Resource" uid="uid://clc18sh8u8wq1" path="res://Collectibles/Moneda.tres" id="73_7s020"]
+[ext_resource type="Resource" uid="uid://1yjib7wvu7ol" path="res://Collectibles/Pala.tres" id="74_o7vfa"]
+[ext_resource type="Resource" uid="uid://0hnuiwt587qs" path="res://Collectibles/Yunque.tres" id="75_lmk67"]
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_26bor")
@@ -181,6 +190,7 @@ on_main_menu = false
 process_mode = 3
 script = ExtResource("39_xpau7")
 array_achievements = Array[Resource("res://Scripts/achievement.gd")]([ExtResource("40_ibs67"), ExtResource("41_qnbln"), ExtResource("42_qbavc"), ExtResource("43_3xvoy"), ExtResource("44_ur8a2"), ExtResource("45_4ai3m"), ExtResource("46_21kau"), ExtResource("45_un61j"), ExtResource("48_fvklg"), ExtResource("47_hxykk"), ExtResource("50_f7tm0"), ExtResource("51_euapn"), ExtResource("52_hols1"), ExtResource("53_yp7ie"), ExtResource("54_462lj"), ExtResource("55_ow6w2"), ExtResource("56_kllne"), ExtResource("57_gx3kq"), ExtResource("56_e41rm"), ExtResource("59_pln2n"), ExtResource("60_neky3"), ExtResource("61_k2qfk"), ExtResource("62_idmyy"), ExtResource("63_twe7h"), ExtResource("64_qfdqj"), ExtResource("65_18d2v"), ExtResource("64_5v5em")])
+array_collectibles = Array[Resource("res://Scripts/collectible.gd")]([ExtResource("69_1olp6"), ExtResource("70_pmd1i"), ExtResource("71_hqen6"), ExtResource("72_hevrk"), ExtResource("73_7s020"), ExtResource("70_qgu12"), ExtResource("74_o7vfa"), ExtResource("75_lmk67")])
 
 [node name="Timers" type="Node" parent="."]
 
@@ -212,6 +222,34 @@ process_mode = 3
 stream = ExtResource("67_105kh")
 volume_db = -5.0
 bus = &"Sound"
+
+[node name="Collectible" parent="." instance=ExtResource("68_t4yak")]
+position = Vector2(299, 209)
+item = ExtResource("69_1olp6")
+
+[node name="Collectible2" parent="." instance=ExtResource("68_t4yak")]
+position = Vector2(377, 177)
+item = ExtResource("70_pmd1i")
+
+[node name="Collectible3" parent="." instance=ExtResource("68_t4yak")]
+position = Vector2(409, 253)
+item = ExtResource("71_hqen6")
+
+[node name="Collectible4" parent="." instance=ExtResource("68_t4yak")]
+position = Vector2(229, 179)
+item = ExtResource("72_hevrk")
+
+[node name="Collectible5" parent="." instance=ExtResource("68_t4yak")]
+position = Vector2(349, 273)
+item = ExtResource("73_7s020")
+
+[node name="Collectible6" parent="." instance=ExtResource("68_t4yak")]
+position = Vector2(127, 221)
+item = ExtResource("74_o7vfa")
+
+[node name="Collectible7" parent="." instance=ExtResource("68_t4yak")]
+position = Vector2(295, 139)
+item = ExtResource("75_lmk67")
 
 [connection signal="timeout" from="Timers/TimerShieldUnlock" to="." method="_on_timer_shield_unlock_timeout"]
 [connection signal="timeout" from="Timers/TimerAxeStormUnlock" to="." method="_on_timer_axe_storm_unlock_timeout"]

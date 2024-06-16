@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Collectible" load_steps=3 format=3 uid="uid://0hnuiwt587qs"]
+
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="1_p6x4a"]
+[ext_resource type="Texture2D" uid="uid://ca8phwb1kgm2h" path="res://Arte/colectibles/Anvil.png" id="2_ybqb1"]
+
+[resource]
+script = ExtResource("1_p6x4a")
+name = "Yunque de hierromante"
+description = "Aqui nace la magia de cualquier hierromante. Aunque por desgracia este lo han desactivado los magos delbosque, solo es un gran trozo de hierro. "
+sprite = ExtResource("2_ybqb1")
+unlocked = false
