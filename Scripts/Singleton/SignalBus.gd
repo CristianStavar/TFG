@@ -62,6 +62,10 @@ signal lock_maxed_card(skill_card)
 #Emited by:  player
 #Received by: upgradesManager
 
+signal card_unlocked_condition(card_name,card_type)
+#Emited by:  player
+#Received by: upgradesManager
+
 signal card_unlocked(skill_card)
 #Emited by:  player
 #Received by: upgradesManager

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_ooo2v")
 name = "Sobrevive 30"
-description = "Consigue sobrevivir treinta minutos. Nada que comentar."
+description = "Nada que comentar."
 sprite = ExtResource("2_dfdjv")
 unlocked = false

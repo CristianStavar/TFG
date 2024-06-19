@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://et14fsi8f1vh"]
 
-[ext_resource type="Texture2D" uid="uid://bfd4gwamujchf" path="res://Arte/Mio/edificio.png" id="1_des1g"]
 [ext_resource type="Script" path="res://Scripts/building.gd" id="1_ieua2"]
+[ext_resource type="Texture2D" uid="uid://cp0srp06w5gbn" path="res://Arte/Mio/building1.png" id="2_owme1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qdulu"]
 size = Vector2(547.554, 727.732)
@@ -14,7 +14,7 @@ script = ExtResource("1_ieua2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.427355, 0.427355)
-texture = ExtResource("1_des1g")
+texture = ExtResource("2_owme1")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 visible = false

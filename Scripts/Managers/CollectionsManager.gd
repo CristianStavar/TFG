@@ -49,6 +49,8 @@ func _ready():
 	await get_tree().create_timer(0.1).timeout
 	add_buttons_to_achievements()
 	ask_for_statistics_dictionary()
+	await get_tree().create_timer(0.1).timeout
+	print("Voy a actualizar los stats collection")
 	update_statistics_UI()
 	
 	update_unlocked_achievements()
@@ -125,7 +127,7 @@ func update_unlocked_achievements():
 	
 
 func update_statistics_UI():
-	print(statistics_dictionary.keys())
+	print("Llaves del dictionary"+str(statistics_dictionary.keys()))
 	label_rats_killed.text="Ratas eliminadas: "+str(statistics_dictionary.enemies_killed.rats)
 	label_bats_killed_total.text="Murcielagos eliminados: "+str(statistics_dictionary.enemies_killed.bats)
 	label_spiders_killed_total.text="Arañas eliminadass: "+str(statistics_dictionary.enemies_killed.spiders)
@@ -149,10 +151,11 @@ func update_statistics_UI():
 
 
 func ask_for_statistics_dictionary():
+	print("Voy a preguntar por el diccionario")
 	SignalBus.ask_for_statistics_dictionary.emit()
 
 func update_statistics_dictionary(new_dictionary):
-	print("He actualizado el dicionario en colecion")
+	print("He actualizado el dicionario en colecion: "+str(new_dictionary))
 	statistics_dictionary=new_dictionary
 
 func _on_button_back_to_menu_pressed():
@@ -166,4 +169,5 @@ func _on_tab_container_tab_changed(tab):
 	if tab==2:
 		print("Si soy yo el DOS")
 		ask_for_statistics_dictionary()
+		await get_tree().create_timer(1).timeout
 		update_statistics_UI()

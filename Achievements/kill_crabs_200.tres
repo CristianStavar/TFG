@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_7eq6e")
-name = "Cangrejero"
+name = "Cangrejista"
 description = "Caza unos cangrejos para la merienda. Con 200 vale."
 sprite = ExtResource("2_7651g")
 unlocked = false

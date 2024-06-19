@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhme138ectpr"]
+
+[ext_resource type="Texture2D" uid="uid://b66olnd4qtkud" path="res://Arte/UI/panelInset_beigeLight.png" id="1_53b4k"]
+[ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="2_3itpw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bg8n1"]
+texture = ExtResource("1_53b4k")
+
+[node name="BossKilledPanel" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 1144.0
+offset_bottom = 640.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_bg8n1")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 56.0
+offset_right = 1104.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "Conseguiste sobreponerte a uno de los magos del bosque pero el trabajo no acaba aqui. Puedes quedarte en la zona para intentar acabar con todas las criaturas que el mago invocó. 
+
+Si lo prefieres puedes volver a tu base y prepararte para el siguiente asalto pero no te olvides el cofre dorado."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonContinue" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 432.0
+offset_right = 407.0
+offset_bottom = 542.0
+theme_override_font_sizes/font_size = 26
+text = "Seguir aguantando 
+oleadas interminables"
+icon = ExtResource("2_3itpw")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonQuit" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 688.0
+offset_top = 432.0
+offset_right = 1023.0
+offset_bottom = 542.0
+theme_override_font_sizes/font_size = 26
+text = "Volver al menú 
+para descansar"
+icon = ExtResource("2_3itpw")
+flat = true
+icon_alignment = 1
+expand_icon = true

@@ -17,6 +17,7 @@ var back_button:=0
 var new_achievement:=false
 @onready var panel_new_achievements = $PanelNewAchievements
 
+@onready var starting_story_panel: Button = $StartingStoryPanel
 
 
 #
@@ -49,12 +50,15 @@ var save_file_login:="user://saveLogin.dat"
 @onready var button_change_name:=$PanelRanking/ButtonChangeName
 @onready var line_change_name:=$PanelRanking/LineEditChangeName
 
+@onready var line_edit_email: LineEdit = $PanelLogin/LineEditEmail
+@onready var line_edit_password: LineEdit = $PanelLogin/LineEditPassword
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalBus.connect("back_to_menu",back_to_menu)
 	statistics_manager.load_from_file()
 	new_achievement=statistics_manager.check_achievements_from_menu()
-	print("Valor de  LOGROOOOOOOOOOOOOOO :    "+str(new_achievement))
 	
 	back_to_menu_from_ranking.connect("pressed",back_to_menu)
 	
@@ -64,6 +68,7 @@ func _ready():
 	Firebase.Auth.signup_failed.connect(on_signup_failed)
 	
 	button_change_name.connect("pressed",change_player_name_pressed)
+	starting_story_panel.connect("pressed",starting_game)
 	
 	var auth=Firebase.Auth.auth
 #	print("\nEsto es el authsea loq  sea: "+str(auth))
@@ -71,21 +76,31 @@ func _ready():
 		panel_login.visible=false
 	fill_login_lines()
 	
-	
-
-	if new_achievement:
-		
+	if new_achievement and SignalBus.game_type=="EXTRINSICAL":
 		panel_new_achievements.visible=true
 		await get_tree().create_timer(10).timeout
 		panel_new_achievements.visible=false
 	
+	if SignalBus.game_type!="EXTRINSICAL":
+		$MainPanel/Button3.visible=false
+		$MainPanel/ButtonRanking.visible=false
+	
 
 
 func start_game():
-	#Cargar escena nivel y mostrarla
-	# Start game leveel
-#	main_panel.visible=false
+	print("Mostrando intro")
+	main_panel.visible=false
+	starting_story_panel.visible=true
+
+
+
+	
+
+
+func starting_game():
+	print("Le dimos a jugar")
 	loading_screen.visible=true
+	starting_story_panel.visible=false
 	statistics_manager.save_to_file()
 	await get_tree().create_timer(0.1).timeout
 	var scene = load("res://Escenas/MainGame.tscn")
@@ -93,10 +108,13 @@ func start_game():
 	scene_instance.set_name("MainGame")
 	var root=get_node("/root")
 	root.add_child(scene_instance)
+	
 	self.visible=false
+	print("Llegamos al juego!")
 #	queue_free()
-	
-	
+
+
+
 
 func show_colection_UI():
 	# Show colection screen
@@ -156,7 +174,6 @@ func save_login_lines():
 		"email":email,
 		"password":password
 	}
-	print("procedemos a guardar los datos de logn: "+str(data))
 
 	file.store_var(data)
 	file.close()
@@ -166,13 +183,25 @@ func save_login_lines():
 
 
 func _on_button_login_pressed():
-	Firebase.Auth.login_with_email_and_password(email,password)
-	label_feedback.text="Conectando"
+	if email!="" and password!="":
+		#Firebase.Auth.login_with_email_and_password(email,password.sha256_text())
+		Firebase.Auth.login_with_email_and_password(email,password)
+		label_feedback.text="Conectando"
+	elif  email=="" and password=="":
+		#Firebase.Auth.login_with_email_and_password(line_edit_email.text,line_edit_password.text.sha256_text())
+		Firebase.Auth.login_with_email_and_password(line_edit_email.text,line_edit_password.text)
+		label_feedback.text="Conectando"
 
 
 func _on_button_signup_pressed():
-	Firebase.Auth.signup_with_email_and_password(email,password)
-	label_feedback.text="Creando cuenta"
+	if email!="" and password!="":
+		#Firebase.Auth.signup_with_email_and_password(email,password.sha256_text())  
+		Firebase.Auth.signup_with_email_and_password(email,password) 
+		label_feedback.text="Creando cuenta"
+	elif  email=="" and password=="":
+		#Firebase.Auth.signup_with_email_and_password(line_edit_email.text,line_edit_password.text.sha256_text())
+		Firebase.Auth.signup_with_email_and_password(line_edit_email.text,line_edit_password.text)
+		label_feedback.text="Creando cuenta"
 
 
 
@@ -197,6 +226,10 @@ func on_login_failed(error_code,response):
 	print(response)
 	if response=="INVALID_LOGIN_CREDENTIALS":
 		label_feedback.text="Error conectando: \nLa combinacion de credenciales no es correcta."
+	elif response=="Error connecting to auth service":
+		label_feedback.text="Error iniciando seesion: %s"%response
+		await get_tree().create_timer(2).timeout
+#		panel_login.visible=false
 	else:
 		label_feedback.text="Error conectando: %s"%response
 
@@ -204,6 +237,10 @@ func on_signup_failed(error_code,response):
 	print(error_code)
 	print(response)
 	label_feedback.text="Error creando cuenta: %s"%response
+	if response=="Error connecting to auth service":
+		label_feedback.text="Error creando cuenta: %s"%response
+		await get_tree().create_timer(2).timeout
+#		panel_login.visible=false
 
 
 
@@ -234,48 +271,44 @@ func _on_button_ranking_pressed():
 
 func update_ranking():
 	var auth=Firebase.Auth.auth
-	clean_ranking()
-	
-#	save_score_to_firebase()
-	
-	ranking_panel.visible=true
-	
-	# create a query
-	var query: FirestoreQuery = FirestoreQuery.new()
-
-	# FROM a collection
-	query.from(collection_ranking_id)
-
-	# WHERE points > 20
-#	query.where("score", FirestoreQuery.OPERATOR.GREATER_THAN, 20)
-
-	# ORDER BY points, from the user with the best score to the latest
-#	query.order_by("player_name", FirestoreQuery.DIRECTION.ASCENDING)
-
-	# LIMIT to the first 10 users
-	query.limit(10)
-	var results = await Firebase.Firestore.query(query)
-	
-	print(results)
-	print("\n Hueco para ver bien")
-	var my_items=results
-	my_items.sort_custom(func(a, b): return a.document.score.doubleValue > b.document.score.doubleValue)
-	print("\nnuevocoso miralo")
-	print(my_items)
-	print("\nTamaño de la cosa: "+str(my_items.size()))
-	
-	
-	for entry in my_items:
-		var scene_entry=ranking_entry.instantiate()
-#		print("existe scene entry: "+str(scene_entry))
-#		print("El jugador: "+str(entry.document.player_name.stringValue))
-#		print("La puntuacion: "+str(entry.document.score.doubleValue))
-		ranking_container.add_child(scene_entry)
-		scene_entry.update_labels(entry.document.player_name.stringValue,entry.document.score.doubleValue)
-		if auth.localid==entry.doc_name:
-			scene_entry.is_current_player()
+	if auth.localid:
+		clean_ranking()
 		
-	
+	#	save_score_to_firebase()
+		
+		ranking_panel.visible=true
+		
+		# create a query
+		var query: FirestoreQuery = FirestoreQuery.new()
+
+		# FROM a collection
+		query.from(collection_ranking_id)
+
+		# WHERE points > 20
+	#	query.where("score", FirestoreQuery.OPERATOR.GREATER_THAN, 20)
+
+		# ORDER BY points, from the user with the best score to the latest
+		#query.order_by("score", FirestoreQuery.DIRECTION.ASCENDING)
+
+		# LIMIT to the first 10 users
+		#query.limit(10)
+		var results = await Firebase.Firestore.query(query)
+		
+
+		var my_items=results
+		my_items.sort_custom(func(a, b): return a.document.score.doubleValue > b.document.score.doubleValue)
+		var top_ten_items:Array
+		for i in 10:
+			top_ten_items.append(my_items[i])
+		
+		for entry in top_ten_items:
+			var scene_entry=ranking_entry.instantiate()
+			ranking_container.add_child(scene_entry)
+			scene_entry.update_labels(entry.document.player_name.stringValue,entry.document.score.doubleValue)
+			if auth.localid==entry.doc_name:
+				scene_entry.is_current_player()
+			
+		
 
 
 
@@ -283,6 +316,7 @@ func update_ranking():
 
 func _on_button_logout_pressed():
 	Firebase.Auth.logout()
+	panel_login.visible=true
 
 
 
@@ -323,4 +357,3 @@ func change_player_name_pressed():
 				
 	else:
 		print("    ++Score +++  TNo hay una sesion de usuario.")
-

@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_b8bw3")
 name = "Solo cuchillo."
-description = "Vence al jefe final habiendo usado solo las dagas y mejoras generales. Solo digno de los más poderosos Hierromantes."
+description = "Venciste a un amgo del bosque habiendo usado solo las dagas y mejoras generales. Solo digno de los más poderosos Hierromantes."
 sprite = ExtResource("2_pyv3s")
 unlocked = false

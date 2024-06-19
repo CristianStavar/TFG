@@ -16,5 +16,3 @@ func _on_area_2d_body_entered(body):
 		sound_secret_found.play()
 		await get_tree().create_timer(0.1).timeout
 		queue_free()
-
-

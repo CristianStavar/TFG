@@ -26,10 +26,10 @@ tier = 4
 enemy_name = "Boss"
 health = 500.0
 damage = 12.0
-move_speed = 160.0
+move_speed = 180.0
 attack_cooldown = 1.0
 experience_token = ExtResource("3_pig7b")
-extra_experience = 100.0
+extra_experience = 150.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 0)

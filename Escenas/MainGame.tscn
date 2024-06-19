@@ -1,11 +1,13 @@
-[gd_scene load_steps=77 format=3 uid="uid://c1ajgh0vacds8"]
+[gd_scene load_steps=79 format=3 uid="uid://c1ajgh0vacds8"]
 
 [ext_resource type="Script" path="res://Scripts/Managers/game_manager.gd" id="1_26bor"]
 [ext_resource type="Texture2D" uid="uid://1gqahfelhqqa" path="res://icon.svg" id="2_clwek"]
 [ext_resource type="PackedScene" uid="uid://bc06ubbfpk0mn" path="res://Escenas/UI/RandomMap.tscn" id="3_bqjtn"]
 [ext_resource type="PackedScene" uid="uid://018a4ufmyjnn" path="res://Unidades/Jugador.tscn" id="4_mnaxt"]
 [ext_resource type="Script" path="res://Escenas/FPS.gd" id="5_g8tek"]
+[ext_resource type="Resource" uid="uid://c1d4f5vuhfdt2" path="res://Ataques/Cards/AttackCards/nuevo.tres" id="5_ytalj"]
 [ext_resource type="PackedScene" uid="uid://clifhfykt3f42" path="res://Escenas/spawn_manager.tscn" id="7_6dqck"]
+[ext_resource type="Script" path="res://Scripts/card_skill.gd" id="8_s4mdj"]
 [ext_resource type="Script" path="res://Scripts/Managers/upgrades_manager.gd" id="9_nhmv0"]
 [ext_resource type="Resource" uid="uid://y4nv34qlp5ad" path="res://Ataques/Cards/AttackCards/card_axe_tornado.tres" id="10_1an7i"]
 [ext_resource type="Resource" uid="uid://qnmicgktt2lh" path="res://Ataques/Cards/AttackCards/card_spear.tres" id="11_ukgdt"]
@@ -26,7 +28,6 @@
 [ext_resource type="Resource" uid="uid://c4fp3oqpmvonu" path="res://Ataques/Cards/Upgrades/Hammer/upgrade_hammer_damage.tres" id="26_ljgfh"]
 [ext_resource type="Resource" uid="uid://ceawcbxi50lbt" path="res://Ataques/Cards/Upgrades/Hammer/upgrade_hammer_extra.tres" id="27_gpeql"]
 [ext_resource type="Resource" uid="uid://c3yn7aksdx20y" path="res://Ataques/Cards/Upgrades/Hammer/upgrade_hammer_fragile.tres" id="28_lcuqb"]
-[ext_resource type="Resource" uid="uid://p54wqpwabycu" path="res://Ataques/Cards/Upgrades/Shield/upgrade_shield_speed.tres" id="29_0a6le"]
 [ext_resource type="Resource" uid="uid://cw74qactjowd2" path="res://Ataques/Cards/Upgrades/Shield/upgrade_shield_extra.tres" id="30_rmwiu"]
 [ext_resource type="Resource" uid="uid://b75slxbvkur5d" path="res://Ataques/Cards/Upgrades/Shield/upgrade_shield_solid.tres" id="31_6uip4"]
 [ext_resource type="Resource" uid="uid://byx2wknk8mxg2" path="res://Ataques/Cards/Upgrades/Shield/upgrade_shield_damage.tres" id="32_7dwbv"]
@@ -36,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://37ic61k0lk5u" path="res://panel_player_level_up.tscn" id="36_y4w8f"]
 [ext_resource type="PackedScene" uid="uid://bx528sl58swbt" path="res://Escenas/UI/PauseMenuUI.tscn" id="37_r1evg"]
 [ext_resource type="PackedScene" uid="uid://fvh70jxidati" path="res://Escenas/UI/OptionsMenuUI.tscn" id="38_ulj80"]
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="39_r1tj2"]
 [ext_resource type="Script" path="res://Scripts/Managers/statistics_manager.gd" id="39_xpau7"]
 [ext_resource type="Resource" uid="uid://d1wb3p8qsqfok" path="res://Achievements/survive_5.tres" id="40_ibs67"]
 [ext_resource type="Resource" uid="uid://d383axgfs4ng" path="res://Achievements/survive_10.tres" id="41_qnbln"]
@@ -66,8 +68,8 @@
 [ext_resource type="Resource" uid="uid://bicwt7hde3a5i" path="res://Achievements/barrels_destroyed_20.tres" id="65_18d2v"]
 [ext_resource type="AudioStream" uid="uid://3sc70rlbfwf" path="res://Sonidos/Musica/GameSong.ogg" id="65_pf18o"]
 [ext_resource type="AudioStream" uid="uid://cenn0kcu5610u" path="res://Sonidos/Musica/BossSong.ogg" id="66_dr7i6"]
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="67_7by5s"]
 [ext_resource type="AudioStream" uid="uid://cn3mcy0sy1bo8" path="res://Sonidos/gameover4.ogg" id="67_105kh"]
-[ext_resource type="PackedScene" uid="uid://bwv5jj37ggwj1" path="res://Escenas/Items/collectible_item.tscn" id="68_t4yak"]
 [ext_resource type="Resource" uid="uid://cgiq4dojmsie7" path="res://Collectibles/CelulasPadre.tres" id="69_1olp6"]
 [ext_resource type="Resource" uid="uid://c5c2qpy4hrfig" path="res://Collectibles/Flecha.tres" id="70_pmd1i"]
 [ext_resource type="Resource" uid="uid://csdn06jay30n" path="res://Collectibles/MuñecoNieve.tres" id="70_qgu12"]
@@ -90,39 +92,10 @@ texture = ExtResource("2_clwek")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("4_mnaxt")]
 position = Vector2(234, 276)
+unlockable_dagger_shotgun = ExtResource("5_ytalj")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 zoom = Vector2(1.6, 1.6)
-
-[node name="LabelHealth" type="Label" parent="CharacterBody2D/Camera2D"]
-visible = false
-offset_left = 339.0
-offset_top = -310.0
-offset_right = 437.0
-offset_bottom = -271.0
-theme_override_colors/font_color = Color(0, 0.443137, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 2
-theme_override_font_sizes/font_size = 32
-text = "Health: "
-
-[node name="LabelExperience" type="Label" parent="CharacterBody2D/Camera2D"]
-visible = false
-offset_left = 326.0
-offset_top = -252.0
-offset_right = 493.0
-offset_bottom = -207.0
-theme_override_font_sizes/font_size = 30
-text = "Experience:"
-
-[node name="LabelExperience2" type="Label" parent="CharacterBody2D/Camera2D"]
-visible = false
-offset_left = 323.0
-offset_top = -217.0
-offset_right = 490.0
-offset_bottom = -172.0
-theme_override_font_sizes/font_size = 30
-text = "Experience:"
 
 [node name="Label" type="Label" parent="CharacterBody2D/Camera2D"]
 offset_left = -333.0
@@ -144,8 +117,8 @@ wave_enemy_quantity = 18
 script = ExtResource("9_nhmv0")
 attacks_directory = "res://Ataques/Cards/AttackCards"
 upgrades_directory = "res://Ataques/Cards/Upgrades"
-all_card_attacks = Array[Resource("res://Scripts/card_skill.gd")]([ExtResource("10_1an7i"), ExtResource("11_ukgdt"), ExtResource("12_0kujb"), ExtResource("13_3ejow")])
-all_card_upgrades = Array[Resource("res://Scripts/card_skill.gd")]([ExtResource("14_4tncr"), ExtResource("15_04sxn"), ExtResource("16_67sdu"), ExtResource("17_vrlp7"), ExtResource("18_xuy0x"), ExtResource("19_2fl4y"), ExtResource("20_ykwxa"), ExtResource("21_11uyt"), ExtResource("22_kiohr"), ExtResource("23_pruvh"), ExtResource("24_m5dli"), ExtResource("25_66lpl"), ExtResource("26_ljgfh"), ExtResource("27_gpeql"), ExtResource("28_lcuqb"), ExtResource("29_0a6le"), ExtResource("30_rmwiu"), ExtResource("31_6uip4"), ExtResource("32_7dwbv"), ExtResource("33_63gyb"), ExtResource("34_ej7bj"), ExtResource("35_s1alt")])
+all_card_attacks = Array[ExtResource("8_s4mdj")]([ExtResource("10_1an7i"), ExtResource("11_ukgdt"), ExtResource("12_0kujb"), ExtResource("13_3ejow")])
+all_card_upgrades = Array[ExtResource("8_s4mdj")]([ExtResource("14_4tncr"), ExtResource("15_04sxn"), ExtResource("16_67sdu"), ExtResource("17_vrlp7"), ExtResource("18_xuy0x"), ExtResource("19_2fl4y"), ExtResource("20_ykwxa"), ExtResource("21_11uyt"), ExtResource("22_kiohr"), ExtResource("23_pruvh"), ExtResource("24_m5dli"), ExtResource("25_66lpl"), ExtResource("26_ljgfh"), ExtResource("27_gpeql"), ExtResource("28_lcuqb"), ExtResource("30_rmwiu"), ExtResource("31_6uip4"), ExtResource("32_7dwbv"), ExtResource("33_63gyb"), ExtResource("34_ej7bj"), ExtResource("35_s1alt")])
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -168,17 +141,17 @@ visible = false
 
 [node name="LabelTime" type="Label" parent="UI"]
 offset_left = 509.0
-offset_top = 38.0
+offset_top = 40.0
 offset_right = 588.0
-offset_bottom = 80.0
+offset_bottom = 82.0
 theme_override_font_sizes/font_size = 28
 text = "02: 30"
 
 [node name="LabelLevel" type="Label" parent="UI"]
 offset_left = 511.0
-offset_top = -3.0
-offset_right = 585.0
-offset_bottom = 42.0
+offset_top = 3.0
+offset_right = 617.0
+offset_bottom = 48.0
 theme_override_font_sizes/font_size = 30
 text = "Nivel: 1"
 
@@ -189,8 +162,8 @@ on_main_menu = false
 [node name="StatisticsManager" type="Node" parent="."]
 process_mode = 3
 script = ExtResource("39_xpau7")
-array_achievements = Array[Resource("res://Scripts/achievement.gd")]([ExtResource("40_ibs67"), ExtResource("41_qnbln"), ExtResource("42_qbavc"), ExtResource("43_3xvoy"), ExtResource("44_ur8a2"), ExtResource("45_4ai3m"), ExtResource("46_21kau"), ExtResource("45_un61j"), ExtResource("48_fvklg"), ExtResource("47_hxykk"), ExtResource("50_f7tm0"), ExtResource("51_euapn"), ExtResource("52_hols1"), ExtResource("53_yp7ie"), ExtResource("54_462lj"), ExtResource("55_ow6w2"), ExtResource("56_kllne"), ExtResource("57_gx3kq"), ExtResource("56_e41rm"), ExtResource("59_pln2n"), ExtResource("60_neky3"), ExtResource("61_k2qfk"), ExtResource("62_idmyy"), ExtResource("63_twe7h"), ExtResource("64_qfdqj"), ExtResource("65_18d2v"), ExtResource("64_5v5em")])
-array_collectibles = Array[Resource("res://Scripts/collectible.gd")]([ExtResource("69_1olp6"), ExtResource("70_pmd1i"), ExtResource("71_hqen6"), ExtResource("72_hevrk"), ExtResource("73_7s020"), ExtResource("70_qgu12"), ExtResource("74_o7vfa"), ExtResource("75_lmk67")])
+array_achievements = Array[ExtResource("39_r1tj2")]([ExtResource("40_ibs67"), ExtResource("41_qnbln"), ExtResource("42_qbavc"), ExtResource("43_3xvoy"), ExtResource("44_ur8a2"), ExtResource("45_4ai3m"), ExtResource("46_21kau"), ExtResource("45_un61j"), ExtResource("48_fvklg"), ExtResource("47_hxykk"), ExtResource("50_f7tm0"), ExtResource("51_euapn"), ExtResource("52_hols1"), ExtResource("53_yp7ie"), ExtResource("54_462lj"), ExtResource("55_ow6w2"), ExtResource("56_kllne"), ExtResource("57_gx3kq"), ExtResource("56_e41rm"), ExtResource("59_pln2n"), ExtResource("60_neky3"), ExtResource("61_k2qfk"), ExtResource("62_idmyy"), ExtResource("63_twe7h"), ExtResource("64_qfdqj"), ExtResource("65_18d2v"), ExtResource("64_5v5em")])
+array_collectibles = Array[ExtResource("67_7by5s")]([ExtResource("69_1olp6"), ExtResource("70_pmd1i"), ExtResource("71_hqen6"), ExtResource("72_hevrk"), ExtResource("73_7s020"), ExtResource("70_qgu12"), ExtResource("74_o7vfa"), ExtResource("75_lmk67")])
 
 [node name="Timers" type="Node" parent="."]
 
@@ -204,14 +177,14 @@ wait_time = 360.0
 one_shot = true
 autostart = true
 
-[node name="BGSong" type="AudioStreamPlayer2D" parent="."]
+[node name="BGSong" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("65_pf18o")
 volume_db = -5.393
 autoplay = true
 bus = &"Music"
 
-[node name="BossSong" type="AudioStreamPlayer2D" parent="."]
+[node name="BossSong" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("66_dr7i6")
 volume_db = -8.0
@@ -222,34 +195,6 @@ process_mode = 3
 stream = ExtResource("67_105kh")
 volume_db = -5.0
 bus = &"Sound"
-
-[node name="Collectible" parent="." instance=ExtResource("68_t4yak")]
-position = Vector2(299, 209)
-item = ExtResource("69_1olp6")
-
-[node name="Collectible2" parent="." instance=ExtResource("68_t4yak")]
-position = Vector2(377, 177)
-item = ExtResource("70_pmd1i")
-
-[node name="Collectible3" parent="." instance=ExtResource("68_t4yak")]
-position = Vector2(409, 253)
-item = ExtResource("71_hqen6")
-
-[node name="Collectible4" parent="." instance=ExtResource("68_t4yak")]
-position = Vector2(229, 179)
-item = ExtResource("72_hevrk")
-
-[node name="Collectible5" parent="." instance=ExtResource("68_t4yak")]
-position = Vector2(349, 273)
-item = ExtResource("73_7s020")
-
-[node name="Collectible6" parent="." instance=ExtResource("68_t4yak")]
-position = Vector2(127, 221)
-item = ExtResource("74_o7vfa")
-
-[node name="Collectible7" parent="." instance=ExtResource("68_t4yak")]
-position = Vector2(295, 139)
-item = ExtResource("75_lmk67")
 
 [connection signal="timeout" from="Timers/TimerShieldUnlock" to="." method="_on_timer_shield_unlock_timeout"]
 [connection signal="timeout" from="Timers/TimerAxeStormUnlock" to="." method="_on_timer_axe_storm_unlock_timeout"]

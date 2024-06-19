@@ -22,6 +22,7 @@ func _ready():
 	add_to_group("Enemy")
 	add_to_group("Boss")
 	await get_tree().create_timer(1).timeout
+	SignalBus.ask_for_collectibles.emit()
 	
 	
 
@@ -48,10 +49,11 @@ func fill_collectibles_array(collectibles:Array[Collectible]):
 
 
 func drop_collectible():
+	print("tengo colecionables: "+str(collectibles_to_drop))
 	if collectibles_to_drop.size()>0:
 		var collectible=collectible_item.instantiate()
-		collectible.set_colectible(collectibles_to_drop.pick_random())
-		collectible.update_info()
+		collectible.set_collectible(collectibles_to_drop.pick_random())
+
 		
 		get_parent().add_child(collectible)
 		collectible.global_position=self.global_position
@@ -68,8 +70,9 @@ func substract_health(value):
 	sprite.modulate=Color.WHITE
 
 	if health<=0:
-#		print("he muerto: - "+str(self))
-		spawn_experience_token()
+		print("he muerto: - Y soy el jefe")
+#		spawn_experience_token()
+		gameManager.player.add_experience(extra_experience)
 		drop_collectible()
 		SignalBus.enemy_killed.emit(enemy_name)
 		queue_free()

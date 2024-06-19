@@ -68,15 +68,18 @@ offset_left = 24.0
 offset_top = 89.0
 offset_right = 1063.0
 offset_bottom = 652.0
+theme_override_constants/outline_size = 0
 theme_override_constants/side_margin = 10
 theme_override_constants/icon_separation = 20
 theme_override_constants/icon_max_width = 20
-theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 24
+current_tab = 2
 tabs_rearrange_group = 0
 
 [node name="Logros" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="LabelName" type="Label" parent="TabContainer/Logros"]
 layout_mode = 0
@@ -245,6 +248,7 @@ achievement_holded = ExtResource("30_ixh7r")
 [node name="Objetos" type="Control" parent="TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="PanelInfo" type="Panel" parent="TabContainer/Objetos"]
 layout_mode = 0
@@ -327,8 +331,8 @@ offset_bottom = 277.0
 item_holded = ExtResource("10_stgir")
 
 [node name="Estadisticas" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Estadisticas"]
 layout_mode = 0
@@ -336,7 +340,7 @@ offset_right = 1030.0
 offset_bottom = 467.0
 
 [node name="Control" type="Control" parent="TabContainer/Estadisticas/ScrollContainer"]
-custom_minimum_size = Vector2(1000, 1000)
+custom_minimum_size = Vector2(1000, 700)
 layout_mode = 2
 
 [node name="EnemiesKilled" type="Control" parent="TabContainer/Estadisticas/ScrollContainer/Control"]
@@ -349,74 +353,84 @@ offset_bottom = -153.0
 
 [node name="LabelEnemiesKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 187.0
-offset_top = 165.0
-offset_right = 341.0
-offset_bottom = 198.0
+offset_left = 366.0
+offset_top = 174.0
+offset_right = 624.0
+offset_bottom = 213.0
+theme_override_font_sizes/font_size = 28
 text = "Enemigos vencidos"
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
+layout_mode = 0
+offset_left = 63.0
+offset_top = 361.0
+offset_right = 163.0
+offset_bottom = 365.0
+scale = Vector2(9.435, 9.435)
 
 [node name="LabelRatsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 53.0
-offset_top = 209.0
-offset_right = 280.0
-offset_bottom = 235.0
+offset_left = 55.0
+offset_top = 221.0
+offset_right = 282.0
+offset_bottom = 247.0
 text = "Ratas eliminadas : 83.458.327"
 
 [node name="LabelBatsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
 offset_left = 55.0
-offset_top = 241.0
+offset_top = 253.0
 offset_right = 282.0
-offset_bottom = 267.0
+offset_bottom = 279.0
 text = "Ratas eliminadas : 83.458.327"
 
 [node name="LabelSpidersKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 276.0
-offset_right = 278.0
-offset_bottom = 302.0
+offset_left = 55.0
+offset_top = 288.0
+offset_right = 282.0
+offset_bottom = 314.0
 text = "Ratas eliminadas : 83.458.327"
 
 [node name="LabelCrabsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 53.0
-offset_top = 312.0
-offset_right = 280.0
-offset_bottom = 338.0
+offset_left = 55.0
+offset_top = 324.0
+offset_right = 282.0
+offset_bottom = 350.0
 text = "Ratas eliminadas : 83.458.327"
 
 [node name="LabelGhostsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 711.0
-offset_top = 216.0
-offset_right = 938.0
-offset_bottom = 242.0
+offset_left = 700.0
+offset_top = 228.0
+offset_right = 927.0
+offset_bottom = 254.0
 text = "Ratas eliminadas : 83.458.327"
 
 [node name="LabelStrongGhostsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 713.0
-offset_top = 258.0
-offset_right = 940.0
-offset_bottom = 284.0
+offset_left = 700.0
+offset_top = 270.0
+offset_right = 927.0
+offset_bottom = 296.0
 text = "Ratas eliminadas : 83.458.327"
 
 [node name="LabelGiantsKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 714.0
-offset_top = 301.0
-offset_right = 941.0
-offset_bottom = 327.0
+offset_left = 700.0
+offset_top = 313.0
+offset_right = 927.0
+offset_bottom = 339.0
 text = "Ratas eliminadas : 83.458.327"
 
 [node name="LabelBossesKilled" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/EnemiesKilled"]
 layout_mode = 0
-offset_left = 718.0
-offset_top = 331.0
-offset_right = 758.0
-offset_bottom = 354.0
+offset_left = 700.0
+offset_top = 347.0
+offset_right = 917.0
+offset_bottom = 370.0
+text = "Magos enemigos vencidos:"
 
 [node name="DamageDealt" type="Control" parent="TabContainer/Estadisticas/ScrollContainer/Control"]
 anchors_preset = 0
@@ -425,51 +439,60 @@ offset_top = -129.0
 offset_right = -30.0
 offset_bottom = -129.0
 
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 560.0
+offset_right = 169.0
+offset_bottom = 564.0
+scale = Vector2(9.435, 9.435)
+
 [node name="LabelTitle" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
-offset_left = 146.0
+offset_left = 391.0
 offset_top = 372.0
-offset_right = 186.0
-offset_bottom = 395.0
+offset_right = 582.0
+offset_bottom = 411.0
+theme_override_font_sizes/font_size = 28
 text = "Daño causado"
 
 [node name="DamageDagger" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
-offset_left = 69.0
+offset_left = 102.0
 offset_top = 438.0
-offset_right = 109.0
+offset_right = 247.0
 offset_bottom = 461.0
 text = "Daño dagas : 5.268"
 
 [node name="DamageSpear" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
-offset_left = 72.0
+offset_left = 102.0
 offset_top = 485.0
-offset_right = 217.0
+offset_right = 247.0
 offset_bottom = 511.0
 text = "Daño dagas : 5.268"
 
 [node name="DamageHammer" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
-offset_left = 75.0
+offset_left = 103.0
 offset_top = 530.0
-offset_right = 220.0
+offset_right = 248.0
 offset_bottom = 556.0
 text = "Daño dagas : 5.268"
 
 [node name="DamageShield" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
-offset_left = 455.0
+offset_left = 694.0
 offset_top = 439.0
-offset_right = 600.0
+offset_right = 839.0
 offset_bottom = 465.0
 text = "Daño dagas : 5.268"
 
 [node name="DamageAxeStorm" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/DamageDealt"]
 layout_mode = 0
-offset_left = 458.0
+offset_left = 697.0
 offset_top = 493.0
-offset_right = 603.0
+offset_right = 842.0
 offset_bottom = 519.0
 text = "Daño dagas : 5.268"
 
@@ -482,51 +505,50 @@ offset_bottom = 713.0
 
 [node name="LabelTitle" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 393.0
+offset_top = -11.0
+offset_right = 477.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 28
 text = "Extras"
 
 [node name="LabelSecrets" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 62.0
-offset_right = 41.0
-offset_bottom = 85.0
+offset_top = 66.0
+offset_right = 205.0
+offset_bottom = 89.0
 text = "Secretos encontrados: 200"
 
 [node name="LabelPotions" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
 layout_mode = 0
 offset_left = 1.0
-offset_top = 110.0
+offset_top = 126.0
 offset_right = 178.0
-offset_bottom = 136.0
+offset_bottom = 152.0
 text = "Pociones tomadas: 200"
 
 [node name="LabelBarrels" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
 layout_mode = 0
-offset_left = 366.0
-offset_top = 41.0
-offset_right = 513.0
-offset_bottom = 93.0
+offset_left = 595.0
+offset_top = 64.0
+offset_right = 871.0
+offset_bottom = 116.0
 text = "Barriles destruidos
 : 200"
 
 [node name="LabelProjectiles" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
 layout_mode = 0
-offset_left = 566.0
-offset_top = 82.0
-offset_right = 606.0
-offset_bottom = 105.0
+offset_left = 593.0
+offset_top = 130.0
+offset_right = 678.0
+offset_bottom = 153.0
 text = "Proyectiles"
-
-[node name="Control" type="Control" parent="TabContainer/Estadisticas/ScrollContainer/Control"]
-anchors_preset = 0
-offset_right = 1017.0
-offset_bottom = 679.0
 
 [node name="Coleccionables" parent="TabContainer" instance=ExtResource("36_1mh7y")]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
 [connection signal="pressed" from="Background/ButtonBackToMenu" to="." method="_on_button_back_to_menu_pressed"]
 [connection signal="tab_changed" from="TabContainer" to="." method="_on_tab_container_tab_changed"]

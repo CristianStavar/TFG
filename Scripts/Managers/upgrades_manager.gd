@@ -26,6 +26,7 @@ func _ready():
 	SignalBus.connect("player_level_up",on_player_level_up)
 	SignalBus.connect("card_chosen",skill_card_chosen)
 	SignalBus.connect("card_unlocked",unlock_card)
+	SignalBus.connect("card_unlocked_condition",unlock_card_condition)
 	SignalBus.connect("lock_maxed_card",lock_maxed_card)
 	choose_cards_ui_array.append(get_node("/root/MainGame/UI/Control/NodeCard1"))
 	choose_cards_ui_array.append(get_node("/root/MainGame/UI/Control/NodeCard2"))
@@ -57,7 +58,7 @@ func fill_available_card_upgrades():
 
 
 func unlock_card(selected_card):
-#	print(" \nDESBLOQUEOO   "+str(selected_card.name))
+	print(" \nDESBLOQUEOO   "+str(selected_card.name))
 	if selected_card.card_type=="Upgrade":
 		for card in all_card_upgrades:
 			if card == selected_card:
@@ -65,6 +66,20 @@ func unlock_card(selected_card):
 	else:
 		for card in all_card_attacks:
 			if card == selected_card:
+				card.unlocked=true
+
+
+func unlock_card_condition(card_name:String,card_type:String):
+	print("Me ha llegado para desbloquear: "+card_name)
+	if card_type=="Upgrade":
+		for card in all_card_upgrades:
+			if card.name == card_name:
+				print("He desbloqueado la mejora: "+card_name)
+				card.unlocked=true
+	else:
+		for card in all_card_attacks:
+			if card.name == card_name:
+				print("He desbloqueado el atqe: "+card_name)
 				card.unlocked=true
 
 
@@ -198,4 +213,3 @@ func lock_cards():
 		if attack.attack_type=="Shield" or attack.attack_type=="AxeStorm":
 			attack.set_unlocked(false)
 		
-

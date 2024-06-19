@@ -11,10 +11,6 @@ var upgrades_manager
 
 
 
-@onready var label_experience:=get_node("CharacterBody2D/Camera2D/LabelExperience")
-@onready var label_experience2:=get_node("CharacterBody2D/Camera2D/LabelExperience2")
-
-
 
 @onready var panel_player_level_up:=get_node("UI/Control")
 @onready var panel_button:=get_node("UI/Control/ContinuaJuego")
@@ -54,6 +50,10 @@ var time_label
 @onready var bg_song:=$BGSong
 @onready var boss_song:=$BossSong
 @onready var sound_player_dead = $SoundPlayerDead
+@onready var boss_killed_panel: Control = $UI/PauseMenuUI/BossKilledPanel
+
+@onready var boss_killed_continue_game:=$UI/PauseMenuUI/BossKilledPanel/Panel/ButtonContinue
+@onready var boss_killed_quit_game:=$UI/PauseMenuUI/BossKilledPanel/Panel/ButtonQuit
 
 
 # Called when the node enters the scene tree for the first time.
@@ -74,6 +74,8 @@ func _ready():
 	
 	button_deny_main_menu.connect("pressed",go_to_main_menu_button_pressed)
 	button_confirmation_main_menu.connect("pressed",go_to_main_menu)
+	boss_killed_quit_game.connect("pressed",go_to_main_menu)
+	boss_killed_continue_game.connect("pressed",resume_game)
 	
 	panel_button.pressed.connect(hide_player_level_up)
 
@@ -196,6 +198,7 @@ func update_pause_menu():
 
 func resume_game():
 	pause_menu_ui.visible=false
+	boss_killed_panel.visible=false
 
 	get_tree().paused = false
 	game_is_paused=false
@@ -234,12 +237,14 @@ func go_to_main_menu_button_pressed():
 
 func go_to_main_menu():
 	get_tree().paused = false
-	pause_menu_ui.visible=false
 	self.visible=false
 
-
+	panel_loading_game.visible=true
 	SignalBus.time_passed.emit(time_passed)
+	print("\n Mano señal de juego terminado en menu")
 	SignalBus.game_ended.emit()
+#	await get_tree().create_timer(2).timeout
+	print("Espere despues de mandar la señal jeugo temrinado menu\n")
 	statistics_manager.check_new_achievements()
 	statistics_manager.save_to_file()
 	var scene = load("res://Escenas/UI/MainMenuUI.tscn")
@@ -268,6 +273,11 @@ func boss_spawned():
 func boss_killed():
 	boss_song.stop()
 	bg_song.play()
+	await get_tree().create_timer(5).timeout
+	get_tree().paused = true
+	boss_killed_panel.visible=true
+	pause_menu_ui.visible=true
+	
 
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dkabrjh8phksx"]
+[gd_scene load_steps=53 format=3 uid="uid://dkabrjh8phksx"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_it0pd"]
 [ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="2_6yc1x"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Managers/statistics_manager.gd" id="5_7o8eg"]
 [ext_resource type="Texture2D" uid="uid://bcrjv4mvtkhhy" path="res://Arte/UI/panelInset_beige.png" id="7_xjeq0"]
 [ext_resource type="Resource" uid="uid://d1wb3p8qsqfok" path="res://Achievements/survive_5.tres" id="8_pt2q1"]
+[ext_resource type="Script" path="res://Scripts/achievement.gd" id="9_4pobn"]
 [ext_resource type="Resource" uid="uid://d383axgfs4ng" path="res://Achievements/survive_10.tres" id="9_hdn8s"]
 [ext_resource type="Resource" uid="uid://cwk1q70wne3ee" path="res://Achievements/survive_15.tres" id="10_lg81b"]
 [ext_resource type="Resource" uid="uid://0v6plgs6we8y" path="res://Achievements/survive_20.tres" id="11_psmcg"]
@@ -38,6 +39,7 @@
 [ext_resource type="Resource" uid="uid://bypfyqp6m28cg" path="res://Achievements/only_dagger.tres" id="34_t613t"]
 [ext_resource type="Resource" uid="uid://cgiq4dojmsie7" path="res://Collectibles/CelulasPadre.tres" id="36_amr4d"]
 [ext_resource type="Texture2D" uid="uid://b66olnd4qtkud" path="res://Arte/UI/panelInset_beigeLight.png" id="36_d30p0"]
+[ext_resource type="Script" path="res://Scripts/collectible.gd" id="37_6hgym"]
 [ext_resource type="Resource" uid="uid://c5c2qpy4hrfig" path="res://Collectibles/Flecha.tres" id="37_dennb"]
 [ext_resource type="PackedScene" uid="uid://mgkqhkf72c6a" path="res://Escenas/UI/panel_ranking.tscn" id="37_tqxrw"]
 [ext_resource type="Resource" uid="uid://crd88fy03aqmt" path="res://Collectibles/LlaveCiudad.tres" id="38_5ivot"]
@@ -46,6 +48,7 @@
 [ext_resource type="Resource" uid="uid://csdn06jay30n" path="res://Collectibles/MuñecoNieve.tres" id="41_l0ovl"]
 [ext_resource type="Resource" uid="uid://1yjib7wvu7ol" path="res://Collectibles/Pala.tres" id="42_g7e2o"]
 [ext_resource type="Resource" uid="uid://0hnuiwt587qs" path="res://Collectibles/Yunque.tres" id="43_ul0ir"]
+[ext_resource type="PackedScene" uid="uid://6v0qwjibr23j" path="res://Escenas/UI/Story/StartingStoryPanel.tscn" id="49_sy4vx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gm30x"]
 texture = ExtResource("7_xjeq0")
@@ -131,7 +134,20 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 40
 text = "Colección
 "
-icon = ExtResource("2_6yc1x")
+icon = ExtResource("2_p3um0")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="ButtonLogout" type="Button" parent="MainPanel"]
+layout_mode = 0
+offset_left = 912.0
+offset_top = 32.0
+offset_right = 1129.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 26
+text = "Cerrar sesión"
+icon = ExtResource("2_p3um0")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -165,12 +181,12 @@ offset_right = 897.0
 offset_bottom = 335.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 80
-text = "Cargando Partida"
+text = "Cargando Partida..."
 
 [node name="StatisticsManager" type="Node" parent="."]
 script = ExtResource("5_7o8eg")
-array_achievements = Array[Resource("res://Scripts/achievement.gd")]([ExtResource("8_pt2q1"), ExtResource("9_hdn8s"), ExtResource("10_lg81b"), ExtResource("11_psmcg"), ExtResource("12_6ixsn"), ExtResource("13_185bm"), ExtResource("14_vqbkh"), ExtResource("15_viafb"), ExtResource("16_gkqeu"), ExtResource("17_d158v"), ExtResource("18_mdyqv"), ExtResource("19_sx4p5"), ExtResource("20_c5tes"), ExtResource("21_xvn76"), ExtResource("22_b8h1i"), ExtResource("23_2j2hy"), ExtResource("24_027n6"), ExtResource("25_j4ibl"), ExtResource("26_pf5iv"), ExtResource("27_gshr2"), ExtResource("28_c7tc3"), ExtResource("29_vynvf"), ExtResource("30_qo2ty"), ExtResource("31_dc4bk"), ExtResource("32_3wxwt"), ExtResource("33_ab4cw"), ExtResource("34_t613t")])
-array_collectibles = Array[Resource("res://Scripts/collectible.gd")]([ExtResource("36_amr4d"), ExtResource("37_dennb"), ExtResource("38_5ivot"), ExtResource("39_0hjlv"), ExtResource("40_rv1hk"), ExtResource("41_l0ovl"), ExtResource("42_g7e2o"), ExtResource("43_ul0ir")])
+array_achievements = Array[ExtResource("9_4pobn")]([ExtResource("8_pt2q1"), ExtResource("9_hdn8s"), ExtResource("10_lg81b"), ExtResource("11_psmcg"), ExtResource("12_6ixsn"), ExtResource("13_185bm"), ExtResource("14_vqbkh"), ExtResource("15_viafb"), ExtResource("16_gkqeu"), ExtResource("17_d158v"), ExtResource("18_mdyqv"), ExtResource("19_sx4p5"), ExtResource("20_c5tes"), ExtResource("21_xvn76"), ExtResource("22_b8h1i"), ExtResource("23_2j2hy"), ExtResource("24_027n6"), ExtResource("25_j4ibl"), ExtResource("26_pf5iv"), ExtResource("27_gshr2"), ExtResource("28_c7tc3"), ExtResource("29_vynvf"), ExtResource("30_qo2ty"), ExtResource("31_dc4bk"), ExtResource("32_3wxwt"), ExtResource("33_ab4cw"), ExtResource("34_t613t")])
+array_collectibles = Array[ExtResource("37_6hgym")]([ExtResource("36_amr4d"), ExtResource("37_dennb"), ExtResource("38_5ivot"), ExtResource("39_0hjlv"), ExtResource("40_rv1hk"), ExtResource("41_l0ovl"), ExtResource("42_g7e2o"), ExtResource("43_ul0ir")])
 in_main_menu = true
 
 [node name="PanelNewAchievements" type="Panel" parent="."]
@@ -299,20 +315,23 @@ theme_override_font_sizes/font_size = 20
 text = "Una vez creada una cuenta correctamente se guardaran los datos de acceso para que en futuras ocasiones solo tengas que pulsar: Iniciar sesion"
 autowrap_mode = 2
 
-[node name="ButtonLogout" type="Button" parent="."]
+[node name="StartingStoryPanel" parent="." instance=ExtResource("49_sy4vx")]
+visible = false
 layout_mode = 0
-offset_left = 987.0
-offset_top = 64.0
-offset_right = 1066.0
-offset_bottom = 95.0
-text = "Cerrar sesión"
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="pressed" from="MainPanel/Button" to="." method="show_options_UI"]
 [connection signal="pressed" from="MainPanel/Button2" to="." method="start_game"]
 [connection signal="pressed" from="MainPanel/ButtonRanking" to="." method="_on_button_ranking_pressed"]
 [connection signal="pressed" from="MainPanel/Button3" to="." method="show_colection_UI"]
+[connection signal="pressed" from="MainPanel/ButtonLogout" to="." method="_on_button_logout_pressed"]
 [connection signal="text_changed" from="PanelLogin/LineEditEmail" to="." method="_on_line_edit_email_text_changed"]
 [connection signal="text_changed" from="PanelLogin/LineEditPassword" to="." method="_on_line_edit_password_text_changed"]
 [connection signal="pressed" from="PanelLogin/ButtonLogin" to="." method="_on_button_login_pressed"]
 [connection signal="pressed" from="PanelLogin/ButtonSignup" to="." method="_on_button_signup_pressed"]
-[connection signal="pressed" from="ButtonLogout" to="." method="_on_button_logout_pressed"]

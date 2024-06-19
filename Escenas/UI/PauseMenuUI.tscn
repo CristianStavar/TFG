@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bx528sl58swbt"]
+[gd_scene load_steps=14 format=3 uid="uid://bx528sl58swbt"]
 
 [ext_resource type="Texture2D" uid="uid://bcrjv4mvtkhhy" path="res://Arte/UI/panelInset_beige.png" id="1_3j7n6"]
 [ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="1_dn8sp"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://xyu77mjlrpbt" path="res://Arte/shield_metal.png" id="4_5uqf7"]
 [ext_resource type="Texture2D" uid="uid://dpy4swi4ev48t" path="res://Arte/axe.png" id="5_4y388"]
 [ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="9_81o30"]
+[ext_resource type="PackedScene" uid="uid://bhme138ectpr" path="res://Escenas/UI/Story/BossKilledPanel.tscn" id="10_8cqvr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qbjxv"]
 texture = ExtResource("1_3j7n6")
@@ -36,8 +37,8 @@ offset_bottom = 681.0
 
 [node name="ButtonOptions" type="Button" parent="."]
 layout_mode = 0
-offset_left = 55.0
-offset_top = 33.0
+offset_left = 37.0
+offset_top = 19.0
 offset_right = 312.0
 offset_bottom = 156.0
 theme_override_font_sizes/font_size = 30
@@ -49,9 +50,9 @@ expand_icon = true
 
 [node name="ButtonMainMenu" type="Button" parent="."]
 layout_mode = 0
-offset_left = 780.0
+offset_left = 756.0
 offset_top = 23.0
-offset_right = 1138.0
+offset_right = 1141.0
 offset_bottom = 136.0
 theme_override_font_sizes/font_size = 30
 text = "Volver al menu principal"
@@ -61,28 +62,29 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="GameEndedPanel" type="Panel" parent="."]
-visible = false
 layout_mode = 0
-offset_left = -8.0
-offset_top = 287.0
-offset_right = 1159.0
-offset_bottom = 547.0
+offset_left = -9.0
+offset_top = 240.0
+offset_right = 1158.0
+offset_bottom = 500.0
 
 [node name="Label" type="Label" parent="GameEndedPanel"]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 21.0
-offset_right = 1153.0
-offset_bottom = 459.0
-theme_override_font_sizes/font_size = 106
-text = "AAAA MORISTE PERRO"
+offset_left = 11.0
+offset_top = -6.0
+offset_right = 1148.0
+offset_bottom = 415.0
+theme_override_font_sizes/font_size = 60
+text = "Oh no! los magos del bosque pudieron contigo."
+autowrap_mode = 2
 
 [node name="ButtonRestartGame" type="Button" parent="GameEndedPanel"]
 layout_mode = 0
-offset_left = 427.0
-offset_top = -188.0
-offset_right = 748.0
-offset_bottom = -17.0
+offset_left = 362.0
+offset_top = -182.0
+offset_right = 734.0
+offset_bottom = -4.0
+theme_override_font_sizes/font_size = 24
 text = "Reiniciar partida"
 icon = ExtResource("1_dn8sp")
 flat = true
@@ -90,6 +92,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="GamePausedPanel" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 390.0
 offset_top = 98.0
@@ -222,4 +225,8 @@ offset_right = 897.0
 offset_bottom = 335.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 80
-text = "Cargando Partida"
+text = "Cargando Partida..."
+
+[node name="BossKilledPanel" parent="." instance=ExtResource("10_8cqvr")]
+visible = false
+layout_mode = 1

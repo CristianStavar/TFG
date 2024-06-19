@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_yc74v")
 name = "Exterminador de muercielagos"
-description = "Envía 1000 muercielagos al cielo."
+description = "Envía 2000 muercielagos al cielo."
 sprite = ExtResource("2_6ss1s")
 unlocked = false

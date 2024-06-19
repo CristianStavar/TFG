@@ -47,7 +47,8 @@ var hammer_shatter_mode:=false
 
 					#AXE TORNADO
 var axe_tornado_gotten:=false
-@export var attack_axe_tornado:PackedScene
+#@export var attack_axe_tornado:PackedScene
+var attack_axe_tornado:=load("res://Ataques/Propios/TornadoHachas.tscn")
 @export var axe_tornado_cooldown:=3.5
 @export var axe_tornado_cooldown_min:=1.0
 var axe_tornado_upgrades:Array[float]=[0.0,0.0,0.0,0.0,1.0]# Damage,size,duration,cdr, quantity
@@ -120,8 +121,6 @@ var shield_time_passed:=false
 
 
 
-@onready var label_cords = $Label
-
 
 #checks
 var only_dagger:=true
@@ -144,12 +143,11 @@ func _ready():
 	
 	experience_bar.max_value=experience_points_to_level
 	experience_bar.value=0
-#	in_touchscreen=touchscreen_check()
+	in_touchscreen=touchscreen_check()
 
 
 func _physics_process(_delta):
 	aim_direction = global_position.direction_to(get_global_mouse_position())
-	label_cords.text=str(global_position)
 	
 	if not in_touchscreen:
 		direction = Input.get_vector("left", "right", "up", "down")
@@ -297,17 +295,28 @@ func skill_card_chosen(skill:CardSkill):
 
 func check_for_new_upgrades():
 	if dagger_upgrades[3]>2:
-		SignalBus.card_unlocked.emit(unlockable_dagger_shotgun)
+		SignalBus.card_unlocked_condition.emit("Daga Escopeta","Upgrade")
+		#SignalBus.card_unlocked.emit(unlockable_dagger_shotgun)
+		
 	if game_manager.get_time_passed()>=500:
-		SignalBus.card_unlocked.emit(unlockable_dagger_separation)
+		SignalBus.card_unlocked_condition.emit("Abanico de dagas","Upgrade")
+		#SignalBus.card_unlocked.emit(unlockable_dagger_separation)
+		
 	if shield_time_passed: # Tiempo de partida pasado escudo
-		SignalBus.card_unlocked.emit(unlockable_orbital_shield)
+		SignalBus.card_unlocked_condition.emit("Escudo orbital","Attack")
+		#SignalBus.card_unlocked.emit(unlockable_orbital_shield)
+		
 	if orbital_shield_upgrades[2]>=3:
-		SignalBus.card_unlocked.emit(unlockable_orbital_shield_solid)
+		SignalBus.card_unlocked_condition.emit("Escudo solido","Upgrade")
+		#SignalBus.card_unlocked.emit(unlockable_orbital_shield_solid)
+		
 	if axe_tornado_time_passed:   # Tiempo para tornado
-		SignalBus.card_unlocked.emit(unlockable_axe_tornado)
+		SignalBus.card_unlocked_condition.emit("Tormenta de hachas","Attack")
+		#SignalBus.card_unlocked.emit(unlockable_axe_tornado)
+		
 	if hammer_upgrades[0]>3:
-		SignalBus.card_unlocked.emit(unlockable_hammer_fragile)
+		SignalBus.card_unlocked_condition.emit("Martillo frágil","Upgrade")
+		#SignalBus.card_unlocked.emit(unlockable_hammer_fragile)
 
 
 
@@ -448,6 +457,7 @@ func spawn_shield_orbital():
 	add_child(shield)
 	shield.update_damage(orbital_shield_upgrades[0]+extra_damage)
 	shield.update_rotation_speed(orbital_shield_upgrades[1])
+	orbital_shield_upgrades[1]+=.2
 	orbital_shields_array.append(shield)
 	if orbital_shield_block_mode:
 		make_solid_shields()
@@ -624,5 +634,3 @@ func _on_area_damage_body_exited(body):
 func _on_area_kill_body_exited(body):
 	if body.is_in_group("Enemy") and not body.is_in_group("Boss"):
 		body.queue_free()
-
-

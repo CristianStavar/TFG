@@ -243,12 +243,18 @@ func login_with_email_and_password(email : String, password : String) -> void:
 		_login_request_body.email = email
 		_login_request_body.password = password
 		auth_request_type = Auth_Type.LOGIN_EP
+		print("Esto mandamos en el request: \n++URL"+str(_base_url + _signin_request_url))
+		print("++HEADERS: "+str(_headers))
+		print("+++ BODY: "+JSON.stringify(_login_request_body))
 		var err = request(_base_url + _signin_request_url, _headers, HTTPClient.METHOD_POST, JSON.stringify(_login_request_body))
+		print(" \n Estamos en el login mirando este es la respuesta del login: "+str(err))
 		_login_request_body.email = ""
 		_login_request_body.password = ""
 		if err != OK:
+			print(" Err no esta OK")
 			is_busy = false
 			Firebase._printerr("Error logging in with password and email: %s" % err)
+		print("Err si esta OK: "+str(err))
 
 # Login with a custom valid token
 # The token needs to be generated using an external service/function

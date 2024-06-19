@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://6v0qwjibr23j"]
+
+[ext_resource type="Texture2D" uid="uid://bhspggxhxqagm" path="res://Arte/Mio/Forest.jpg" id="1_xtfgk"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ul6q"]
+texture = ExtResource("1_xtfgk")
+
+[node name="StartingStoryPanel" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 120.0
+offset_top = 40.0
+offset_right = 1040.0
+offset_bottom = 622.0
+theme_override_font_sizes/font_size = 30
+text = "Nuestra historia comienza cuando los magos del bosque deciden que ya es hora de que el el gran consejo de la magia deje de ningunearles. Para llevar a cabo su venganza atacan por sorpresa al reino y a toda persona relacionada con la hierromancia.
+Demostrando plenamente su poder, han capturado a todos sus objetivos, solo quedas tu para enfrentarte a sus hordas de criaturas!
+Haz acopio de todas tus fuerzas y conocimientos hierromanticos pues eres la única persona del mundo con poder suficiente para ganar esto. ¡Ánimos!
+
+Pulsa para continuar."
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(0.493545, 0.493546, 0.493546, 1)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -264.0
+offset_top = -56.0
+offset_right = 1432.0
+offset_bottom = 736.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_3ul6q")

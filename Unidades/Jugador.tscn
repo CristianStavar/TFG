@@ -1,11 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://018a4ufmyjnn"]
+[gd_scene load_steps=22 format=3 uid="uid://018a4ufmyjnn"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_pl71v"]
 [ext_resource type="PackedScene" uid="uid://b7xxari67wnwx" path="res://Ataques/Propios/attack_dagger.tscn" id="2_ybly8"]
 [ext_resource type="Texture2D" uid="uid://c3xns3ymrb0q8" path="res://Arte/mage.png" id="3_0rmns"]
 [ext_resource type="PackedScene" uid="uid://chl4gj4rl5duu" path="res://Ataques/Propios/attack_spear.tscn" id="3_yvsj1"]
 [ext_resource type="PackedScene" uid="uid://b6ltxn3vy78kg" path="res://Ataques/Propios/attack_hammer.tscn" id="4_oyqx5"]
-[ext_resource type="PackedScene" uid="uid://d2cbkee27cwny" path="res://Ataques/Propios/TornadoHachas.tscn" id="5_o0u2n"]
 [ext_resource type="PackedScene" uid="uid://dd34ws0maxutx" path="res://Ataques/Propios/Orbital.tscn" id="6_x1vcf"]
 [ext_resource type="Resource" uid="uid://bpcwlq804lalq" path="res://Ataques/Cards/Upgrades/Dagger/upgrade_dagger_shotgun.tres" id="7_ml43i"]
 [ext_resource type="Resource" uid="uid://dbo2u74r06vta" path="res://Ataques/Cards/Upgrades/Dagger/upgrade_dagger_separation.tres" id="8_3r1og"]
@@ -43,7 +42,6 @@ attack_spear = ExtResource("3_yvsj1")
 spear_cooldown_min = 1.5
 attack_hammer = ExtResource("4_oyqx5")
 hammer_cooldown_min = 1.0
-attack_axe_tornado = ExtResource("5_o0u2n")
 axe_tornado_cooldown = 5.5
 axe_tornado_cooldown_min = 2.0
 attack_orbital_shield = ExtResource("6_x1vcf")
@@ -147,13 +145,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaKill"]
 shape = SubResource("RectangleShape2D_gn0kc")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -178.0
-offset_top = -148.0
-offset_right = -138.0
-offset_bottom = -125.0
-text = "Position: "
 
 [node name="AimPoint" type="Node2D" parent="."]
 z_index = 1

@@ -15,11 +15,12 @@ func _ready():
 
 func _physics_process(delta):
 	if target !=null:
-		last_target_position=target.global_position
-		look_at(last_target_position)
-	#		print("posicion antes: ++++"+str(position))
-	#	global_position+= (direction * speed * delta)
-		position=position.move_toward(last_target_position,speed*delta)
+		if is_instance_valid(target):
+			last_target_position=target.global_position
+			look_at(last_target_position)
+		#		print("posicion antes: ++++"+str(position))
+		#	global_position+= (direction * speed * delta)
+			position=position.move_toward(last_target_position,speed*delta)
 	else:
 		look_at(last_target_position)
 		position=position.move_toward(last_target_position,speed*delta)
@@ -66,5 +67,3 @@ func set_is_shard(value:bool):
 	if value:
 #		sprite.texture=shard_image
 		$Area2D.scale=Vector2(.6,.6)
-
-

@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_76uiu")
-name = "Escudo solido "
+name = "Escudo solido"
 description = "El escudo para los proyectile con los que choca."
 show_name = ""
 unique_upgrades = ""

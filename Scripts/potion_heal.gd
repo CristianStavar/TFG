@@ -12,5 +12,5 @@ func _on_area_2d_body_entered(body):
 
 
 
-func change_coordinates(position:Vector2):
-	self.global_position=position
+func change_coordinates(new_position:Vector2):
+	self.global_position=new_position

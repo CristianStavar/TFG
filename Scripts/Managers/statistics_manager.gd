@@ -113,6 +113,7 @@ var player_display_name:=""
 
 
 var time_starded_game:Dictionary
+var player_dead:=0
 
 
 @export var in_main_menu:=false
@@ -141,6 +142,8 @@ func _ready():
 	time_starded_game=Time.get_datetime_dict_from_system ()
 	
 	SignalBus.connect("change_player_name",change_player_display_name)
+	
+	player_dead=0
 
 
 
@@ -180,11 +183,12 @@ func enemy_killed(enemy_type:String):
 		"Giant":
 			giants_killed_round+=1
 		"Boss":
-			boss_killed_round+=1
-			round_boss_killed=true
-			print("HEMOS MATADO AL JEFEE")
-			SignalBus.boss_killed.emit()
-			SignalBus.ask_for_only_dagger.emit()
+			if round_boss_killed==false:
+				boss_killed_round+=1
+				round_boss_killed=true
+				print("HEMOS MATADO AL JEFEE")
+				SignalBus.boss_killed.emit()
+				SignalBus.ask_for_only_dagger.emit()
 			
 			
 			
@@ -546,16 +550,21 @@ func delete_save_file():
 
 
 func asked_for_statistics_dictionary():
+	print("\nDesde statistics envio el diccionario que me han pedido\n")
 	SignalBus.give_statistics_dictionary.emit(create_save_data()) 
 
 
 func asked_for_collectibles_array():
-	var array:Array[Collectible]
-	for collectible in array_collectibles:
-		if not collectible.unlocked:
-			array.append(collectible)
+	print("pide colectibles. TEngo estos : "+str(array_collectibles))
+	if not in_main_menu:
+		var array:Array[Collectible]
+		for collectible in array_collectibles:
+			print("Compurebo este colectible: "+str(collectible))
+			if not collectible.unlocked:
+				print("Esta sin descubrir asiq lo meto al jefe")
+				array.append(collectible)
 
-	SignalBus.send_collectibles.emit(array)
+		SignalBus.send_collectibles.emit(array)
 
 func return_stats():
 	var damage_stats:Array[float]
@@ -577,7 +586,6 @@ func player_take_damage(value):
 
 func add_up_score() ->float :
 	var final_score:=0.0
-	var temp_score:=0.0
 	final_score+=round_seconds_survived*4
 	final_score+=rats_killed_round/2
 	final_score+=bats_killed_round
@@ -586,7 +594,7 @@ func add_up_score() ->float :
 	final_score+=ghosts_killed_round*2
 	final_score+=giants_killed_round*3
 	final_score+=big_ghosts_killed_round*3
-	final_score+=boss_killed_round*400
+	final_score+=boss_killed_round*500
 	final_score-=player_hp_lost/2
 	
 	print("\n\n Puntuacion final de la partida!! : "+str(final_score))
@@ -594,13 +602,16 @@ func add_up_score() ->float :
 	return final_score
 
 func game_ended():
-	if not in_main_menu:
+	if player_dead==0:
 		last_game_score=add_up_score()
-		print("OTravez puntuacionfinalpartida pero ahora mejor :  "+str(last_game_score)+"\n\n" )
-		if last_game_score>highest_score:
-			highest_score=last_game_score
-			save_score_to_firebase()
-		save_game_data_to_firebase()
+		player_dead+=1
+		if not in_main_menu and SignalBus.game_type=="EXTRINSICAL":	
+			if last_game_score>highest_score:
+				highest_score=last_game_score
+				save_score_to_firebase()
+			
+		elif in_main_menu:
+			save_game_data_to_firebase()
 
 
 
@@ -739,5 +750,3 @@ func save_game_data_to_firebase():
 	
 	else:
 		print("No hay una sesion de usuario.")
-
-

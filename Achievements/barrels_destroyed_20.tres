@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_hcg44")
-name = "Barriles 20"
+name = "Barriles 100"
 description = "Destruye 100 barriles."
 sprite = ExtResource("2_hnh0k")
 unlocked = false

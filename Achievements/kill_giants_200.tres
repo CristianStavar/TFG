@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_g3182")
 name = "Matagigantes"
-description = "Mata 200 gigantes."
+description = "Mata 200 gigantes. La creación máss poderosa de los magos del bosque."
 sprite = ExtResource("2_upasb")
 unlocked = false

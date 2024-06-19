@@ -5,8 +5,7 @@
 
 [resource]
 script = ExtResource("1_hnvms")
-name = "Cangrejero maestro"
-description = "Mata muchos cangrejos.
-Cazaste 2222 cangrejos para la cena familiar."
+name = "Cangrejista maestro"
+description = "Cazaste 2222 cangrejos para la cena familiar."
 sprite = ExtResource("2_t7xyb")
 unlocked = false
