@@ -78,13 +78,7 @@ var cooldownHoming1:=false
 
 
 
-
 var aim_direction:Vector2
-
-var shotgun_bullets:=8
-
-
-
 
 
 var cooldown_press:=false
@@ -118,7 +112,6 @@ var shield_time_passed:=false
 @onready var sound_shotgun = $Sounds/SoundShotgun
 @onready var sound_heal = $Sounds/SoundHeal
 @onready var sound_level_up = $Sounds/SoundLevelUp
-
 
 
 
@@ -453,7 +446,6 @@ func spawn_axe_tornado():
 func spawn_shield_orbital():
 	var shield = attack_orbital_shield.instantiate()
 
-
 	add_child(shield)
 	shield.update_damage(orbital_shield_upgrades[0]+extra_damage)
 	shield.update_rotation_speed(orbital_shield_upgrades[1])
@@ -473,21 +465,6 @@ func check_extra_shield():
 func make_solid_shields():
 	for shield in orbital_shields_array:
 		shield.activate_solid_shield()
-
-
-
-
-
-func StarShot():
-	for angle in [-45,-90,-135,-190,135,90,45,0]:
-		print("-------------"+str(angle))
-		var radians = deg_to_rad(angle)
-		var bullet = attack_dagger.instantiate()
-		owner.add_child(bullet)
-		bullet.direction = aim_direction.rotated(radians)
-		bullet.global_position = self.global_position
-		bullet.define_direction(aim_direction.rotated(radians))
-		
 
 
 #####################################################################
@@ -524,11 +501,6 @@ func _on_timer_hammer_timeout():
 	for i in range(hammer_upgrades.back()):
 		throw_hammer()
 		await get_tree().create_timer(0.08).timeout
-
-
-
-
-
 
 
 
@@ -599,11 +571,6 @@ func randv_circle(min_radius := 200.0, max_radius := 300.0) -> Vector2:
 	var r := sqrt(randf() * (r2_max - r2_min) + r2_min)
 	var t := randf() * TAU
 	return Vector2(r, 0).rotated(t)
-
-
-
-
-
 
 
 

@@ -1,7 +1,6 @@
 [gd_scene load_steps=53 format=3 uid="uid://dkabrjh8phksx"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_it0pd"]
-[ext_resource type="Texture2D" uid="uid://b13kc7kxaoci6" path="res://Arte/buttonLong_brown_pressed.png" id="2_6yc1x"]
 [ext_resource type="PackedScene" uid="uid://drq8v8a5opngh" path="res://Escenas/UI/ColectionUI.tscn" id="2_8ka6j"]
 [ext_resource type="PackedScene" uid="uid://dad8dsspnhavj" path="res://Escenas/UI/Elementos/ranking_entry.tscn" id="2_gphpm"]
 [ext_resource type="Texture2D" uid="uid://b6d0y07yn66x3" path="res://Arte/UI/buttonLong_brown.png" id="2_p3um0"]
@@ -50,6 +49,9 @@
 [ext_resource type="Resource" uid="uid://0hnuiwt587qs" path="res://Collectibles/Yunque.tres" id="43_ul0ir"]
 [ext_resource type="PackedScene" uid="uid://6v0qwjibr23j" path="res://Escenas/UI/Story/StartingStoryPanel.tscn" id="49_sy4vx"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_svhlt"]
+texture = ExtResource("7_xjeq0")
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gm30x"]
 texture = ExtResource("7_xjeq0")
 
@@ -78,8 +80,11 @@ offset_bottom = 645.0
 
 [node name="MainPanel" type="Panel" parent="."]
 layout_mode = 0
+offset_left = -8.0
+offset_top = -8.0
 offset_right = 1153.0
 offset_bottom = 651.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_svhlt")
 
 [node name="Button" type="Button" parent="MainPanel"]
 layout_mode = 2
@@ -90,7 +95,7 @@ offset_bottom = 101.0
 theme_override_font_sizes/font_size = 30
 text = "Opciones
 "
-icon = ExtResource("2_6yc1x")
+icon = ExtResource("2_p3um0")
 flat = true
 icon_alignment = 1
 expand_icon = true
@@ -213,7 +218,6 @@ horizontal_alignment = 1
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("34_p5cha")
 volume_db = -10.0
-autoplay = true
 bus = &"Music"
 
 [node name="PanelRanking" parent="." instance=ExtResource("37_tqxrw")]

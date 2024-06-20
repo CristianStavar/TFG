@@ -73,11 +73,10 @@ theme_override_constants/side_margin = 10
 theme_override_constants/icon_separation = 20
 theme_override_constants/icon_max_width = 20
 theme_override_font_sizes/font_size = 24
-current_tab = 2
+current_tab = 0
 tabs_rearrange_group = 0
 
 [node name="Logros" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -331,6 +330,7 @@ offset_bottom = 277.0
 item_holded = ExtResource("10_stgir")
 
 [node name="Estadisticas" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 

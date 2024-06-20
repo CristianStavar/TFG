@@ -17,7 +17,7 @@ script = ExtResource("1_jme4m")
 enemy_name = "Rat"
 damage = 2.0
 attack_cooldown = 0.6
-lvl_upgrades = Array[float]([0.1, 0.1])
+lvl_upgrades = Array[float]([0.1, 0.2])
 experience_token = ExtResource("2_4bw1n")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

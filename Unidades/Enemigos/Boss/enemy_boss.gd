@@ -49,7 +49,6 @@ func fill_collectibles_array(collectibles:Array[Collectible]):
 
 
 func drop_collectible():
-	print("tengo colecionables: "+str(collectibles_to_drop))
 	if collectibles_to_drop.size()>0:
 		var collectible=collectible_item.instantiate()
 		collectible.set_collectible(collectibles_to_drop.pick_random())
@@ -70,7 +69,7 @@ func substract_health(value):
 	sprite.modulate=Color.WHITE
 
 	if health<=0:
-		print("he muerto: - Y soy el jefe")
+		#print("he muerto: - Y soy el jefe")
 #		spawn_experience_token()
 		gameManager.player.add_experience(extra_experience)
 		drop_collectible()

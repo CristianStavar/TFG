@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource("1_ryvux")
-name = "lanza extra"
-description = "Lanzas una mas extra."
+name = "Lanza extra"
+description = "Dos lanzas al precio de una!"
 show_name = ""
 unique_upgrades = ""
 sprite = ExtResource("2_p00bp")
@@ -38,7 +38,7 @@ axe_tornado_move_upgrade = false
 spear_upgrade = true
 spear_damage_value = 0.0
 spear_cooldown_value = 0.0
-spear_extra_spear_value = 1.0
+spear_extra_spear_value = 2.0
 hammer_upgrade = false
 hammer_damage_value = 0.0
 hammer_cooldown_value = 0.0

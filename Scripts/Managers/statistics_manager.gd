@@ -281,9 +281,6 @@ func clean_all_stats():
 	player_hp_lost=0.0
 
 
-
-
-
 func save_to_file():
 	
 	#partidaComenzada=true
@@ -291,7 +288,7 @@ func save_to_file():
 	add_round_stats_to_total()
 	check_new_achievements()
 	var data=create_save_data()
-	print("\n Voy a guardar: \n"+str(data)+"\n")
+	#print("\n Voy a guardar: \n"+str(data)+"\n")
 	file.store_var(data)
 	file.close()
 	
@@ -369,8 +366,7 @@ func load_from_file():
 	var file=FileAccess.open(save_file,FileAccess.READ)
 	if FileAccess.file_exists(save_file):
 		loaded_data=file.get_var()
-		print("\n **********************\n Tenemos data nuevaaaao algo. \n "+str(loaded_data)+"\n")
-		
+	
 		var array_unlocked_achievements:Array
 		var array_found_collectibles
 		if loaded_data !=null:
@@ -550,18 +546,14 @@ func delete_save_file():
 
 
 func asked_for_statistics_dictionary():
-	print("\nDesde statistics envio el diccionario que me han pedido\n")
 	SignalBus.give_statistics_dictionary.emit(create_save_data()) 
 
 
 func asked_for_collectibles_array():
-	print("pide colectibles. TEngo estos : "+str(array_collectibles))
 	if not in_main_menu:
 		var array:Array[Collectible]
 		for collectible in array_collectibles:
-			print("Compurebo este colectible: "+str(collectible))
 			if not collectible.unlocked:
-				print("Esta sin descubrir asiq lo meto al jefe")
 				array.append(collectible)
 
 		SignalBus.send_collectibles.emit(array)
@@ -597,7 +589,6 @@ func add_up_score() ->float :
 	final_score+=boss_killed_round*500
 	final_score-=player_hp_lost/2
 	
-	print("\n\n Puntuacion final de la partida!! : "+str(final_score))
 	
 	return final_score
 
@@ -612,9 +603,6 @@ func game_ended():
 			
 		elif in_main_menu:
 			save_game_data_to_firebase()
-
-
-
 
 
 
@@ -642,22 +630,10 @@ func change_player_display_name(new_name:String):
 
 
 func save_score_to_firebase():
-	print(" \n *************************************************\n*******************************")
-	print(" \n *************************************************\n*******************************")
-	print("PRocedemos a guardar los puntos")
 	var auth=Firebase.Auth.auth
 	var player_name:=""
 	if auth.localid:
-#		print("Sesion de usuario comprobada")
 		var collection:FirestoreCollection=Firebase.Firestore.collection(collection_ranking_id)
-		
-#		print("\n\n A continuacion la coleccion enteera a ver que tiene: ")
-#		print(collection)
-#		print("ahora los trozos: "+str(collection._documents))
-#		print("Ahora el nombre: "+str(collection.collection_name))
-#		print("Ahora el auth: "+str(collection.auth))
-#		print("\n")
-		
 		if player_display_name=="":
 			player_name="Anónimo"
 #			print(" Le ponemos nuevo nombre al chorbo: "+player_name)
@@ -692,9 +668,7 @@ func save_score_to_firebase():
 			
 			if player_display_name!="":
 				document_to_update.add_or_update_field("player_name",player_display_name)
-#			print("\n     ++Score +++  Tdespuesde cambio:")
-#			print(document_to_update)
-			
+
 			var new_document= await collection.update(document_to_update)
 			print(" \n    ++Score +++  TEldocumento ya actualizado en la BD : "+str(new_document))
 			
@@ -705,20 +679,10 @@ func save_score_to_firebase():
 
 
 func save_game_data_to_firebase():
-	
-	print(" \n ********************************************************************************")
-	print("PRocedemos a guardar lasmetricas")
 	var auth=Firebase.Auth.auth
 	if auth.localid:
-		print("Sesion de usuario comprobada")
 		var collection:FirestoreCollection=Firebase.Firestore.collection(str(auth.localid))
-		print("\n\n A continuacion la coleccion enteera a ver que tiene: ")
-		print(collection)
-#		print("ahora los trozos: "+str(collection._documents))
-		print("Ahora el nombre: "+str(collection.collection_name))
-#		print("Ahora el auth: "+str(collection.auth))
-		print("\n")
-		
+
 		var game_type:String
 		if SignalBus.game_type=="EXTRINSICAL":
 			game_type="EXTRINSICAL"
@@ -733,20 +697,11 @@ func save_game_data_to_firebase():
 		}
 		
 		var query: FirestoreQuery = FirestoreQuery.new()
-		print("+++ Creo query")
 		query.from(str(auth.localid))
-		print("Le digo donde mirar: "+str(auth.localid))
-#		query.where("game_duration", FirestoreQuery.OPERATOR.GREATER_THAN,0)
-		print("Le digo el where y ahora espero los resultados")
 		var results = await Firebase.Firestore.query(query)
-#		print("EL UQERY LO HACEE PERFE:   "+str(results))
 
 		var doc_name="game"+str(results.size())
-		print("-*-*-*-*-*-*-*-*  nombredoc: "+doc_name)
-		print("El tamaño de los resultados:                                  "+str(results.size()))
-		print("EL data con sus cosas:        "+str(data))
 		var document=await collection.add(doc_name,data)
-		print("Este es el peaso documento que envio: "+str(document))
 	
 	else:
 		print("No hay una sesion de usuario.")

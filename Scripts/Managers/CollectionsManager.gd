@@ -151,11 +151,9 @@ func update_statistics_UI():
 
 
 func ask_for_statistics_dictionary():
-	print("Voy a preguntar por el diccionario")
 	SignalBus.ask_for_statistics_dictionary.emit()
 
 func update_statistics_dictionary(new_dictionary):
-	print("He actualizado el dicionario en colecion: "+str(new_dictionary))
 	statistics_dictionary=new_dictionary
 
 func _on_button_back_to_menu_pressed():

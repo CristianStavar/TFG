@@ -98,6 +98,7 @@ unlockable_dagger_shotgun = ExtResource("5_ytalj")
 zoom = Vector2(1.6, 1.6)
 
 [node name="Label" type="Label" parent="CharacterBody2D/Camera2D"]
+visible = false
 offset_left = -333.0
 offset_top = -205.0
 offset_right = -272.0
@@ -180,14 +181,14 @@ autostart = true
 [node name="BGSong" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("65_pf18o")
-volume_db = -5.393
+volume_db = -6.726
 autoplay = true
 bus = &"Music"
 
 [node name="BossSong" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("66_dr7i6")
-volume_db = -8.0
+volume_db = -6.0
 bus = &"Music"
 
 [node name="SoundPlayerDead" type="AudioStreamPlayer" parent="."]

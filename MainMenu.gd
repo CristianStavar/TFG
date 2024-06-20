@@ -115,7 +115,6 @@ func starting_game():
 
 
 
-
 func show_colection_UI():
 	# Show colection screen
 	# CArgamos la escena de coleccion y la ponemos encima. Así la tenemos unificada aquí y mientras
@@ -166,8 +165,6 @@ func fill_login_lines():
 		file.close()
 
 
-
-
 func save_login_lines():
 	var file=FileAccess.open(save_file_login,FileAccess.WRITE)
 	var data={
@@ -184,30 +181,29 @@ func save_login_lines():
 
 func _on_button_login_pressed():
 	if email!="" and password!="":
-		#Firebase.Auth.login_with_email_and_password(email,password.sha256_text())
-		Firebase.Auth.login_with_email_and_password(email,password)
+		Firebase.Auth.login_with_email_and_password(email,password.sha256_text())
+		#Firebase.Auth.login_with_email_and_password(email,password)
 		label_feedback.text="Conectando"
 	elif  email=="" and password=="":
-		#Firebase.Auth.login_with_email_and_password(line_edit_email.text,line_edit_password.text.sha256_text())
-		Firebase.Auth.login_with_email_and_password(line_edit_email.text,line_edit_password.text)
+		Firebase.Auth.login_with_email_and_password(line_edit_email.text,line_edit_password.text.sha256_text())
+		#Firebase.Auth.login_with_email_and_password(line_edit_email.text,line_edit_password.text)
 		label_feedback.text="Conectando"
 
 
 func _on_button_signup_pressed():
 	if email!="" and password!="":
-		#Firebase.Auth.signup_with_email_and_password(email,password.sha256_text())  
-		Firebase.Auth.signup_with_email_and_password(email,password) 
+		Firebase.Auth.signup_with_email_and_password(email,password.sha256_text())  
+		#Firebase.Auth.signup_with_email_and_password(email,password) 
 		label_feedback.text="Creando cuenta"
 	elif  email=="" and password=="":
-		#Firebase.Auth.signup_with_email_and_password(line_edit_email.text,line_edit_password.text.sha256_text())
-		Firebase.Auth.signup_with_email_and_password(line_edit_email.text,line_edit_password.text)
+		Firebase.Auth.signup_with_email_and_password(line_edit_email.text,line_edit_password.text.sha256_text())
+		#Firebase.Auth.signup_with_email_and_password(line_edit_email.text,line_edit_password.text)
 		label_feedback.text="Creando cuenta"
 
 
 
 
 func on_login_done(response):
-	print(response)
 	label_feedback.text="Conectado con exito: \n Iniciando juego."
 	Firebase.Auth.save_auth(response)
 	save_login_lines()
@@ -215,15 +211,12 @@ func on_login_done(response):
 	panel_login.visible=false
 
 func on_signup_done(response):
-	print(response)
 	label_feedback.text="Cuenta creada con exito: \n Iniciando juego."
 	save_login_lines()
 	await get_tree().create_timer(2).timeout
 	panel_login.visible=false
 
 func on_login_failed(error_code,response):
-	print(error_code)
-	print(response)
 	if response=="INVALID_LOGIN_CREDENTIALS":
 		label_feedback.text="Error conectando: \nLa combinacion de credenciales no es correcta."
 	elif response=="Error connecting to auth service":
@@ -234,8 +227,6 @@ func on_login_failed(error_code,response):
 		label_feedback.text="Error conectando: %s"%response
 
 func on_signup_failed(error_code,response):
-	print(error_code)
-	print(response)
 	label_feedback.text="Error creando cuenta: %s"%response
 	if response=="Error connecting to auth service":
 		label_feedback.text="Error creando cuenta: %s"%response
@@ -250,12 +241,6 @@ func _on_line_edit_email_text_changed(new_text):
 
 func _on_line_edit_password_text_changed(new_text):
 	password=new_text
-
-
-
-
-
-
 
 
 func clean_ranking():
@@ -275,26 +260,14 @@ func update_ranking():
 		clean_ranking()
 		
 	#	save_score_to_firebase()
-		
 		ranking_panel.visible=true
 		
 		# create a query
 		var query: FirestoreQuery = FirestoreQuery.new()
-
 		# FROM a collection
 		query.from(collection_ranking_id)
 
-		# WHERE points > 20
-	#	query.where("score", FirestoreQuery.OPERATOR.GREATER_THAN, 20)
-
-		# ORDER BY points, from the user with the best score to the latest
-		#query.order_by("score", FirestoreQuery.DIRECTION.ASCENDING)
-
-		# LIMIT to the first 10 users
-		#query.limit(10)
 		var results = await Firebase.Firestore.query(query)
-		
-
 		var my_items=results
 		my_items.sort_custom(func(a, b): return a.document.score.doubleValue > b.document.score.doubleValue)
 		var top_ten_items:Array
@@ -323,9 +296,6 @@ func _on_button_logout_pressed():
 
 func change_player_name_pressed():
 	var new_player_name:String=line_change_name.text
-	print(" \n *************************************************\n*******************************")
-	print(" \n *************************************************\n*******************************")
-	print("PRocedemos a guardar los puntos")
 	var auth=Firebase.Auth.auth
 
 	if auth.localid:
@@ -334,10 +304,8 @@ func change_player_name_pressed():
 		if new_player_name=="":
 			print("no hacemos nada")
 		
-
 		else:
 			var document
-
 			var document_exist
 			document_exist=await collection.get_doc(auth.localid)
 	#		print("    ++Score +++  TTenemoss un documento que existe tambien: "+str(document_exist))

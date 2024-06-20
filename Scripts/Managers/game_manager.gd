@@ -114,7 +114,6 @@ func _physics_process(delta):
 
 
 
-
 func show_player_level_up(_player_current_level):
 	get_tree().paused = true
 	game_is_paused=true
@@ -136,10 +135,6 @@ func hide_player_level_up(_skill:CardSkill):
 
 func show_options():
 	options_panel.visible=!options_panel.visible
-
-
-
-
 
 
 
@@ -206,15 +201,11 @@ func resume_game():
 
 func restart_game():
 
-	print("\n Voy a reiniciar sisisis")
 	if get_tree():
 		panel_loading_game.visible=true
 		reload_game()
 #		get_tree().reload_current_scene()
 
-#	await get_tree().create_timer(0.1).timeout
-#	get_tree().paused = false
-#	game_is_paused=false
 
 func reload_game():
 #	get_tree().reload_current_scene()
@@ -230,6 +221,7 @@ func reload_game():
 	get_tree().paused = false
 	game_is_paused=false
 	queue_free()
+
 
 func go_to_main_menu_button_pressed():
 	panel_go_to_main_menu.visible=!panel_go_to_main_menu.visible
@@ -278,10 +270,6 @@ func boss_killed():
 	boss_killed_panel.visible=true
 	pause_menu_ui.visible=true
 	
-
-
-
-
 
 
 

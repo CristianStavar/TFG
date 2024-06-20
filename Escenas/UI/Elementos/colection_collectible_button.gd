@@ -10,12 +10,9 @@ func _ready():
 
 
 
-
-
 func _on_pressed():
 	SignalBus.colection_collectible_pressed.emit(collectible_holded)
 
 func update():
 	if collectible_holded.unlocked:
 		self.icon=collectible_holded.sprite
-		print(" ACTUALIZO BOTON COLECIONABLE PARA LA FOTO!!")

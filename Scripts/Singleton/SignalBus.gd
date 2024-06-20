@@ -1,6 +1,6 @@
 extends Node
 
-var game_type:="EXTRINSICAL"
+var game_type:="EXTRINSICAL"   # INTRINSICAL--EXTRINSICAL
 
 
 signal player_level_up(current_level)

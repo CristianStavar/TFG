@@ -18,7 +18,7 @@ tier = 1
 enemy_name = "Bat"
 damage = 3.0
 move_speed = 60.0
-lvl_upgrades = Array[float]([0.2, 0.2])
+lvl_upgrades = Array[float]([0.2, 0.5])
 experience_token = ExtResource("2_2sqkx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
