@@ -34,6 +34,10 @@ var statistics_dictionary:Dictionary
 @onready var label_barrels_destroyed:=$TabContainer/Estadisticas/ScrollContainer/Control/Misc/LabelBarrels
 @onready var label_projectiles_blocked:=$TabContainer/Estadisticas/ScrollContainer/Control/Misc/LabelProjectiles
 
+@onready var label_highest_score:=$TabContainer/Estadisticas/ScrollContainer/Control/Misc/LabelScore
+@onready var label_longest_survived:=$TabContainer/Estadisticas/ScrollContainer/Control/Misc/LabelTime
+
+
 @onready var achievements:Array[Button]
 
 
@@ -50,7 +54,6 @@ func _ready():
 	add_buttons_to_achievements()
 	ask_for_statistics_dictionary()
 	await get_tree().create_timer(0.1).timeout
-	print("Voy a actualizar los stats collection")
 	update_statistics_UI()
 	
 	update_unlocked_achievements()
@@ -127,7 +130,7 @@ func update_unlocked_achievements():
 	
 
 func update_statistics_UI():
-	print("Llaves del dictionary"+str(statistics_dictionary.keys()))
+	#print("Llaves del dictionary"+str(statistics_dictionary.keys()))
 	label_rats_killed.text="Ratas eliminadas: "+str(statistics_dictionary.enemies_killed.rats)
 	label_bats_killed_total.text="Murcielagos eliminados: "+str(statistics_dictionary.enemies_killed.bats)
 	label_spiders_killed_total.text="Arañas eliminadass: "+str(statistics_dictionary.enemies_killed.spiders)
@@ -148,6 +151,11 @@ func update_statistics_UI():
 	label_barrels_destroyed.text="Barriles destruidos: "+str(statistics_dictionary.game_statistics.barrels_destroyed)
 	label_projectiles_blocked.text="Proyectiles enemigos bloqueados: "+str(statistics_dictionary.game_statistics.projectiles_blocked)
 	
+	label_highest_score.text="Máxima puntuación conseguida: "+str(statistics_dictionary.highest_score)
+	var minutes=statistics_dictionary.longest_game/60
+	var seconds=fmod(statistics_dictionary.longest_game,60)
+	var time_text="%02d:%02d"%[minutes,seconds]
+	label_longest_survived.text="Máximo tiempo sobrevivido: "+str(time_text)
 
 
 func ask_for_statistics_dictionary():
@@ -165,7 +173,6 @@ func _on_tab_container_tab_changed(tab):
 	if tab==0:
 		update_unlocked_achievements()
 	if tab==2:
-		print("Si soy yo el DOS")
 		ask_for_statistics_dictionary()
 		await get_tree().create_timer(1).timeout
 		update_statistics_UI()

@@ -73,10 +73,11 @@ theme_override_constants/side_margin = 10
 theme_override_constants/icon_separation = 20
 theme_override_constants/icon_max_width = 20
 theme_override_font_sizes/font_size = 24
-current_tab = 0
+current_tab = 2
 tabs_rearrange_group = 0
 
 [node name="Logros" type="Control" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -330,7 +331,6 @@ offset_bottom = 277.0
 item_holded = ExtResource("10_stgir")
 
 [node name="Estadisticas" type="Control" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
@@ -338,6 +338,7 @@ metadata/_tab_index = 2
 layout_mode = 0
 offset_right = 1030.0
 offset_bottom = 467.0
+scroll_vertical = 233
 
 [node name="Control" type="Control" parent="TabContainer/Estadisticas/ScrollContainer"]
 custom_minimum_size = Vector2(1000, 700)
@@ -544,6 +545,21 @@ offset_top = 130.0
 offset_right = 678.0
 offset_bottom = 153.0
 text = "Proyectiles"
+
+[node name="LabelScore" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
+layout_mode = 0
+offset_top = 174.0
+offset_right = 40.0
+offset_bottom = 197.0
+text = "Puntuacion máxima: 4261"
+
+[node name="LabelTime" type="Label" parent="TabContainer/Estadisticas/ScrollContainer/Control/Misc"]
+layout_mode = 0
+offset_left = 601.0
+offset_top = 184.0
+offset_right = 641.0
+offset_bottom = 207.0
+text = "Máximo tiempo sobrevivido: 6m5s"
 
 [node name="Coleccionables" parent="TabContainer" instance=ExtResource("36_1mh7y")]
 visible = false

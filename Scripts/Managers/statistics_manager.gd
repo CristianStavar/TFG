@@ -102,7 +102,7 @@ var new_achievement:=false
 var last_game_score:=0.0
 var highest_score:=0.0
 
-
+var highest_time_survived:=0
 
 @export var array_collectibles:Array[Collectible]
 ##  FIREBASE
@@ -196,6 +196,8 @@ func enemy_killed(enemy_type:String):
 func time_passed(quantity:int):
 	print("Hemos sobrevivido estos segundazos: "+str(quantity))
 	round_seconds_survived=quantity
+	if round_seconds_survived>highest_time_survived:
+		highest_time_survived=round_seconds_survived
 	
 
 func potion_taken():
@@ -355,6 +357,7 @@ func create_save_data():
 		"gameStarted":gameStarted,
 		"new_achievement":new_achievement,
 		"highest_score":highest_score,
+		"longest_game":highest_time_survived,
 		"player_display_name":player_display_name
 		
 	}
@@ -397,6 +400,7 @@ func load_from_file():
 			new_achievement=loaded_data.new_achievement
 			
 			highest_score=loaded_data.highest_score
+			highest_time_survived=loaded_data.longest_game
 			player_display_name=loaded_data.player_display_name
 			
 			if array_unlocked_achievements!=null:

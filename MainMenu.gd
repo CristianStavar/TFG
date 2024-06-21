@@ -88,7 +88,6 @@ func _ready():
 
 
 func start_game():
-	print("Mostrando intro")
 	main_panel.visible=false
 	starting_story_panel.visible=true
 
@@ -98,7 +97,6 @@ func start_game():
 
 
 func starting_game():
-	print("Le dimos a jugar")
 	loading_screen.visible=true
 	starting_story_panel.visible=false
 	statistics_manager.save_to_file()
@@ -110,15 +108,10 @@ func starting_game():
 	root.add_child(scene_instance)
 	
 	self.visible=false
-	print("Llegamos al juego!")
-#	queue_free()
 
 
 
 func show_colection_UI():
-	# Show colection screen
-	# CArgamos la escena de coleccion y la ponemos encima. Así la tenemos unificada aquí y mientras
-	# se está en una partida.
 	statistics_manager.load_from_file()
 	main_panel.visible=false
 	collections_panel.visible=true
@@ -272,7 +265,14 @@ func update_ranking():
 		my_items.sort_custom(func(a, b): return a.document.score.doubleValue > b.document.score.doubleValue)
 		var top_ten_items:Array
 		for i in 10:
-			top_ten_items.append(my_items[i])
+			if my_items.size()>i:
+				top_ten_items.append(my_items[i])
+		
+		if my_items.size()==0:
+			var scene_entry=ranking_entry.instantiate()
+			ranking_container.add_child(scene_entry)
+			scene_entry.update_labels("Aún no hay nadie digno.",0.0)
+			
 		
 		for entry in top_ten_items:
 			var scene_entry=ranking_entry.instantiate()
@@ -284,14 +284,9 @@ func update_ranking():
 		
 
 
-
-
-
 func _on_button_logout_pressed():
 	Firebase.Auth.logout()
 	panel_login.visible=true
-
-
 
 
 func change_player_name_pressed():
